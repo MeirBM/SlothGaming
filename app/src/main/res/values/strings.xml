@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">mainProject</string>
+    <string name="app_name">SlothGaming</string>
     <string name="enter_user_name">Enter user name</string>
     <string name="enter_password">Enter password</string>
     <string name="sign_in">Sign in</string>
