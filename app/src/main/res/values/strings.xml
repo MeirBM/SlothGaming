@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">mainProject</string>
+    <string name="enter_user_name">Enter user name</string>
+    <string name="enter_password">Enter password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="logo_for_sign_in">logo for sign in</string>
+    <string name="logout">Logout</string>
+
+</resources>

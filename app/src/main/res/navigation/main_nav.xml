@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/mainPageFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.SlothGaming.Ui.LoginFragment"
+        android:label="login_page_layout"
+        tools:layout="@layout/login_page_layout" />
+    <fragment
+        android:id="@+id/mainPageFragment"
+        android:name="com.example.SlothGaming.Ui.MainPageFragment"
+        android:label="main_page_layout"
+        tools:layout="@layout/main_page_layout" >
+        <action
+            android:id="@+id/action_mainPageFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/from_down"
+            app:exitAnim="@anim/to_up"
+            app:popEnterAnim="@anim/from_up"
+            app:popExitAnim="@anim/to_down"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
