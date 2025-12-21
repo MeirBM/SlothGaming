@@ -14,13 +14,15 @@
             android:id="@+id/wish_image"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_launcher"
+            />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="6dp">
 
 
             <TextView
@@ -30,29 +32,36 @@
                 android:text="Title"
                 android:fontFamily="sans-serif-medium"
                 android:textSize="20sp" />
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_height="100dp"
                 android:fontFamily="sans-serif-light"
-                android:text="Category"
+                android:gravity="center"
+                android:text="Review"
                 android:textSize="20sp" />
-
-            <androidx.appcompat.widget.AppCompatRatingBar
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:numStars="5"
-                android:rating="0.0"
-                android:stepSize="0.1"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="sans-serif-light"
-                android:text="rating"
-                android:textSize="20dp" />
+                android:orientation="horizontal"
+                android:layout_gravity="end">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_star"
+                    android:layout_gravity="center"
+                    app:tint="@color/yellow"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:fontFamily="sans-serif-light"
+                    android:text="rating"
+                    android:layout_gravity="center"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
 
 
         </LinearLayout>
