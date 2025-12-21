@@ -5,5 +5,6 @@
     <string name="sign_in">Sign in</string>
     <string name="logo_for_sign_in">logo for sign in</string>
     <string name="logout">Logout</string>
+    <string name="add_a_review">Add a review</string>
 
 </resources>

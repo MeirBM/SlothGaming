@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.SlothGaming.databinding.WishListLayoutBinding
+import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
 
-class WishListFragment : Fragment() {
+class MyReviewsFragment : Fragment() {
 
-    private var _binding : WishListLayoutBinding? = null
+    private var _binding : MyReviewsLayoutBinding? = null
 
     private val binding get() = _binding!!
 
@@ -18,17 +18,20 @@ class WishListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = WishListLayoutBinding.inflate(inflater,container,false)
+        _binding = MyReviewsLayoutBinding.inflate(inflater, container, false)
 
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        binding.addReviewButton.setOnClickListener {
+//            // TODO: handle add review click
+//        }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }
