@@ -27,6 +27,7 @@ class MyReviewsFragment : Fragment() {
 
 //        binding.addReviewButton.setOnClickListener {
 //            // TODO: handle add review click
+        // homohomo homo homo homo homo homo homo homo homo homo homo homo homo
 //        }
     }
 
