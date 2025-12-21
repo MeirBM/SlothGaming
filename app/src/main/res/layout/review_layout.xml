@@ -13,14 +13,15 @@
         <ImageView
             android:id="@+id/wish_image"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="match_parent"
             android:src="@mipmap/ic_launcher" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="6dp">
 
 
             <TextView
@@ -28,13 +29,34 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Title"
+                android:fontFamily="sans-serif-medium"
                 android:textSize="20sp" />
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:text="Review"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:numStars="5"
+                android:rating="0.0"
+                android:stepSize="0.1"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="sans-serif-light"
                 android:text="rating"
-                android:textSize="25sp"
-                android:gravity="center"/>
+                android:textSize="20dp" />
+
+
         </LinearLayout>
 
     </LinearLayout>
