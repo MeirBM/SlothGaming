@@ -13,19 +13,19 @@ import com.example.SlothGaming.data.models.Wish
 interface WishListDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addItem(wish : Wish)
+    fun addWish(wish : Wish)
 
     @Delete
-    fun deleteItem(wish : Wish)
+    fun deleteWish(wish : Wish)
 
     @Update
     fun updateItem (wish: Wish)
 
     @Query("SELECT * FROM wishes ORDER BY rating ASC")
-    fun getItems(): LiveData<List<Wish>>
+    fun getWish(): LiveData<List<Wish>>
 
     @Query("SELECT * FROM wishes WHERE id LIKE :id ")
-    fun getItem(id : Int) : Wish
+    fun getWish(id : Int) : Wish
 
     @Query("DELETE FROM wishes")
     fun deleteAll()

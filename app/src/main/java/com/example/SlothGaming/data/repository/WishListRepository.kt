@@ -11,20 +11,20 @@ class WishListRepository(val application: Application) {
 
         init {
             val db  = WishListDataBase.getDatabase(application.applicationContext)
-            wishListDao = db?.itemsDao()
+            wishListDao = db?.wishDao()
         }
 
-        fun getItems() = wishListDao?.getItems()
+        fun getItems() = wishListDao?.getWish()
 
         fun addItem(wish: Wish) {
-            wishListDao?.addItem(wish)
+            wishListDao?.addWish(wish)
         }
 
         fun deleteItem(wish: Wish) {
-            wishListDao?.deleteItem(wish)
+            wishListDao?.deleteWish(wish)
         }
 
-        fun getItem(id:Int)  = wishListDao?.getItem(id)
+        fun getItem(id:Int)  = wishListDao?.getWish(id)
 
         fun deleteAll(){
             wishListDao?.deleteAll()

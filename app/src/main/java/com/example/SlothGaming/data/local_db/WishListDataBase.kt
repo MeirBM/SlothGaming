@@ -10,7 +10,7 @@ import com.example.SlothGaming.data.models.Wish
 @Database(entities = arrayOf(Wish::class), version = 1, exportSchema = false)
 abstract class WishListDataBase : RoomDatabase() {
 
-    abstract fun itemsDao() : WishListDao
+    abstract fun wishDao() : WishListDao
 
     companion object {
 
