@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/customBlack"
     android:padding="16dp"
+    android:alpha="0.85"
     tools:context=".Ui.AddReviewFragment">
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/title_text_layout"
@@ -22,12 +23,14 @@
         app:boxCornerRadiusTopStart="10dp"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/entered_game_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your review here"
+            android:hint="Enter game title "
+            android:inputType="text"
             android:textColor="@color/pearlWhite"
-
-            tools:text = "some text"/>
+            tools:text = "some text"
+            android:ellipsize="end"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/review_text_layout"
@@ -46,12 +49,16 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/entered_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your review here"
-
+            android:maxLines="4"
+            android:inputType="text"
             android:textColor="@color/pearlWhite"
-            tools:text="some text" />
+            tools:text="some text"
+            android:ellipsize="end"/>
+        />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
@@ -63,6 +70,31 @@
         tools:text="Finish Review"
         android:textAllCaps="false"
         android:backgroundTint="@color/yellow"
+        />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/choose_rating_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/review_text_layout"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Choose rating"
+        android:textColor="@color/pearlWhite"
+        android:textSize="20sp"
+        />
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/choose_rating_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:progressBackgroundTint="@color/midRed"
+        android:layout_marginTop="12dp"
+        android:progressTint="@color/yellow"
+        android:rating="5"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

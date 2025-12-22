@@ -5,18 +5,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardUseCompatPadding="true"
     app:contentPadding="10dp"
+    android:backgroundTint="@color/darkGray"
+
     app:cardCornerRadius="10dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/darkGray"
         >
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/game_image"
             android:layout_width="100dp"
             android:layout_height="170dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"
+            app:shapeAppearanceOverlay="@style/RoundedCornersImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
@@ -43,7 +45,6 @@
             android:ellipsize="end"
             android:fontFamily="sans-serif-light"
             android:gravity="top|start"
-            android:maxLines="4"
             android:text="Review"
             android:textColor="@color/pearlWhite"
             android:padding="8dp"

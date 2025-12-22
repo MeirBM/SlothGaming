@@ -9,11 +9,10 @@
         android:id="@+id/myReviewsFragment"
         android:name="com.example.SlothGaming.Ui.MyReviewsFragment"
         android:label="my_reviews_layout"
-        tools:layout="@layout/my_reviews_layout" >
+        tools:layout="@layout/my_reviews_layout" >w
         <action
-            android:id="@+id/action_myReviewsFragment_to_addReviewFragment"
-            app:destination="@id/addReviewFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_myReviewsFragment_to_addReviewFragment2"
+            app:destination="@id/addReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/addReviewFragment"

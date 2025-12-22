@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.R
+import com.example.SlothGaming.R
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
@@ -30,8 +30,8 @@ class MyReviewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addReviewButton.root.setOnClickListener {_ ->
+            findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment2)
         }
-
     }
 
     override fun onDestroyView() {
