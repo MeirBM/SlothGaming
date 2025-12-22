@@ -16,7 +16,7 @@ class ReviewListRepository(val application: Application) {
 
         fun getReviews() = reviewListDao?.getReview()
 
-        fun addItem(review: Review) {
+        fun addReview(review: Review) {
             reviewListDao?.addReview(review)
         }
 
