@@ -4,9 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "wishes")
-data class Wish(
+data class Review(
     val title : String,
-    val category : String,
+    val gameReview : String,
     val rating : Double,
     val photo : String?,
 

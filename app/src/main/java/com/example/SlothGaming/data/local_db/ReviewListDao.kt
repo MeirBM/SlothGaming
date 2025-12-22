@@ -1,31 +1,30 @@
 package com.example.architectureproject.data.local_db
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.SlothGaming.data.models.Wish
+import com.example.SlothGaming.data.models.Review
 @Dao
-interface WishListDao {
+interface ReviewListDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addWish(wish : Wish)
+    fun addReview(review: Review)
 
     @Delete
-    fun deleteWish(wish : Wish)
+    fun deleteReview(vararg review : Review)
 
     @Update
-    fun updateItem (wish: Wish)
+    fun updateReview (review: Review)
 
     @Query("SELECT * FROM wishes ORDER BY rating ASC")
-    fun getWish(): LiveData<List<Wish>>
+    fun getReview(): LiveData<List<Review>>
 
     @Query("SELECT * FROM wishes WHERE id LIKE :id ")
-    fun getWish(id : Int) : Wish
+    fun getReview(id : Int) : Review
 
     @Query("DELETE FROM wishes")
     fun deleteAll()
