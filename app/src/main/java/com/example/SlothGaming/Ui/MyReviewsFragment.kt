@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
+import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
 
 class MyReviewsFragment : Fragment() {
 
+    private val repository : ReviewListRepository by lazy{ ReviewListRepository(requireActivity().application) }
+    private val viewModelFactory : ReviewViewModelFactory by lazy { ReviewViewModelFactory(repository) }
     private var _binding : MyReviewsLayoutBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -27,7 +30,6 @@ class MyReviewsFragment : Fragment() {
 
 //        binding.addReviewButton.setOnClickListener {
 //            // TODO: handle add review click
-        // homohomo homo homo homo homo homo homo homo homo homo homo homo homo
 //        }
     }
 
