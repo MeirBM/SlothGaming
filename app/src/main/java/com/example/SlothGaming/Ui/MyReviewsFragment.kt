@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.R
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
 import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
@@ -27,10 +29,9 @@ class MyReviewsFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.addReviewButton.root.setOnClickListener {_ ->
+        }
 
-//        binding.addReviewButton.setOnClickListener {
-//            // TODO: handle add review click
-//        }
     }
 
     override fun onDestroyView() {

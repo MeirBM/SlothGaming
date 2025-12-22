@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/customBlack"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".Ui.AddReviewFragment">
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/title_text_layout"
         android:layout_width="match_parent"
