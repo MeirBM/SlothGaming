@@ -4,5 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="customBlack">#010609</color>
     <color name="yellow">#ffb20f</color>
+    <color name="darkGray">#333232</color>
+    <color name="pearlWhite">#f7f7f2</color>
+
 
 </resources>

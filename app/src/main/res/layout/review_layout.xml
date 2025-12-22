@@ -6,66 +6,73 @@
     app:cardUseCompatPadding="true"
     app:contentPadding="10dp"
     app:cardCornerRadius="10dp">
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:background="@color/darkGray"
+        >
         <ImageView
             android:id="@+id/game_image"
             android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_height="170dp"
+            android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             />
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_margin="6dp">
-
-
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_marginStart="10dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/pearlWhite"
                 android:id="@+id/game_title"
-                android:gravity="center"
+                android:gravity="top|start"
                 android:text="Title"
+                app:layout_constraintTop_toTopOf="@id/game_image"
+                app:layout_constraintStart_toEndOf="@id/game_image"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:fontFamily="sans-serif-medium"
                 android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:fontFamily="sans-serif-light"
-                android:id="@+id/review_text"
-                android:gravity="center"
-                android:text="Review"
-                android:textSize="20sp" />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:orientation="horizontal">
+        <TextView
+            android:id="@+id/review_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-light"
+            android:gravity="top|start"
+            android:maxLines="4"
+            android:text="Review"
+            android:textColor="@color/pearlWhite"
+            android:padding="8dp"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/game_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/game_title"
+            app:layout_constraintTop_toBottomOf="@id/game_title" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:id="@+id/given_rating"
-                    android:fontFamily="sans-serif-light"
-                    android:hint="2.5"
-                    android:layout_gravity="center"
-                    android:textSize="20sp"
-                    android:drawableLeft="@drawable/ic_star"
-                    android:drawableTint="@color/yellow"/>
+        <TextView
+            android:id="@+id/given_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="5dp"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/ic_star"
+            android:drawableTint="@color/yellow"
+            android:fontFamily="sans-serif-light"
+            android:gravity="end"
+            android:text="2.5"
+            android:textColor="@color/pearlWhite"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/game_image" />
 
-            </LinearLayout>
 
 
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
