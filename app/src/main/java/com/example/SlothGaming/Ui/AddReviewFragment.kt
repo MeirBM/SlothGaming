@@ -41,6 +41,7 @@ class AddReviewFragment : Fragment() {
     }
 
     override fun onDestroy() {
+        super.onDestroyView()
         _binding = null
     }
 }
