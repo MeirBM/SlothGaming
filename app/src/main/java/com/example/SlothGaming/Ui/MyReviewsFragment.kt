@@ -30,7 +30,7 @@ class MyReviewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addReviewButton.root.setOnClickListener {_ ->
-            findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment2)
+            findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment)
         }
     }
 
