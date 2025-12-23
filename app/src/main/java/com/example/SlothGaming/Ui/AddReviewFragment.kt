@@ -4,18 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.SlothGaming.R
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.activityViewModels
+import com.example.SlothGaming.Ui.view_models.ReviewViewModel
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
+import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.data.repository.ReviewListRepository
+import com.example.SlothGaming.databinding.AddReviewLayoutBinding
 import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
 
-class MyReviewsFragment : Fragment() {
+class AddReviewFragment : Fragment() {
 
     private val repository : ReviewListRepository by lazy{ ReviewListRepository(requireActivity().application) }
     private val viewModelFactory : ReviewViewModelFactory by lazy { ReviewViewModelFactory(repository) }
-    private var _binding : MyReviewsLayoutBinding? = null
+
+    private val viewModel : ReviewViewModel by activityViewModels { viewModelFactory }
+    private var _binding : AddReviewLayoutBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -23,19 +27,20 @@ class MyReviewsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = MyReviewsLayoutBinding.inflate(inflater, container, false)
+        _binding = AddReviewLayoutBinding.inflate(inflater,container,false)
 
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.addReviewButton.root.setOnClickListener {_ ->
-            findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment2)
-        }
+//        val review =
+//            Review(binding.enteredGameTitle.text.toString(),
+//            binding.enteredReview.text.toString(),
+//                )
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
         _binding = null
     }
 }
