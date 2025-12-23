@@ -40,7 +40,7 @@ class AddReviewFragment : Fragment() {
 //                )
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
