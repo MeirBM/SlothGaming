@@ -96,6 +96,7 @@
         android:progressBackgroundTint="@color/darkGray"
         android:layout_marginTop="12dp"
         android:progressTint="@color/highRating"
+        android:secondaryProgressTint="@color/highRating"
         android:rating="5"
         />
 
