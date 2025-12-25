@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
 import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
+import com.example.SlothGaming.extensions.setScaleClickAnimation
 
 class MyReviewsFragment : Fragment() {
 
@@ -29,7 +30,7 @@ class MyReviewsFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.addReviewButton.root.setOnClickListener {_ ->
+        binding.addReviewButton.root.setScaleClickAnimation {
             findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment)
         }
     }

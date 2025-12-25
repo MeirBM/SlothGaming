@@ -13,12 +13,10 @@ import androidx.fragment.app.activityViewModels
 import com.example.SlothGaming.R
 import com.example.SlothGaming.Ui.view_models.ReviewViewModel
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
-import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.AddReviewLayoutBinding
-import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
 import kotlin.math.roundToInt
-
+import com.example.SlothGaming.extensions.setScaleClickAnimation
 class AddReviewFragment : Fragment() {
 
     private val repository: ReviewListRepository by lazy { ReviewListRepository(requireActivity().application) }
@@ -34,14 +32,13 @@ class AddReviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = AddReviewLayoutBinding.inflate(inflater, container, false)
-
+        binding.addReviewButton.root.setScaleClickAnimation()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         changeColorOnRatingChange(binding.ratingBar)
-
     }
 
     override fun onDestroyView() {
@@ -49,10 +46,8 @@ class AddReviewFragment : Fragment() {
         _binding = null
     }
 
-
      private fun changeColorOnRatingChange(ratingBar: RatingBar) {
         ratingBar.setOnTouchListener { v, event ->
-            val context = requireContext()
             //color group
             val lowRating = ContextCompat.getColor(requireContext(), R.color.lowRating)
             val midRating = ContextCompat.getColor(requireContext(), R.color.midRating)
