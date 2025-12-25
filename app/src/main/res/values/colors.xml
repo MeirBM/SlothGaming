@@ -7,7 +7,7 @@
     <color name="darkGray">#333232</color>
     <color name="pearlWhite">#e5e5e5</color>
     <color name="midGray">#b5b5b5</color>
-    <color name="lowRating">#D32F2F</color>
+    <color name="lowRating">#FF0000</color>
     <color name="midRating">#F9A825</color>
     <color name="highRating">#ffeb54</color>
 
