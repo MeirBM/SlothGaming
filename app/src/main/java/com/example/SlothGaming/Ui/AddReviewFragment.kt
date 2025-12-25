@@ -53,10 +53,11 @@ class AddReviewFragment : Fragment() {
      private fun changeColorOnRatingChange(ratingBar: RatingBar) {
         ratingBar.setOnTouchListener { v, event ->
             val context = requireContext()
-
+            //color group
             val lowRating = ContextCompat.getColor(requireContext(), R.color.lowRating)
             val midRating = ContextCompat.getColor(requireContext(), R.color.midRating)
             val highRating = ContextCompat.getColor(requireContext(), R.color.highRating)
+
             // Constrain it between 0 and 1 so it doesn't break if they slide off the edge
             val touchX = event.x.coerceIn(0f, v.width.toFloat())
             val fraction = touchX / v.width
