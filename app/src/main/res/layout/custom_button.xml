@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="@string/add_a_review"
         tools:text="Add a review"
-        android:textColor="@color/pearlWhite"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:fontFamily="sans-serif-black" />
 
