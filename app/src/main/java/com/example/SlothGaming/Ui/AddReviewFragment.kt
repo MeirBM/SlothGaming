@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RatingBar
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.SlothGaming.R
 import com.example.SlothGaming.Ui.view_models.ReviewViewModel
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
@@ -48,6 +50,20 @@ class AddReviewFragment : Fragment() {
                 else -> ContextCompat.getColor(context, R.color.highRating)
             }
             binding.ratingBar.progressTintList = ColorStateList.valueOf(color)
+
+
+            binding.finishReviewBtn.setOnClickListener {
+
+                val review = Review(binding.enteredGameTitle.text.toString(),binding.enteredReview.text.toString(),rating,null)
+
+                viewModel.addReview(review)
+
+                findNavController().navigate(
+                    R.id.action_addReviewFragment_to_myReviewsFragment
+                    , bundleOf("reviews" to review)
+                )
+            }
+
 
         }
 //        val review =

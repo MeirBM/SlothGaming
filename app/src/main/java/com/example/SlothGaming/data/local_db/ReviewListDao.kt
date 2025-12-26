@@ -20,12 +20,12 @@ interface ReviewListDao {
     @Update
     fun updateReview (review: Review)
 
-    @Query("SELECT * FROM wishes ORDER BY rating ASC")
+    @Query("SELECT * FROM reviews ORDER BY rating ASC")
     fun getReview(): LiveData<List<Review>>
 
-    @Query("SELECT * FROM wishes WHERE id LIKE :id ")
+    @Query("SELECT * FROM reviews WHERE id LIKE :id ")
     fun getReview(id : Int) : Review
 
-    @Query("DELETE FROM wishes")
+    @Query("DELETE FROM reviews")
     fun deleteAll()
 }

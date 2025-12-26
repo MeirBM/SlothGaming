@@ -18,7 +18,7 @@ abstract class ReviewListDataBase : RoomDatabase() {
         private var instance:ReviewListDataBase? = null
 
         fun getDatabase(context: Context) = instance ?: synchronized(this) {
-            Room.databaseBuilder(context.applicationContext, ReviewListDataBase::class.java,"items_db")
+            Room.databaseBuilder(context.applicationContext, ReviewListDataBase::class.java,"reviews_db")
                 .allowMainThreadQueries().build()
         }
     }

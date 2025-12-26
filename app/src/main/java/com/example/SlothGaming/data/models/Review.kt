@@ -1,19 +1,18 @@
 package com.example.SlothGaming.data.models
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = "wishes")
+@Parcelize
+@Entity(tableName = "reviews")
 data class Review(
     val title : String,
     val gameReview : String,
-    val rating : Double,
-    val photo : String?,
+    val rating : Float,
+    val photo : String?) : Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
-
-){
-
-
 }
