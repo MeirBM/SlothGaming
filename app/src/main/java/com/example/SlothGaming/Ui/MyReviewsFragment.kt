@@ -65,7 +65,7 @@ class MyReviewsFragment : Fragment() {
 
                 override fun onReviewLongClicked(index: Int) {
                     viewModel.setReview(it[index])
-                    findNavController().navigate(R.id.action_myReviewsFragment_to_detailReviewFragment2)
+                    findNavController().navigate(R.id.action_myReviewsFragment_to_detailReviewFragment)
                 }
             })
             binding.recycler.layoutManager = GridLayoutManager(requireContext(),1)
