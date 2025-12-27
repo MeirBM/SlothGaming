@@ -44,16 +44,16 @@ class DetailReviewFragment : Fragment() {
                 .into(binding.reviewImage)
         }
 
-        player = ExoPlayer.Builder(requireContext()).build()
-        binding.playerView.player = player
-
-        val mediaItem = MediaItem.fromUri(
-            Uri.parse("https://www.pornhub.com/view_video.php?viewkey=6504aacd98ccf")
-        )
-
-        player.setMediaItem(mediaItem)
-        player.prepare()
-        player.play()
+//        player = ExoPlayer.Builder(requireContext()).build()
+//        binding.playerView.player = player
+//
+//        val mediaItem = MediaItem.fromUri(
+//            Uri.parse("https://www.pornhub.com/view_video.php?viewkey=6504aacd98ccf")
+//        )
+//
+//        player.setMediaItem(mediaItem)
+//        player.prepare()
+//        player.play()
 
 
     }

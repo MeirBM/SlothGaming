@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Ui."
-    android:padding="30dp"
+    tools:context=".Ui.view_models.DetailReviewFragment"
+    android:padding="16dp"
     android:background="#000000">
 
+<!--    app:cardBackgroundColor="#FFEB3B" add later, hard with yellow background-->
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardCornerRadius="30dp"
-        app:cardBackgroundColor="#FFEB3B"
         app:cardUseCompatPadding="true"
+        app:layout_constraintStart_toStartOf="parent"
         app:cardPreventCornerOverlap="true"
         app:cardElevation="@dimen/cardview_compat_inset_shadow">
 
@@ -41,12 +43,12 @@
                 android:textSize="25sp"
                 android:textAllCaps="true"/>
 
-            <androidx.media3.ui.PlayerView
-                android:id="@+id/playerView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                app:use_controller="true"
-                />
+<!--            <androidx.media3.ui.PlayerView-->
+<!--                android:id="@+id/playerView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="200dp"-->
+<!--                app:use_controller="true"-->
+<!--                />-->
 
             <ImageView
                 android:layout_width="match_parent"
@@ -54,14 +56,11 @@
                 android:layout_margin="15dp"
                 android:id="@+id/review_image"/>
 
-
-
-
         </LinearLayout>
 
 
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
