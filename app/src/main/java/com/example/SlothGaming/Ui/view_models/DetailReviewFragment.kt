@@ -41,7 +41,7 @@ class DetailReviewFragment : Fragment() {
             binding.reviewTitle.text=it.title
             binding.reviewDesc.text=it.gameReview
             Glide.with(requireContext()).load(it.photo).circleCrop()
-                .into(binding.reviewImage)
+                .into(binding.reviewedGameImage)
         }
 
 //        player = ExoPlayer.Builder(requireContext()).build()
