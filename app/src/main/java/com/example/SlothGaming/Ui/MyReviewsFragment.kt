@@ -28,7 +28,7 @@ class MyReviewsFragment : Fragment() {
     private var _binding : MyReviewsLayoutBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : ReviewViewModel by activityViewModels() {
+    private val viewModel : ReviewViewModel by activityViewModels {
         viewModelFactory
     }
 
@@ -88,8 +88,7 @@ class MyReviewsFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val item = (binding.recycler.adapter as ReviewAdapter).reviewAt(viewHolder.absoluteAdapterPosition)
                 viewModel.deleteReview(item)
-                // ItemManager.remove(viewHolder.adapterPosition)
-                //  binding.recycler.adapter!!.notifyItemRemoved(viewHolder.adapterPosition)
+
             }
         }).attachToRecyclerView(binding.recycler)
     }
