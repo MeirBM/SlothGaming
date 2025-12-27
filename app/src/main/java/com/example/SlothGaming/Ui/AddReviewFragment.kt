@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.RatingBar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -21,7 +24,9 @@ import com.example.SlothGaming.utils.ColorProvider
 import kotlin.math.roundToInt
 
 class AddReviewFragment : Fragment() {
-
+    companion object {
+         private val consoleList = listOf<String>("Ps5", "Xbox", "PC","Nintendo")
+    }
     private val repository: ReviewListRepository by lazy { ReviewListRepository(requireActivity().application) }
     private val viewModelFactory: ReviewViewModelFactory by lazy { ReviewViewModelFactory(repository) }
 
@@ -42,25 +47,30 @@ class AddReviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         changeColorOnRatingChange(binding.ratingBar)
+        val adapter = ArrayAdapter(requireContext(),R.layout.console_list_layout,
+            R.id.console_item,consoleList)
+        val autoComplete = binding.consoleSpinner.setAdapter(adapter)
+
+
 
         binding.addReviewButton.root.setOnClickListener {
             val review = Review(
                 binding.enteredGameTitle.text.toString(),
                 binding.enteredReview.text.toString(),
                 binding.ratingBar.rating,
+                "On ${binding.consoleSpinner.text}",
                 null)
             viewModel.addReview(review)
             findNavController().navigate(
                 R.id.action_addReviewFragment_to_myReviewsFragment, bundleOf("reviews" to review)
             )
         }
-
-
     }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 
     private fun changeColorOnRatingChange(ratingBar: RatingBar) {
         ratingBar.setOnTouchListener { v, event ->

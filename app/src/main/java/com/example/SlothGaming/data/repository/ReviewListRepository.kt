@@ -14,7 +14,7 @@ class ReviewListRepository(val application: Application) {
             reviewListDao = db.reviewDao()
         }
 
-        fun getReviews() = reviewListDao?.getReview()
+        fun getReviews() = reviewListDao?.getReviews()
 
         fun addReview(review: Review) {
             reviewListDao?.addReview(review)

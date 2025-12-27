@@ -58,6 +58,26 @@
                         android:textColor="@color/customBlack"
                         android:textSize="14sp"
                         android:alpha="0.8" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"                        android:layout_marginTop="6dp"
+                        android:hint="Select Console"
+                        app:boxStrokeColor="@color/customBlack"
+                        app:boxBackgroundColor="@color/midGray"
+
+                        >
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/console_spinner"
+                            android:inputType="none"
+                            android:dropDownVerticalOffset="0dp"
+                            android:popupBackground="@color/midGray"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/title_text_layout"
@@ -68,7 +88,8 @@
                         app:boxBackgroundColor="@color/midGray"
                         app:boxStrokeColor="@color/customBlack"
                         app:counterEnabled="true"
-                        app:counterMaxLength="35">
+                        app:counterMaxLength="35"
+                        >
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/entered_game_title"

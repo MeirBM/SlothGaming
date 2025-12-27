@@ -11,6 +11,7 @@ data class Review(
     val title : String,
     val gameReview : String,
     val rating : Float,
+    val console: String,
     val photo : String?) : Parcelable {
 
     @PrimaryKey(autoGenerate = true)
