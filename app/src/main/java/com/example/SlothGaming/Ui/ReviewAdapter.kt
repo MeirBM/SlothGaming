@@ -9,7 +9,9 @@ import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.databinding.ReviewLayoutBinding
 
 
-class ReviewAdapter(private val reviews: List<Review> , val callBack: ReviewListener):
+class ReviewAdapter(
+    private val reviews: List<Review> ,
+    val callBack: ReviewListener):
     RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int): ReviewViewHolder =
@@ -20,7 +22,6 @@ class ReviewAdapter(private val reviews: List<Review> , val callBack: ReviewList
         fun onReviewClicked(index:Int)
         fun onReviewLongClicked(index:Int)
     }
-
 
     override fun onBindViewHolder(
         holder: ReviewViewHolder, position: Int)=  holder.bind(reviews[position])
@@ -48,9 +49,9 @@ class ReviewAdapter(private val reviews: List<Review> , val callBack: ReviewList
 
 
         fun bind(review : Review){
-            binding.gameTitle.text = review.title.toString()
-            binding.reviewText.text = review.gameReview.toString()
-            binding.consoleText.text = review.console.toString()
+            binding.gameTitle.text = review.title
+            binding.reviewText.text = review.gameReview
+            binding.consoleText.text = review.console
             binding.givenRating.text = review.rating.toString()
             Glide.with(binding.root).load(review.photo)
                 .into(binding.gameImage)

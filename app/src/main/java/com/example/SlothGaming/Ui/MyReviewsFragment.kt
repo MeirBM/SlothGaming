@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.SlothGaming.R
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -83,8 +84,23 @@ class MyReviewsFragment : Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val item = (binding.recycler.adapter as ReviewAdapter).reviewAt(viewHolder.absoluteAdapterPosition)
-                viewModel.deleteReview(item)
+
+
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("DELETE")
+                builder.setMessage("Are you sure you want to delete this review?")
+                builder.setPositiveButton("Yes"){
+                    dialog, which ->
+                    val item = (binding.recycler.adapter as ReviewAdapter).reviewAt(viewHolder.absoluteAdapterPosition)
+                    viewModel.deleteReview(item)
+                }
+                builder.setNegativeButton("No"){
+                    dialog, which ->
+                    binding.recycler.adapter?.notifyItemChanged(viewHolder.absoluteAdapterPosition)
+                }
+                builder.setCancelable(false)
+                builder.show()
+
 
             }
         }).attachToRecyclerView(binding.recycler)
