@@ -53,14 +53,11 @@ class MyReviewsFragment : Fragment() {
         }
 
         viewModel.reviews?.observe(viewLifecycleOwner) {
-            Log.d("TEST", "reviews = ${viewModel.reviews}")
             binding.recycler.adapter = ReviewAdapter(it, object : ReviewAdapter.ReviewListener {
 
                 override fun onReviewClicked(index: Int) {
-                    Log.d("TEST", "reviews = ${viewModel.reviews}")
-
                     Toast.makeText(requireContext(),
-                        "${it[index]}",Toast.LENGTH_SHORT).show()
+                        "onReviewClicked it working",Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onReviewLongClicked(index: Int) {
