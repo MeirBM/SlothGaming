@@ -50,6 +50,7 @@ class ReviewAdapter(private val reviews: List<Review> , val callBack: ReviewList
         fun bind(review : Review){
             binding.gameTitle.text = review.title.toString()
             binding.reviewText.text = review.gameReview.toString()
+            binding.consoleText.text = review.console.toString()
             binding.givenRating.text = review.rating.toString()
             Glide.with(binding.root).load(review.photo)
                 .into(binding.gameImage)

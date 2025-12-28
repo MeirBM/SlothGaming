@@ -15,8 +15,8 @@
             app:destination="@id/addReviewFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_myReviewsFragment_to_detailReviewFragment2"
-            app:destination="@id/detailReviewFragment2" />
+            android:id="@+id/action_myReviewsFragment_to_detailReviewFragment"
+            app:destination="@id/detailReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/addReviewFragment"
@@ -28,7 +28,7 @@
             app:destination="@id/myReviewsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/detailReviewFragment2"
+        android:id="@+id/detailReviewFragment"
         android:name="com.example.SlothGaming.Ui.view_models.DetailReviewFragment"
         android:label="DetailReviewFragment" />
 </navigation>

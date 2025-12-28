@@ -19,7 +19,8 @@ abstract class ReviewListDataBase : RoomDatabase() {
 
         fun getDatabase(context: Context) = instance ?: synchronized(this) {
             Room.databaseBuilder(context.applicationContext, ReviewListDataBase::class.java,"reviews_db")
-                .allowMainThreadQueries().build()
+                .fallbackToDestructiveMigration(true).allowMainThreadQueries().build()
+        // TODO  switch fallbackToDestructiveMigration with AddMigration in Future
         }
     }
 }

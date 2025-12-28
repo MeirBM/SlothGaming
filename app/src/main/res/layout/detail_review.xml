@@ -1,58 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Ui."
-    android:padding="30dp"
+    tools:context=".Ui.view_models.DetailReviewFragment"
+    android:padding="16dp"
     android:background="#000000">
 
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+<!--    app:cardBackgroundColor="#FFEB3B" add later, hard with yellow background-->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:id="@+id/detail_card"
+        android:layout_height="0dp"
         app:cardCornerRadius="30dp"
-        app:cardBackgroundColor="#FFEB3B"
         app:cardUseCompatPadding="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:cardPreventCornerOverlap="true"
         app:cardElevation="@dimen/cardview_compat_inset_shadow">
-
-
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:fillViewport="true"
+            android:padding="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/review_title"
                 android:textStyle="bold"
-                android:gravity="center"
+                tools:text ="Game title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="start|top"
                 android:textSize="30sp"
-                android:textAllCaps="true"/>
+                android:fontFamily="sans-serif-medium"/>
 
-            <ImageView
+            <TextView
+                android:id="@+id/review_console"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:id="@+id/review_image"/>
+                android:fontFamily="sans-serif-medium"
+                android:gravity="start|top"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/review_title"
+                android:layout_marginTop="6dp"
+                tools:text="console" />
+            <TextView
+                android:id="@+id/rating_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="start|top"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/rating_star"
+                app:layout_constraintStart_toEndOf="@id/reviewed_game_image"
+                android:layout_marginTop="6dp"
+                tools:text="2.5" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/reviewed_game_image"
+                android:layout_width="0dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintEnd_toStartOf="@+id/rating_star"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/review_console"
+                app:shapeAppearanceOverlay="@style/RoundedCornersImage" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/rating_star"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_star"
+                app:layout_constraintBottom_toBottomOf="@+id/reviewed_game_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:shapeAppearanceOverlay="@style/RoundedCornersImage" />
+
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/review_desc"
-                android:gravity="center"
-                android:textSize="25sp"
-                android:textAllCaps="true"/>
+                android:layout_gravity="top|start"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reviewed_game_image"
+                tools:text  = "Your review be seen here"
+                android:layout_marginTop="16dp"
+                android:ellipsize="end"
+                android:scrollHorizontally="false"
+                android:textSize="18sp"
 
-        </LinearLayout>
+                />
 
+<!--            <androidx.media3.ui.PlayerView-->
+<!--                android:id="@+id/playerView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="200dp"-->
+<!--                app:use_controller="true"-->
+<!--                />-->
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+    </com.google.android.material.card.MaterialCardView>
 
-    </androidx.cardview.widget.CardView>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

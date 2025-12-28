@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import com.example.SlothGaming.R
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,6 +19,7 @@ import com.example.SlothGaming.Ui.view_models.ReviewViewModel
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
 import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
+import com.example.SlothGaming.extensions.setScaleClickAnimation
 import kotlin.collections.get
 import kotlin.getValue
 
@@ -28,7 +30,7 @@ class MyReviewsFragment : Fragment() {
     private var _binding : MyReviewsLayoutBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : ReviewViewModel by activityViewModels() {
+    private val viewModel : ReviewViewModel by activityViewModels {
         viewModelFactory
     }
 
@@ -43,26 +45,29 @@ class MyReviewsFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.addReviewButton.root.setOnClickListener {_ ->
+        binding.addReviewButton.root.setScaleClickAnimation {
             findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment)
         }
 
-        arguments?.getString("review")?.let {
-
-                Toast.makeText(requireActivity(),it,Toast.LENGTH_SHORT).show()
-        }
+//        arguments?.getString("review")?.let {
+//
+//                Toast.makeText(requireActivity(),it,Toast.LENGTH_SHORT).show()
+//        }
 
         viewModel.reviews?.observe(viewLifecycleOwner) {
+            Log.d("TEST", "reviews = ${viewModel.reviews}")
             binding.recycler.adapter = ReviewAdapter(it, object : ReviewAdapter.ReviewListener {
 
                 override fun onReviewClicked(index: Int) {
+                    Log.d("TEST", "reviews = ${viewModel.reviews}")
                     Toast.makeText(requireContext(),
-                        "onReviewClicked it working",Toast.LENGTH_SHORT).show()
+                        "${it[index]}",Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onReviewLongClicked(index: Int) {
                     viewModel.setReview(it[index])
-                    findNavController().navigate(R.id.action_myReviewsFragment_to_detailReviewFragment2)
+                    findNavController().navigate(R.id.action_myReviewsFragment_to_detailReviewFragment)
+
                 }
             })
             binding.recycler.layoutManager = GridLayoutManager(requireContext(),1)
@@ -85,8 +90,7 @@ class MyReviewsFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val item = (binding.recycler.adapter as ReviewAdapter).reviewAt(viewHolder.absoluteAdapterPosition)
                 viewModel.deleteReview(item)
-                // ItemManager.remove(viewHolder.adapterPosition)
-                //  binding.recycler.adapter!!.notifyItemRemoved(viewHolder.adapterPosition)
+
             }
         }).attachToRecyclerView(binding.recycler)
     }
