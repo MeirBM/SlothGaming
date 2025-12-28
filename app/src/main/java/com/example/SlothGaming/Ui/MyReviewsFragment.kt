@@ -6,21 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import com.example.SlothGaming.R
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.ItemTouchHelper.Callback.makeFlag
 import androidx.recyclerview.widget.RecyclerView
 import com.example.SlothGaming.Ui.view_models.ReviewViewModel
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
 import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
 import com.example.SlothGaming.extensions.setScaleClickAnimation
-import kotlin.collections.get
 import kotlin.getValue
 
 class MyReviewsFragment : Fragment() {
@@ -55,11 +52,9 @@ class MyReviewsFragment : Fragment() {
 //        }
 
         viewModel.reviews?.observe(viewLifecycleOwner) {
-            Log.d("TEST", "reviews = ${viewModel.reviews}")
             binding.recycler.adapter = ReviewAdapter(it, object : ReviewAdapter.ReviewListener {
 
                 override fun onReviewClicked(index: Int) {
-                    Log.d("TEST", "reviews = ${viewModel.reviews}")
                     Toast.makeText(requireContext(),
                         "${it[index]}",Toast.LENGTH_SHORT).show()
                 }

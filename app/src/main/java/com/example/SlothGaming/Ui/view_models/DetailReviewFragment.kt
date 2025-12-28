@@ -1,6 +1,5 @@
 package com.example.SlothGaming.Ui.view_models
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +7,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.media3.common.MediaItem
-import androidx.media3.exoplayer.ExoPlayer
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.R
 import com.example.SlothGaming.databinding.DetailReviewBinding
@@ -22,7 +19,6 @@ class DetailReviewFragment : Fragment() {
     getDrawable(requireContext(),R.drawable.ic_star)?.mutate()}
     var _binding : DetailReviewBinding?  = null
 
-    private lateinit var player: ExoPlayer
 
     val viewModel : ReviewViewModel by activityViewModels()
 
