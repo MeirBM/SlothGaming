@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import com.example.SlothGaming.R
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,6 +19,7 @@ import com.example.SlothGaming.Ui.view_models.ReviewViewModel
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
 import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
+import com.example.SlothGaming.extensions.setScaleClickAnimation
 import kotlin.collections.get
 import kotlin.getValue
 
@@ -43,14 +45,14 @@ class MyReviewsFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.addReviewButton.root.setOnClickListener {_ ->
+        binding.addReviewButton.root.setScaleClickAnimation {
             findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment)
         }
 
-        arguments?.getString("review")?.let {
-
-                Toast.makeText(requireActivity(),it,Toast.LENGTH_SHORT).show()
-        }
+//        arguments?.getString("review")?.let {
+//
+//                Toast.makeText(requireActivity(),it,Toast.LENGTH_SHORT).show()
+//        }
 
         viewModel.reviews?.observe(viewLifecycleOwner) {
             Log.d("TEST", "reviews = ${viewModel.reviews}")
@@ -58,7 +60,6 @@ class MyReviewsFragment : Fragment() {
 
                 override fun onReviewClicked(index: Int) {
                     Log.d("TEST", "reviews = ${viewModel.reviews}")
-
                     Toast.makeText(requireContext(),
                         "${it[index]}",Toast.LENGTH_SHORT).show()
                 }
@@ -66,6 +67,7 @@ class MyReviewsFragment : Fragment() {
                 override fun onReviewLongClicked(index: Int) {
                     viewModel.setReview(it[index])
                     findNavController().navigate(R.id.action_myReviewsFragment_to_detailReviewFragment)
+
                 }
             })
             binding.recycler.layoutManager = GridLayoutManager(requireContext(),1)

@@ -46,16 +46,56 @@
                 android:gravity="start|top"
                 android:textSize="30sp"
                 android:fontFamily="sans-serif-medium"/>
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:scaleType="centerCrop"
-                app:shapeAppearanceOverlay="@style/RoundedCornersImage"
-                android:layout_marginTop="16dp"
+
+            <TextView
+                android:id="@+id/review_console"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="start|top"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/review_title"
+                android:layout_marginTop="6dp"
+                tools:text="console" />
+            <TextView
+                android:id="@+id/rating_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="start|top"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/rating_star"
+                app:layout_constraintStart_toEndOf="@id/reviewed_game_image"
+                android:layout_marginTop="6dp"
+                tools:text="2.5" />
+
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/reviewed_game_image"
-                android:src="@drawable/ic_star"/>
+                android:layout_width="0dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintEnd_toStartOf="@+id/rating_star"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/review_console"
+                app:shapeAppearanceOverlay="@style/RoundedCornersImage" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/rating_star"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_star"
+                app:layout_constraintBottom_toBottomOf="@+id/reviewed_game_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:shapeAppearanceOverlay="@style/RoundedCornersImage" />
+
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,8 +118,6 @@
 <!--                android:layout_height="200dp"-->
 <!--                app:use_controller="true"-->
 <!--                />-->
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

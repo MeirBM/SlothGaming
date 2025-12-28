@@ -5,17 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import com.bumptech.glide.Glide
+import com.example.SlothGaming.R
 import com.example.SlothGaming.databinding.DetailReviewBinding
+import com.example.SlothGaming.utils.ColorProvider
 import kotlin.getValue
 
 
 class DetailReviewFragment : Fragment() {
-
+    private val star by lazy{ ContextCompat.
+    getDrawable(requireContext(),R.drawable.ic_star)?.mutate()}
     var _binding : DetailReviewBinding?  = null
 
     private lateinit var player: ExoPlayer
@@ -37,11 +41,19 @@ class DetailReviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         viewModel.chosenReview.observe(viewLifecycleOwner){
+
             binding.reviewTitle.text=it.title
             binding.reviewDesc.text=it.gameReview
+            binding.ratingScore.text = it.rating.toString()
             Glide.with(requireContext()).load(it.photo).circleCrop()
                 .into(binding.reviewedGameImage)
+
+            val color = ColorProvider.pickColor(it.rating,requireContext())
+
+            star?.setTint(color)
+            binding.ratingStar.setImageDrawable(star)
         }
 
 //        player = ExoPlayer.Builder(requireContext()).build()
