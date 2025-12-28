@@ -28,7 +28,7 @@ import kotlin.math.roundToInt
 
 class AddReviewFragment : Fragment() {
     companion object {
-         private val consoleList = listOf<String>("Ps5", "Xbox", "PC","Nintendo")
+         private val consoleList = listOf<String>("Ps5", "Xbox", "PC","Switch")
     }
 
     private val repository: ReviewListRepository by lazy { ReviewListRepository(requireActivity().application) }
@@ -59,12 +59,12 @@ class AddReviewFragment : Fragment() {
         val adapter = ArrayAdapter(requireContext(),R.layout.console_list_layout,
             R.id.console_item,consoleList)
 
-        binding.consoleSpinner.setAdapter(adapter)
+        binding.consoleDropdown.setAdapter(adapter)
 
         //permission for photo library
         val pickImageLauncher : ActivityResultLauncher<Array<String>> =
             registerForActivityResult(ActivityResultContracts.OpenDocument()) {
-                binding.chooseImg.setImageURI(it)
+                binding.gameImage.setImageURI(it)
                 if (it != null) {
                     requireActivity().contentResolver.takePersistableUriPermission(it,Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 }
@@ -72,7 +72,7 @@ class AddReviewFragment : Fragment() {
             }
 
 
-        binding.choosePhoto.setOnClickListener {
+        binding.chooseImg.setOnClickListener {
             pickImageLauncher.launch(arrayOf("image/*"))
         }
 
@@ -81,7 +81,7 @@ class AddReviewFragment : Fragment() {
                 binding.enteredGameTitle.text.toString(),
                 binding.enteredReview.text.toString(),
                 binding.ratingBar.rating,
-                "On ${binding.consoleSpinner.text}",
+                "${binding.consoleDropdown.text}",
                 imageUri.toString())
             viewModel.addReview(review)
             findNavController().navigate(
