@@ -1,17 +1,17 @@
 package com.example.SlothGaming.Ui
 
+import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.RatingBar
-import androidx.core.content.ContextCompat
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -36,6 +36,8 @@ class AddReviewFragment : Fragment() {
 
     private val viewModel: ReviewViewModel by activityViewModels { viewModelFactory }
     private var _binding: AddReviewLayoutBinding? = null
+
+    var imageUri: Uri? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -59,13 +61,28 @@ class AddReviewFragment : Fragment() {
 
         binding.consoleSpinner.setAdapter(adapter)
 
+        //permission for photo library
+        val pickImageLauncher : ActivityResultLauncher<Array<String>> =
+            registerForActivityResult(ActivityResultContracts.OpenDocument()) {
+                binding.chooseImg.setImageURI(it)
+                if (it != null) {
+                    requireActivity().contentResolver.takePersistableUriPermission(it,Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+                imageUri = it
+            }
+
+
+        binding.choosePhoto.setOnClickListener {
+            pickImageLauncher.launch(arrayOf("image/*"))
+        }
+
         binding.addReviewButton.root.setScaleClickAnimation {
             val review = Review(
                 binding.enteredGameTitle.text.toString(),
                 binding.enteredReview.text.toString(),
                 binding.ratingBar.rating,
                 "On ${binding.consoleSpinner.text}",
-                null)
+                imageUri.toString())
             viewModel.addReview(review)
             findNavController().navigate(
                 R.id.action_addReviewFragment_to_myReviewsFragment, bundleOf("reviews" to review)
