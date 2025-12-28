@@ -67,9 +67,9 @@
 
                         >
                         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/console_dropdown"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/console_spinner"
                             android:inputType="none"
                             android:dropDownVerticalOffset="0dp"
                             android:popupBackground="@color/midGray"
@@ -87,7 +87,7 @@
                         app:boxBackgroundColor="@color/midGray"
                         app:boxStrokeColor="@color/customBlack"
                         app:counterEnabled="true"
-                        app:counterMaxLength="35"
+                        app:counterMaxLength="30"
                         >
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -96,7 +96,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/customBlack"
                             android:maxLines="1"
-                            android:maxLength="35"
+                            android:maxLength="30"
                             tools:text="some text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,34 +124,25 @@
                             android:textColorHint="@color/customBlack"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageView
+                        android:id="@+id/game_image"
+                        android:layout_width="130dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="16dp"/>
+
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/choose_photo"
+                        android:id="@+id/choose_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-black"
                         android:textColor="@color/white"
                         android:textSize="16sp"
-                        android:text="Choose Photo"
+                        android:fontFamily="sans-serif-black"                         android:text="Choose Image"
                         android:layout_gravity="center"
                         android:textAllCaps="false"
                         android:background="@drawable/button_gradient"
                         app:backgroundTint="@null"
-                        android:layout_marginBottom="8dp"
-                        app:layout_constraintBottom_toTopOf="@+id/add_review_button"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-
-                    <ImageView
-                        android:id="@+id/choose_img"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="8dp"
-                        app:layout_constraintBottom_toTopOf="@+id/add_review_button"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/choose_photo" />
+                        android:layout_marginBottom="8dp"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/choose_rating_text"
@@ -189,7 +180,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

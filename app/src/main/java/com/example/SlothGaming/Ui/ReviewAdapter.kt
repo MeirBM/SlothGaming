@@ -30,7 +30,7 @@ class ReviewAdapter(private val reviews: List<Review> , val callBack: ReviewList
 
     fun reviewAt(position:Int) = reviews[position]
     inner class ReviewViewHolder(private val binding : ReviewLayoutBinding):
-        RecyclerView.ViewHolder(binding.root),View.OnClickListener,View.OnLongClickListener{
+        RecyclerView.ViewHolder(binding.root),View.OnClickListener,View.OnLongClickListener {
 
         init {
             binding.root.setOnClickListener(this)
@@ -46,15 +46,12 @@ class ReviewAdapter(private val reviews: List<Review> , val callBack: ReviewList
             return false
         }
 
-
-        fun bind(review : Review){
+        fun bind(review: Review) {
             binding.gameTitle.text = review.title.toString()
             binding.reviewText.text = review.gameReview.toString()
             binding.consoleText.text = review.console.toString()
             binding.givenRating.text = review.rating.toString()
-            Glide.with(binding.root).load(review.photo)
-                .into(binding.gameImage)
+            Glide.with(binding.root).load(review.photo).into(binding.gameImage)
         }
-
     }
 }
