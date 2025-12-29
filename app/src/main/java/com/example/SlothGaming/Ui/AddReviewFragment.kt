@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.RatingBar
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
@@ -77,13 +78,36 @@ class AddReviewFragment : Fragment() {
         }
 
         binding.addReviewButton.root.setScaleClickAnimation {
-            val review = Review(
-                binding.enteredGameTitle.text.toString(),
-                binding.enteredReview.text.toString(),
-                binding.ratingBar.rating,
-                "${binding.consoleDropdown.text}",
-                imageUri.toString())
+
+                val minTitleLength = 3
+
+                val title = binding.enteredGameTitle.text.toString().trim()
+                val desc = binding.enteredReview.text.toString().trim()
+                val ratingBar = binding.ratingBar.rating
+                val consoleType = "${binding.consoleDropdown.text}"
+                val image = imageUri.toString()
+
+            if(consoleType.isEmpty()){
+                binding.consoleDropdown.error = "Please Enter Platform Type"
+                binding.consoleDropdown.requestFocus()
+                return@setScaleClickAnimation
+            }
+            if(title.length < minTitleLength){
+                binding.enteredGameTitle.error = "Title must be at least $minTitleLength characters"
+                binding.enteredGameTitle.requestFocus()
+                return@setScaleClickAnimation
+            }
+            if(desc.isEmpty()){
+                binding.enteredReview.error = "Please Enter Description"
+                binding.enteredReview.requestFocus()
+                return@setScaleClickAnimation
+            }
+
+
+            val review = Review(title,desc,ratingBar,consoleType,image)
             viewModel.addReview(review)
+
+
             findNavController().navigate(
                 R.id.action_addReviewFragment_to_myReviewsFragment, bundleOf("reviews" to review)
             )
