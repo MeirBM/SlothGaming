@@ -95,8 +95,8 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_star"
                 app:layout_constraintBottom_toBottomOf="@+id/reviewed_game_image"
-                app:layout_constraintEnd_toEndOf="parent"
-
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toEndOf="@+id/reviewed_game_image"
                 app:shapeAppearanceOverlay="@style/RoundedCornersImage" />
 
 
