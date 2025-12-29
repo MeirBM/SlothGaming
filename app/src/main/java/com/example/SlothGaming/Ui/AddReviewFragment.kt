@@ -17,6 +17,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.core.view.ViewCompat
 import com.example.SlothGaming.R
 import com.example.SlothGaming.Ui.view_models.ReviewViewModel
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
@@ -55,12 +56,27 @@ class AddReviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Force LTR for this screen, even when text is Hebrew
+        ViewCompat.setLayoutDirection(binding.root, ViewCompat.LAYOUT_DIRECTION_LTR)
+
+        binding.enteredGameTitle.textDirection = View.TEXT_DIRECTION_LTR
+        binding.enteredGameTitle.textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+
+        binding.enteredReview.textDirection = View.TEXT_DIRECTION_LTR
+        binding.enteredReview.textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+
+        binding.consoleDropdown.textDirection = View.TEXT_DIRECTION_LTR
+        binding.consoleDropdown.textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+
         changeColorOnRatingChange(binding.ratingBar)
 
         val adapter = ArrayAdapter(requireContext(),R.layout.console_list_layout,
             R.id.console_item,consoleList)
 
         binding.consoleDropdown.setAdapter(adapter)
+        binding.consoleDropdown.setOnItemClickListener { _, _, _, _ ->
+            binding.consoleDropdown.error = null
+        }
 
         //permission for photo library
         val pickImageLauncher : ActivityResultLauncher<Array<String>> =
@@ -84,8 +100,7 @@ class AddReviewFragment : Fragment() {
                 val title = binding.enteredGameTitle.text.toString().trim()
                 val desc = binding.enteredReview.text.toString().trim()
                 val ratingBar = binding.ratingBar.rating
-                val consoleType = "${binding.consoleDropdown.text}"
-                val image = imageUri.toString()
+                val consoleType = "${binding.consoleDropdown.text}".trim()
 
             if(consoleType.isEmpty()){
                 binding.consoleDropdown.error = "Please Enter Platform Type"
@@ -102,7 +117,11 @@ class AddReviewFragment : Fragment() {
                 binding.enteredReview.requestFocus()
                 return@setScaleClickAnimation
             }
-
+            if (imageUri == null) {
+                Toast.makeText(requireContext(), "Please upload an image", Toast.LENGTH_SHORT).show()
+                return@setScaleClickAnimation
+            }
+            val image = imageUri.toString()
 
             val review = Review(title,desc,ratingBar,consoleType,image)
             viewModel.addReview(review)
