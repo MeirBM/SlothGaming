@@ -1,5 +1,6 @@
 package com.example.SlothGaming.Ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -119,6 +120,7 @@ class AddReviewFragment : Fragment() {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun changeColorOnRatingChange(ratingBar: RatingBar) {
         ratingBar.setOnTouchListener { v, event ->
             val context = requireContext()
@@ -134,6 +136,7 @@ class AddReviewFragment : Fragment() {
 
             when (event.action) {
                 MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
+
                     // Update Color LIVE while sliding
 
                 val color = ColorProvider.pickColor(steppedRating,context)
