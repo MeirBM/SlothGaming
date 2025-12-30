@@ -88,21 +88,23 @@ class AddReviewFragment : Fragment() {
                 val consoleType = "${binding.consoleDropdown.text}"
                 val image = imageUri.toString()
 
-            if(consoleType.isEmpty()){
-                binding.consoleDropdown.error = "Please Enter Platform Type"
-                binding.consoleDropdown.requestFocus()
-                return@setScaleClickAnimation
+
+            when{
+                consoleType.isEmpty() ->{
+                    binding.consoleDropdown.error = "Please Enter Platform Type"
+                    binding.consoleDropdown.requestFocus()
+                    return@setScaleClickAnimation}
+                title.length < minTitleLength -> {
+                    binding.consoleDropdown.error = "Please Enter Platform Type"
+                    binding.consoleDropdown.requestFocus()
+                    return@setScaleClickAnimation}
+                desc.isEmpty()->{
+                    binding.enteredReview.error = "Please Enter Description"
+                    binding.enteredReview.requestFocus()
+                    return@setScaleClickAnimation
+                }
             }
-            if(title.length < minTitleLength){
-                binding.enteredGameTitle.error = "Title must be at least $minTitleLength characters"
-                binding.enteredGameTitle.requestFocus()
-                return@setScaleClickAnimation
-            }
-            if(desc.isEmpty()){
-                binding.enteredReview.error = "Please Enter Description"
-                binding.enteredReview.requestFocus()
-                return@setScaleClickAnimation
-            }
+
 
 
             val review = Review(title,desc,ratingBar,consoleType,image)
