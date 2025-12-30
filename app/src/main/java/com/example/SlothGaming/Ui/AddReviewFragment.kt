@@ -169,7 +169,7 @@ class AddReviewFragment : Fragment() {
                     ratingBar.rating = steppedRating
                 }
             }
-            true
+            false
         }
     }
 }
