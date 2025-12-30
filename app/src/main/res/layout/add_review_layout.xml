@@ -5,33 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/customBlack"
-    android:padding="0dp"
-    android:alpha="0.85"
     tools:context=".Ui.AddReviewFragment">
 
-    <LinearLayout
-        android:id="@+id/content_scroll"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/add_review_button"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/content_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/form_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/midGray"
-                android:layout_marginBottom="20dp">
+                app:cardCornerRadius="16dp"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -53,30 +49,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
+                        android:alpha="0.8"
                         android:text="Tell others what you thought"
                         android:textColor="@color/customBlack"
-                        android:textSize="14sp"
-                        android:alpha="0.8" />
+                        android:textSize="14sp" />
+
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="12dp"
                         android:hint="Select Console"
-                        app:boxStrokeColor="@color/customBlack"
                         app:boxBackgroundColor="@color/midGray"
-
-                        >
+                        app:boxStrokeColor="@color/customBlack">
                         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                             android:id="@+id/console_dropdown"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="none"
-                            android:dropDownVerticalOffset="0dp"
-                            android:popupBackground="@color/midGray"
-                            />
+                            android:inputType="none" />
                     </com.google.android.material.textfield.TextInputLayout>
-
-
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/title_text_layout"
@@ -87,17 +78,14 @@
                         app:boxBackgroundColor="@color/midGray"
                         app:boxStrokeColor="@color/customBlack"
                         app:counterEnabled="true"
-                        app:counterMaxLength="30"
-                        >
-
+                        app:counterMaxLength="30">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/entered_game_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/customBlack"
-                            android:maxLines="1"
                             android:maxLength="30"
-                            tools:text="some text" />
+                            android:maxLines="1"
+                            android:textColor="@color/customBlack" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -106,22 +94,17 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         app:boxBackgroundColor="@color/midGray"
+                        app:boxStrokeColor="@color/customBlack"
                         app:counterEnabled="true"
-                        app:counterMaxLength="250"
-                        app:boxStrokeColor="@color/customBlack">
-
+                        app:counterMaxLength="250">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/entered_review"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:maxLength="250"
-                            android:minLines="1"
-                            android:maxLines="5"
-                            android:gravity="top|start"
-                            android:scrollHorizontally="false"
-                            android:textColor="@color/customBlack"
                             android:hint="Enter your review here"
-                            android:textColorHint="@color/customBlack"/>
+                            android:maxLength="250"
+                            android:maxLines="5"
+                            android:textColor="@color/customBlack" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageView
@@ -129,50 +112,36 @@
                         android:layout_width="130dp"
                         android:layout_height="120dp"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="16dp"/>
+                        android:layout_marginTop="16dp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/choose_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:fontFamily="sans-serif-black"                         android:text="Choose Image"
                         android:layout_gravity="center"
-                        android:textAllCaps="false"
-                        android:background="@drawable/button_gradient"
+                        android:text="Choose Image"
                         app:backgroundTint="@null"
-                        android:layout_marginBottom="8dp"/>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/choose_rating_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Your score"
-                        android:textColor="@color/customBlack"
-                        android:textSize="20sp"
-                        android:textStyle="normal" />
+                        android:background="@drawable/button_gradient" />
 
                     <androidx.appcompat.widget.AppCompatRatingBar
                         android:id="@+id/rating_bar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
+                        android:isIndicator="false"
+                        android:layout_gravity="center"
                         android:numStars="5"
-                        android:stepSize="0.5"
                         android:progressBackgroundTint="@color/darkGray"
                         android:progressTint="@color/highRating"
-                        android:secondaryProgressTint="@color/highRating"
                         android:rating="5"
-                        android:isIndicator="false" />
+                        android:secondaryProgressTint="@color/highRating"
+                        android:stepSize="0.5" />
+
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
-
-
         </LinearLayout>
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <include
         android:id="@+id/add_review_button"
@@ -180,9 +149,9 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
