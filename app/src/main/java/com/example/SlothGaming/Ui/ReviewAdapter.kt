@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.core.view.ViewCompat
 import com.bumptech.glide.Glide
-import com.example.SlothGaming.R
 import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.databinding.ReviewLayoutBinding
 import com.example.SlothGaming.utils.ColorProvider
