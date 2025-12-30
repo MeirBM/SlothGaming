@@ -39,13 +39,14 @@ class DetailReviewFragment : Fragment() {
 
 
         viewModel.chosenReview.observe(viewLifecycleOwner){
-
+            // populate the view with data
             binding.reviewTitle.text=it.title
             binding.reviewDesc.text=it.gameReview
+            binding.reviewConsole.text = it.console
             binding.ratingScore.text = it.rating.toString()
-            Glide.with(requireContext()).load(it.photo).circleCrop()
+            Glide.with(requireContext()).load(it.photo)
                 .into(binding.reviewedGameImage)
-
+            // match star color with rating
             val color = ColorProvider.pickColor(it.rating,requireContext())
 
             star?.setTint(color)

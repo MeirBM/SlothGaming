@@ -1,5 +1,6 @@
 package com.example.SlothGaming.Ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -102,26 +103,28 @@ class AddReviewFragment : Fragment() {
                 val ratingBar = binding.ratingBar.rating
                 val consoleType = "${binding.consoleDropdown.text}".trim()
 
-            if(consoleType.isEmpty()){
-                binding.consoleDropdown.error = "Please Enter Platform Type"
-                binding.consoleDropdown.requestFocus()
-                return@setScaleClickAnimation
-            }
-            if(title.length < minTitleLength){
-                binding.enteredGameTitle.error = "Title must be at least $minTitleLength characters"
-                binding.enteredGameTitle.requestFocus()
-                return@setScaleClickAnimation
-            }
-            if(desc.isEmpty()){
-                binding.enteredReview.error = "Please Enter Description"
-                binding.enteredReview.requestFocus()
-                return@setScaleClickAnimation
+
+            when{
+                consoleType.isEmpty() ->{
+                    binding.consoleDropdown.error = "Please Enter Platform Type"
+                    binding.consoleDropdown.requestFocus()
+                    return@setScaleClickAnimation}
+                title.length < minTitleLength -> {
+                    binding.consoleDropdown.error = "Please Enter Platform Type"
+                    binding.consoleDropdown.requestFocus()
+                    return@setScaleClickAnimation}
+                desc.isEmpty()->{
+                    binding.enteredReview.error = "Please Enter Description"
+                    binding.enteredReview.requestFocus()
+                    return@setScaleClickAnimation
+                }
             }
             if (imageUri == null) {
                 Toast.makeText(requireContext(), "Please upload an image", Toast.LENGTH_SHORT).show()
                 return@setScaleClickAnimation
             }
             val image = imageUri.toString()
+
 
             val review = Review(title,desc,ratingBar,consoleType,image)
             viewModel.addReview(review)
@@ -138,6 +141,7 @@ class AddReviewFragment : Fragment() {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun changeColorOnRatingChange(ratingBar: RatingBar) {
         ratingBar.setOnTouchListener { v, event ->
             val context = requireContext()
@@ -153,6 +157,7 @@ class AddReviewFragment : Fragment() {
 
             when (event.action) {
                 MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
+
                     // Update Color LIVE while sliding
 
                 val color = ColorProvider.pickColor(steppedRating,context)
