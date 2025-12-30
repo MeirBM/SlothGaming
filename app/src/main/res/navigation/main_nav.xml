@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_myReviewsFragment_to_detailReviewFragment"
             app:destination="@id/detailReviewFragment" />
+        <action
+            android:id="@+id/action_myReviewsFragment_to_statisticsReviewsFragment"
+            app:destination="@id/statisticsReviewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/addReviewFragment"
@@ -33,4 +36,8 @@
         android:id="@+id/detailReviewFragment"
         android:name="com.example.SlothGaming.Ui.view_models.DetailReviewFragment"
         android:label="DetailReviewFragment" />
+    <fragment
+        android:id="@+id/statisticsReviewsFragment"
+        android:name="com.example.SlothGaming.Ui.view_models.StatisticsReviewsFragment"
+        android:label="StatisticsReviewsFragment" />
 </navigation>
