@@ -1,7 +1,6 @@
 package com.example.SlothGaming.Ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,10 +46,6 @@ class MyReviewsFragment : Fragment() {
             findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment)
         }
 
-//        arguments?.getString("review")?.let {
-//
-//                Toast.makeText(requireActivity(),it,Toast.LENGTH_SHORT).show()
-//        }
 
         viewModel.reviews?.observe(viewLifecycleOwner) {
             binding.recycler.adapter = ReviewAdapter(it, object : ReviewAdapter.ReviewListener {
