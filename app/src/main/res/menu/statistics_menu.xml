@@ -5,7 +5,7 @@
     <item
         android:id="@+id/stats_menu"
         android:title="Your Statistics"
-        android:icon="@drawable/twotone_menu_24"
+        android:icon="@drawable/chart_646__1_"
         app:showAsAction="always" />
 
 </menu>
