@@ -62,11 +62,15 @@
                         android:hint="Select Console"
                         app:boxBackgroundColor="@color/midGray"
                         app:boxStrokeColor="@color/customBlack">
-                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
                             android:id="@+id/console_dropdown"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="none" />
+                            android:focusable="false"
+                            android:cursorVisible="false"
+                            android:focusableInTouchMode="false"
+                            android:inputType="none"
+                            />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
