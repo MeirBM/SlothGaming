@@ -34,6 +34,7 @@ class AddReviewFragment : Fragment() {
     }
 
     private val repository: ReviewListRepository by lazy { ReviewListRepository(requireActivity().application) }
+
     private val viewModelFactory: ReviewViewModelFactory by lazy { ReviewViewModelFactory(repository) }
 
     private val viewModel: ReviewViewModel by activityViewModels { viewModelFactory }
@@ -55,12 +56,12 @@ class AddReviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // call the rating bar function which listens for onTouch events
         changeColorOnRatingChange(binding.ratingBar)
 
+        // adapter for the console dropDown
         val adapter = ArrayAdapter(requireContext(),R.layout.console_list_layout,
             R.id.console_item,consoleList)
-
         binding.consoleDropdown.setAdapter(adapter)
 
         //permission for photo library
@@ -80,15 +81,15 @@ class AddReviewFragment : Fragment() {
 
         binding.addReviewButton.root.setScaleClickAnimation {
 
-                val minTitleLength = 3
-
+            // create review parameters
                 val title = binding.enteredGameTitle.text.toString().trim()
                 val desc = binding.enteredReview.text.toString().trim()
                 val ratingBar = binding.ratingBar.rating
                 val consoleType = "${binding.consoleDropdown.text}"
                 val image = imageUri.toString()
 
-
+            // check if all field's are properly filled
+            val minTitleLength = 3
             when{
                 consoleType.isEmpty() ->{
                     binding.consoleDropdown.error = "Please Enter Platform Type"
@@ -106,7 +107,7 @@ class AddReviewFragment : Fragment() {
             }
 
 
-
+            //add review to recycler
             val review = Review(title,desc,ratingBar,consoleType,image)
             viewModel.addReview(review)
 
@@ -120,8 +121,9 @@ class AddReviewFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
+    /*A function for the rating bar
+    * change the rating bar color as the rating goes up or down
+    * in a seamless look and feel */
     @SuppressLint("ClickableViewAccessibility")
     private fun changeColorOnRatingChange(ratingBar: RatingBar) {
         ratingBar.setOnTouchListener { v, event ->
