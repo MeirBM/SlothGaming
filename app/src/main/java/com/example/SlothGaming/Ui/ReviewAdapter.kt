@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import androidx.core.view.ViewCompat
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.R
 import com.example.SlothGaming.data.models.Review
@@ -44,6 +45,21 @@ class ReviewAdapter(
         RecyclerView.ViewHolder(binding.root), View.OnClickListener, View.OnLongClickListener {
 
         init {
+            // Force LTR for this row, even when text is Hebrew
+            ViewCompat.setLayoutDirection(binding.root, ViewCompat.LAYOUT_DIRECTION_LTR)
+
+            binding.gameTitle.textDirection = View.TEXT_DIRECTION_LTR
+            binding.gameTitle.textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+
+            binding.reviewText.textDirection = View.TEXT_DIRECTION_LTR
+            binding.reviewText.textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+
+            binding.consoleText.textDirection = View.TEXT_DIRECTION_LTR
+            binding.consoleText.textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+
+            binding.givenRating.textDirection = View.TEXT_DIRECTION_LTR
+            binding.givenRating.textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+
             binding.root.setOnClickListener(this)
             binding.root.setOnLongClickListener(this)
         }
