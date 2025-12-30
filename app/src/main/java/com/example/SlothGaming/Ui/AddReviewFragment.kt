@@ -104,25 +104,28 @@ class AddReviewFragment : Fragment() {
                 val consoleType = "${binding.consoleDropdown.text}".trim()
 
 
-            when{
-                consoleType.isEmpty() ->{
+            when {
+                consoleType.isEmpty() -> {
                     binding.consoleDropdown.error = "Please Enter Platform Type"
                     binding.consoleDropdown.requestFocus()
-                    return@setScaleClickAnimation}
+                    return@setScaleClickAnimation
+                }
                 title.length < minTitleLength -> {
-                    binding.consoleDropdown.error = "Please Enter Platform Type"
-                    binding.consoleDropdown.requestFocus()
-                    return@setScaleClickAnimation}
-                desc.isEmpty()->{
+                    binding.enteredGameTitle.error = "Please Enter Game Title"
+                    binding.enteredGameTitle.requestFocus()
+                    return@setScaleClickAnimation
+                }
+                desc.isEmpty() -> {
                     binding.enteredReview.error = "Please Enter Description"
                     binding.enteredReview.requestFocus()
                     return@setScaleClickAnimation
                 }
+                imageUri == null -> {
+                    Toast.makeText(requireContext(), "Please upload an image", Toast.LENGTH_SHORT).show()
+                    return@setScaleClickAnimation
+                }
             }
-            if (imageUri == null) {
-                Toast.makeText(requireContext(), "Please upload an image", Toast.LENGTH_SHORT).show()
-                return@setScaleClickAnimation
-            }
+
             val image = imageUri.toString()
 
 
