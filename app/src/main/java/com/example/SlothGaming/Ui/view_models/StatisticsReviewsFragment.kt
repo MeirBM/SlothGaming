@@ -2,14 +2,8 @@ package com.example.SlothGaming.Ui.view_models
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.MenuHost
-import com.example.SlothGaming.R
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.SlothGaming.data.models.Review
@@ -29,7 +23,8 @@ class StatisticsReviewsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        _binding = StatisticsReviewsLayoutBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     private val viewModel: ReviewViewModel by activityViewModels { viewModelFactory }
@@ -68,30 +63,6 @@ class StatisticsReviewsFragment : Fragment() {
                 emptyStats()
             }
         }
-
-        val menuHost : MenuHost = requireActivity()
-
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(
-                menu: Menu,
-                menuInflater: MenuInflater
-            ) {
-                menuInflater.inflate(R.menu.statistics_menu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return true
-
-            }
-
-            override fun onPrepareMenu(menu: Menu) {
-                super.onPrepareMenu(menu)
-            }
-
-            override fun onMenuClosed(menu: Menu) {
-                super.onMenuClosed(menu)
-            }
-        })
     }
 
     override fun onDestroyView() {

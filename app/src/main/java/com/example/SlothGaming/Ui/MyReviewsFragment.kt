@@ -19,6 +19,11 @@ import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
 import com.example.SlothGaming.extensions.setScaleClickAnimation
 import kotlin.getValue
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 
 class MyReviewsFragment : Fragment() {
 
@@ -99,6 +104,30 @@ class MyReviewsFragment : Fragment() {
 
             }
         }).attachToRecyclerView(binding.recycler)
+
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(
+            object : MenuProvider {
+
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.statistics_menu, menu)
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return when (menuItem.itemId) {
+                        R.id.stats_menu -> {
+                            // Assuming you set the ID of the destination in your nav_graph to 'statisticsReviewsFragment'
+                            // You might need to create an action in the nav graph connecting MyReviews to Statistics
+                            findNavController().navigate(R.id.action_myReviewsFragment_to_statisticsReviewsFragment)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            },
+            viewLifecycleOwner
+        )
     }
 
 
