@@ -35,9 +35,11 @@
     <fragment
         android:id="@+id/detailReviewFragment"
         android:name="com.example.SlothGaming.Ui.view_models.DetailReviewFragment"
-        android:label="DetailReviewFragment" />
+        android:label="DetailReviewFragment"
+        tools:layout="@layout/detail_review"/>
     <fragment
         android:id="@+id/statisticsReviewsFragment"
         android:name="com.example.SlothGaming.Ui.view_models.StatisticsReviewsFragment"
-        android:label="StatisticsReviewsFragment" />
+        android:label="StatisticsReviewsFragment"
+        tools:layout="@layout/statistics_reviews_layout"/>
 </navigation>
