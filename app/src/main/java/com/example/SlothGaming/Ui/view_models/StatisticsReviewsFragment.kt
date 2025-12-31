@@ -57,6 +57,8 @@ class StatisticsReviewsFragment : Fragment() {
     }
 
     private fun emptyStats() {
+        star?.setTint(ContextCompat.getColor(requireContext(),R.color.lowRating))
+        binding.ratingStar.setImageDrawable(star)
         binding.avgRating.text = "0.0"
         binding.totalReviews.text = "0"
         binding.topConsole.text = "-"
