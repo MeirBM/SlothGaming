@@ -75,10 +75,11 @@
                     </LinearLayout>
 
                     <ImageView
+                        android:id="@+id/rating_star"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:src="@drawable/ic_star"
-                        app:tint="@color/yellow" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout

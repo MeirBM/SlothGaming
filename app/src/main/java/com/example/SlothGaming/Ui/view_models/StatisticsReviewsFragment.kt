@@ -4,14 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.SlothGaming.R
 import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.StatisticsReviewsLayoutBinding
+import com.example.SlothGaming.utils.ColorProvider
 
 class StatisticsReviewsFragment : Fragment() {
 
+    private val star by lazy{ ContextCompat.
+    getDrawable(requireContext(),R.drawable.ic_star)?.mutate()}
     private val repository : ReviewListRepository by lazy{ ReviewListRepository(requireActivity().application) }
     private val viewModelFactory : ReviewViewModelFactory by lazy { ReviewViewModelFactory(repository) }
     private var _binding : StatisticsReviewsLayoutBinding? = null
@@ -35,6 +40,10 @@ class StatisticsReviewsFragment : Fragment() {
         val avg = reviews.map {
             it.rating
         }.average()
+        val color = ColorProvider.pickColor(avg.toFloat(),requireContext())
+
+        star?.setTint(color)
+        binding.ratingStar.setImageDrawable(star)
 
         //format for shorten the number after the .
         binding.avgRating.text = "%.1f".format(avg)
