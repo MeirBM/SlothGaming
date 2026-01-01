@@ -16,17 +16,17 @@ class ReviewListRepository(val application: Application) {
 
         fun getReviews() = reviewListDao?.getReviews()
 
-        fun addReview(review: Review) {
+        suspend fun addReview(review: Review) {
             reviewListDao?.addReview(review)
         }
 
-        fun deleteReview(review: Review) {
+        suspend fun deleteReview(review: Review) {
             reviewListDao?.deleteReview(review)
         }
 
         fun getReview(id:Int)  = reviewListDao?.getReview(id)
 
-        fun deleteAll(){
+        suspend fun deleteAll(){
             reviewListDao?.deleteAll()
         }
 

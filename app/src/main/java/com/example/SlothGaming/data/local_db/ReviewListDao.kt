@@ -12,13 +12,13 @@ import com.example.SlothGaming.data.models.Review
 interface ReviewListDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addReview(review: Review)
+    suspend fun addReview(review: Review)
 
     @Delete
-    fun deleteReview(vararg review : Review)
+    suspend fun deleteReview(vararg review : Review)
 
     @Update
-    fun updateReview (review: Review)
+    suspend fun updateReview (review: Review)
 
     @Query("SELECT * FROM reviews ORDER BY rating ASC")
     fun getReviews(): LiveData<List<Review>>
@@ -27,5 +27,5 @@ interface ReviewListDao {
     fun getReview(id : Int) : Review
 
     @Query("DELETE FROM reviews")
-    fun deleteAll()
+    suspend fun deleteAll()
 }
