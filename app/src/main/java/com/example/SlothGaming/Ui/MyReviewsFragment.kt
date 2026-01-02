@@ -111,7 +111,7 @@ class MyReviewsFragment : Fragment() {
             object : MenuProvider {
 
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                    menuInflater.inflate(R.menu.statistics_menu, menu)
+                    menuInflater.inflate(R.menu.review_page_menu, menu)
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -120,6 +120,23 @@ class MyReviewsFragment : Fragment() {
                             // Assuming you set the ID of the destination in your nav_graph to 'statisticsReviewsFragment'
                             // You might need to create an action in the nav graph connecting MyReviews to Statistics
                             findNavController().navigate(R.id.action_myReviewsFragment_to_statisticsReviewsFragment)
+                            true
+                        }
+
+                        R.id.delete_all_reviews -> {
+                            val dialog  = AlertDialog.Builder(requireContext()).apply {
+                                setTitle("Delete All Reviews")
+                                setMessage("Are you sure you want to delete all reviews?")
+                                setPositiveButton("Yes"){
+                                    dialog, which ->
+                                    viewModel.deleteAll()
+                                }
+                                setNegativeButton("No"){
+                                    _, _ ->
+                                }
+                                show()
+                            }
+
                             true
                         }
                         else -> false
