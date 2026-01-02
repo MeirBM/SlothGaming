@@ -12,7 +12,11 @@
         tools:layout="@layout/my_reviews_layout" >
         <action
             android:id="@+id/action_myReviewsFragment_to_addReviewFragment"
-            app:destination="@id/addReviewFragment" />
+            app:destination="@id/addReviewFragment"
+            app:enterAnim="@anim/from_up"
+            app:exitAnim="@anim/to_down"
+            app:popEnterAnim="@anim/from_down"
+            app:popExitAnim="@anim/to_up" />
         <action
             android:id="@+id/action_myReviewsFragment_to_detailReviewFragment"
             app:destination="@id/detailReviewFragment" />
@@ -29,8 +33,12 @@
         <action
             android:id="@+id/action_addReviewFragment_to_myReviewsFragment"
             app:destination="@id/myReviewsFragment"
+            app:enterAnim="@anim/from_down"
+            app:exitAnim="@anim/to_up"
+            app:popEnterAnim="@anim/from_up"
+            app:popExitAnim="@anim/to_down"
             app:popUpTo="@id/myReviewsFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/detailReviewFragment"

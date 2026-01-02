@@ -7,7 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Ui.view_models.DetailReviewFragment"
     android:padding="16dp"
-    android:background="#000000">
+    android:alpha="0.85"
+    android:background="@color/customBlack">
 
 <!--    app:cardBackgroundColor="#FFEB3B" add later, hard with yellow background-->
     <com.google.android.material.card.MaterialCardView

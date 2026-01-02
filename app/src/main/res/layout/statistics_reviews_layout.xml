@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@color/customBlack"
+    android:alpha="0.85"
     tools:context=".Ui.view_models.StatisticsReviewsFragment"
     android:padding="16dp">
 

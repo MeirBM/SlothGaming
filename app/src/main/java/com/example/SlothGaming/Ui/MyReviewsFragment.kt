@@ -51,7 +51,7 @@ class MyReviewsFragment : Fragment() {
             findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment)
         }
 
-
+        //Populate the recycler view with reviews
         viewModel.reviews?.observe(viewLifecycleOwner) {
             binding.recycler.adapter = ReviewAdapter(it, object : ReviewAdapter.ReviewListener {
 
@@ -68,6 +68,11 @@ class MyReviewsFragment : Fragment() {
             })
             binding.recycler.layoutManager = GridLayoutManager(requireContext(),1)
         }
+
+
+        /* Define swipe to delete
+           no drag action added currently
+         */
         ItemTouchHelper(object : ItemTouchHelper.Callback() {
 
             override fun getMovementFlags(
@@ -85,7 +90,7 @@ class MyReviewsFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-
+                // Pop up to verify with user his action's
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("DELETE")
                 builder.setMessage("Are you sure you want to delete this review?")
@@ -105,8 +110,15 @@ class MyReviewsFragment : Fragment() {
             }
         }).attachToRecyclerView(binding.recycler)
 
-        val menuHost: MenuHost = requireActivity()
 
+        /*Define menu
+         menu include's:
+           1) Statistics button which show's all my reviews stats
+           2) Delete all reviews button which deletes all reviews
+         */
+
+
+        val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(
             object : MenuProvider {
 
