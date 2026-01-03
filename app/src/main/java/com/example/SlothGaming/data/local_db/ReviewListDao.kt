@@ -20,7 +20,7 @@ interface ReviewListDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateReview (review: Review)
 
-    @Query("SELECT * FROM reviews ORDER BY rating ASC")
+    @Query("SELECT * FROM reviews ORDER BY id DESC")
     fun getReviews(): LiveData<List<Review>>
 
     @Query("SELECT * FROM reviews WHERE id = :id ")
