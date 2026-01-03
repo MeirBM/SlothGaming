@@ -14,11 +14,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/my_reviews"
-        android:textStyle="bold"
-        android:textColor="@color/orange"
         android:fontFamily="sans-serif-medium"
-        android:textSize="25sp"/>
+        android:text="@string/my_reviews"
+        android:textColor="@color/pearlWhite"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
