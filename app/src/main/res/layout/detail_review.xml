@@ -1,131 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Ui.view_models.DetailReviewFragment"
-    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:alpha="0.85"
-    android:background="@color/customBlack">
+    android:background="@color/customBlack"
+    android:padding="16dp"
+    tools:context=".Ui.view_models.DetailReviewFragment">
 
-<!--    app:cardBackgroundColor="#FFEB3B" add later, hard with yellow background-->
+    <!--    app:cardBackgroundColor="#FFEB3B" add later, hard with yellow background-->
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="0dp"
         android:id="@+id/detail_card"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:cardCornerRadius="30dp"
+        app:cardElevation="@dimen/cardview_compat_inset_shadow"
+        app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardPreventCornerOverlap="true"
-        app:cardElevation="@dimen/cardview_compat_inset_shadow">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
             android:background="@color/midGray"
+            android:fillViewport="true"
             android:padding="16dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-
-            <TextView
-                android:id="@+id/review_title"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                tools:text ="Game title"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:gravity="start|top"
-                android:textSize="30sp"
-                android:fontFamily="sans-serif-medium"/>
-
-            <TextView
-                android:id="@+id/review_console"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="start|top"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/review_title"
-                android:layout_marginTop="6dp"
-                tools:text="console" />
-            <TextView
-                android:id="@+id/rating_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="start|top"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/rating_star"
-                app:layout_constraintBottom_toTopOf="@id/rating_star"
-                app:layout_constraintStart_toStartOf="@id/rating_star"
-                android:layout_marginTop="6dp"
-                tools:text="2.5" />
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/reviewed_game_image"
-                android:layout_width="120dp"
-                android:layout_height="160dp"
-                android:layout_marginTop="16dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/review_console"
-                app:shapeAppearanceOverlay="@style/RoundedCornersImage" />
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/rating_star"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/yellow"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_star"
-                app:layout_constraintBottom_toBottomOf="@+id/reviewed_game_image"
-                android:layout_marginStart="16dp"
-                app:layout_constraintStart_toEndOf="@+id/reviewed_game_image"
-                app:shapeAppearanceOverlay="@style/RoundedCornersImage" />
+                android:layout_height="wrap_content">
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/review_desc"
-                android:layout_gravity="top|start"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/reviewed_game_image"
-                tools:text  = "Your review be seen here"
-                android:layout_marginTop="16dp"
-                android:ellipsize="end"
-                android:scrollHorizontally="false"
-                android:textSize="18sp"
+                <TextView
+                    android:id="@+id/review_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="start|top"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Game title" />
 
-                />
+                <TextView
+                    android:id="@+id/review_console"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="start|top"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/review_title"
+                    tools:text="console" />
 
-<!--            <androidx.media3.ui.PlayerView-->
-<!--                android:id="@+id/playerView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="200dp"-->
-<!--                app:use_controller="true"-->
-<!--                />-->
+                <TextView
+                    android:id="@+id/rating_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="start|top"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/rating_star"
+                    app:layout_constraintEnd_toEndOf="@id/rating_star"
+                    app:layout_constraintStart_toStartOf="@id/rating_star"
+                    tools:text="2.5" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/reviewed_game_image"
+                    android:layout_width="120dp"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="16dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/review_console"
+                    app:shapeAppearanceOverlay="@style/RoundedCornersImage" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/rating_star"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/yellow"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_star"
+                    app:layout_constraintBottom_toBottomOf="@+id/reviewed_game_image"
+                    app:layout_constraintStart_toEndOf="@+id/reviewed_game_image"
+                    app:shapeAppearanceOverlay="@style/RoundedCornersImage" />
+
+
+                <TextView
+                    android:id="@+id/review_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginTop="16dp"
+                    android:ellipsize="end"
+                    android:scrollHorizontally="false"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reviewed_game_image"
+                    tools:text="Your review be seen here"
+
+                    />
+
+                <!--            <androidx.media3.ui.PlayerView-->
+                <!--                android:id="@+id/playerView"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="200dp"-->
+                <!--                app:use_controller="true"-->
+                <!--                />-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,7 +31,7 @@ import kotlin.math.roundToInt
 
 class AddReviewFragment : Fragment() {
     companion object {
-         private val consoleList = listOf<String>("Ps5", "Xbox", "PC","Switch")
+         private val consoleList = listOf<String>("PC","PS5","XBOX","Switch")
     }
 
     private val repository: ReviewListRepository by lazy { ReviewListRepository(requireActivity().application) }
@@ -57,17 +57,11 @@ class AddReviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Force LTR for this screen, even when text is Hebrew
-        ViewCompat.setLayoutDirection(binding.root, ViewCompat.LAYOUT_DIRECTION_LTR)
+        binding.enteredGameTitle.text.toString()
+        binding.enteredReview.text.toString()
+        binding.consoleDropdown.text.toString()
 
-        binding.enteredGameTitle.textDirection = View.TEXT_DIRECTION_LTR
-        binding.enteredGameTitle.textAlignment = View.TEXT_ALIGNMENT_VIEW_START
 
-        binding.enteredReview.textDirection = View.TEXT_DIRECTION_LTR
-        binding.enteredReview.textAlignment = View.TEXT_ALIGNMENT_VIEW_START
-
-        binding.consoleDropdown.textDirection = View.TEXT_DIRECTION_LTR
-        binding.consoleDropdown.textAlignment = View.TEXT_ALIGNMENT_VIEW_START
 
         changeColorOnRatingChange(binding.ratingBar)
 
@@ -89,11 +83,12 @@ class AddReviewFragment : Fragment() {
                 imageUri = it
             }
 
-
+        //choose image from library
         binding.chooseImg.setOnClickListener {
             pickImageLauncher.launch(arrayOf("image/*"))
         }
 
+        //Add review text and statements
         binding.addReviewButton.root.setScaleClickAnimation {
 
                 val minTitleLength = 3
@@ -106,22 +101,22 @@ class AddReviewFragment : Fragment() {
 
             when {
                 consoleType.isEmpty() -> {
-                    binding.consoleDropdown.error = "Please Enter Platform Type"
+                    binding.consoleDropdown.error = getString(R.string.please_enter_platform_type)
                     binding.consoleDropdown.requestFocus()
                     return@setScaleClickAnimation
                 }
                 title.length < minTitleLength -> {
-                    binding.enteredGameTitle.error = "Please Enter Game Title"
+                    binding.enteredGameTitle.error = getString(R.string.please_enter_game_title_at_least_3_characters)
                     binding.enteredGameTitle.requestFocus()
                     return@setScaleClickAnimation
                 }
                 desc.isEmpty() -> {
-                    binding.enteredReview.error = "Please Enter Description"
+                    binding.enteredReview.error = getString(R.string.please_enter_description)
                     binding.enteredReview.requestFocus()
                     return@setScaleClickAnimation
                 }
                 imageUri == null -> {
-                    Toast.makeText(requireContext(), "Please upload an image", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.please_upload_an_image), Toast.LENGTH_SHORT).show()
                     return@setScaleClickAnimation
                 }
             }

@@ -51,7 +51,7 @@ class StatisticsReviewsFragment : Fragment() {
 
         //group reviews by key & value: pc[review1,review2,...] then search for biggest if there isn't, then null.
         val topConsole = reviews.groupBy { it.console }
-            .maxByOrNull { it.value.size }?.key ?: "N/A"
+            .maxByOrNull { it.value.size }?.key ?: getString(R.string.n_a)
 
         binding.topConsole.text = topConsole
     }

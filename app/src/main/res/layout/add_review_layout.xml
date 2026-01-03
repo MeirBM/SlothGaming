@@ -40,9 +40,10 @@
                         android:id="@+id/add_review_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Add a review"
+                        android:text="@string/add_a_review_title"
                         android:textColor="@color/customBlack"
                         android:textSize="22sp"
+                        android:textAlignment="viewStart"
                         android:textStyle="bold" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -51,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:alpha="0.8"
-                        android:text="Tell others what you thought"
+                        android:text="@string/tell_others_what_you_thought"
                         android:textColor="@color/customBlack"
                         android:textSize="14sp" />
 
@@ -60,7 +61,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:hint="Select Console"
+                        android:hint="@string/select_console"
                         app:boxBackgroundColor="@color/midGray"
                         app:boxStrokeColor="@color/customBlack">
                         <com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -79,7 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:hint="Game title"
+                        android:hint="@string/game_title"
                         app:boxBackgroundColor="@color/midGray"
                         app:boxStrokeColor="@color/customBlack"
                         app:counterEnabled="true"
@@ -106,7 +107,7 @@
                             android:id="@+id/entered_review"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter your review here"
+                            android:hint="@string/enter_your_review_here"
                             android:maxLength="250"
                             android:maxLines="5"
                             android:textColor="@color/customBlack" />
@@ -124,7 +125,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Choose Image"
+                        android:textAllCaps="false"
+                        android:text="@string/choose_image"
                         app:backgroundTint="@null"
                         android:background="@drawable/button_gradient" />
 

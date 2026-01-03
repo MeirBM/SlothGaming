@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SlothGaming</string>
+    <string name="add_a_review">הוסף ביקורת</string>
+    <string name="n_a">ריק</string>
+    <string name="add_a_review_title">הוספת ביקורת</string>
+    <string name="tell_others_what_you_thought">ספר לאחרים מה אתה חושב</string>
+    <string name="select_console">בחר קונסולה</string>
+    <string name="enter_your_review_here">הכנס את הביקורת שלך כאן</string>
+    <string name="choose_image">בחר תמונה</string>
+    <string name="my_reviews">הביקורות שלי</string>
+    <string name="title">כותרת</string>
+    <string name="review">ביקורת</string>
+    <string name="your_stats">הסטטיסטיקות שלך</string>
+    <string name="average_rating">דירוג ממוצע</string>
+    <string name="reviews">ביקורות</string>
+    <string name="top_console">הקונסולה הנבחרת ביותר</string>
+    <string name="delete">מחק</string>
+    <string name="are_you_sure_you_want_to_delete_this_review">האם אתה בטוח שברצונך למחוק את הביקורת?</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
+    <string name="delete_all_reviews">מחק את כל הביקורות</string>
+    <string name="are_you_sure_you_want_to_delete_all_reviews">האם אתה בטוח שברצונך למחוק את כל הביקורות?</string>
+    <string name="game_title">כותרת המשחק</string>
+    <string name="review_has_been_deleted">הביקורת נמחקה</string>
+    <string name="all_reviews_has_been_deleted">כל הביקורות נמחקו</string>
+    <string name="please_enter_platform_type">בחר בבקשה סוג פלטפורמה</string>
+    <string name="please_enter_game_title_at_least_3_characters">הכנס בבקשה כותרת משחק - לפחות 3 תווים</string>
+    <string name="please_enter_description">הכנס בבקשה תיאור</string>
+    <string name="please_upload_an_image">העלה בבקשה תמונה</string>
+</resources>

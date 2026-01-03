@@ -56,8 +56,6 @@ class MyReviewsFragment : Fragment() {
             binding.recycler.adapter = ReviewAdapter(it, object : ReviewAdapter.ReviewListener {
 
                 override fun onReviewClicked(index: Int) {
-                    Toast.makeText(requireContext(),
-                        "${it[index]}",Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onReviewLongClicked(index: Int) {
@@ -70,9 +68,6 @@ class MyReviewsFragment : Fragment() {
         }
 
 
-        /* Define swipe to delete
-           no drag action added currently
-         */
         ItemTouchHelper(object : ItemTouchHelper.Callback() {
 
             override fun getMovementFlags(
@@ -92,14 +87,15 @@ class MyReviewsFragment : Fragment() {
 
                 // Pop up to verify with user his action's
                 val builder = AlertDialog.Builder(requireContext())
-                builder.setTitle("DELETE")
-                builder.setMessage("Are you sure you want to delete this review?")
-                builder.setPositiveButton("Yes"){
+                builder.setTitle(getString(R.string.delete))
+                builder.setMessage(getString(R.string.are_you_sure_you_want_to_delete_this_review))
+                builder.setPositiveButton(getString(R.string.yes)){
                     dialog, which ->
                     val item = (binding.recycler.adapter as ReviewAdapter).reviewAt(viewHolder.absoluteAdapterPosition)
                     viewModel.deleteReview(item)
+                    Toast.makeText(requireContext(), getString(R.string.review_has_been_deleted),Toast.LENGTH_SHORT).show()
                 }
-                builder.setNegativeButton("No"){
+                builder.setNegativeButton(getString(R.string.no)){
                     dialog, which ->
                     binding.recycler.adapter?.notifyItemChanged(viewHolder.absoluteAdapterPosition)
                 }
@@ -109,14 +105,6 @@ class MyReviewsFragment : Fragment() {
 
             }
         }).attachToRecyclerView(binding.recycler)
-
-
-        /*Define menu
-         menu include's:
-           1) Statistics button which show's all my reviews stats
-           2) Delete all reviews button which deletes all reviews
-         */
-
 
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(
@@ -129,24 +117,30 @@ class MyReviewsFragment : Fragment() {
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                     return when (menuItem.itemId) {
                         R.id.stats_menu -> {
-                            // Assuming you set the ID of the destination in your nav_graph to 'statisticsReviewsFragment'
-                            // You might need to create an action in the nav graph connecting MyReviews to Statistics
                             findNavController().navigate(R.id.action_myReviewsFragment_to_statisticsReviewsFragment)
                             true
                         }
-
                         R.id.delete_all_reviews -> {
-                            val dialog  = AlertDialog.Builder(requireContext()).apply {
-                                setTitle("Delete All Reviews")
-                                setMessage("Are you sure you want to delete all reviews?")
-                                setPositiveButton("Yes"){
-                                    dialog, which ->
-                                    viewModel.deleteAll()
+                            when {
+                                viewModel.reviews?.value?.isEmpty() == true -> {
+                                    Toast.makeText(requireContext(), "No reviews to delete", Toast.LENGTH_SHORT).show()
                                 }
-                                setNegativeButton("No"){
-                                    _, _ ->
+
+                                else -> {
+                                    AlertDialog.Builder(requireContext()).apply {
+                                        setTitle(getString(R.string.delete_all_reviews))
+                                        setMessage(getString(R.string.are_you_sure_you_want_to_delete_all_reviews))
+                                        setPositiveButton(getString(R.string.yes)) { dialog, which ->
+
+                                            viewModel.deleteAll()
+                                            Toast.makeText(requireContext(), getString(R.string.all_reviews_has_been_deleted), Toast.LENGTH_SHORT)
+                                                .show()
+                                        }
+                                        setNegativeButton(getString(R.string.no)) { _, _ ->
+                                        }
+                                        show()
+                                    }
                                 }
-                                show()
                             }
 
                             true

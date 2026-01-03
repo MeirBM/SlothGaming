@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
-                    android:text="Your Stats"
+                    android:text="@string/your_stats"
                     android:textSize="32sp"
                     android:textColor="@color/customBlack"
                     app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Average Rating"
+                            android:text="@string/average_rating"
                             android:textSize="14sp"
                             android:alpha="0.7" />
 
@@ -114,7 +114,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Reviews"
+                                android:text="@string/reviews"
                                 android:textSize="12sp"/>
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -141,22 +141,11 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Top Console"
+                                android:text="@string/top_console"
                                 android:textSize="12sp"/>
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/chart_placeholder"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="24dp"
-                    android:background="#D1D1D1"
-                    android:gravity="center"
-                    android:text="Console Distribution Chart Coming Soon"
-                    app:layout_constraintTop_toBottomOf="@id/count_container" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </com.google.android.material.card.MaterialCardView>
