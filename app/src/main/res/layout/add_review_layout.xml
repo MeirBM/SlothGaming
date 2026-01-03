@@ -128,19 +128,30 @@
                         app:backgroundTint="@null"
                         android:background="@drawable/button_gradient" />
 
-                    <androidx.appcompat.widget.AppCompatRatingBar
-                        android:id="@+id/rating_bar"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:isIndicator="false"
                         android:layout_gravity="center"
-                        android:numStars="5"
-                        android:progressBackgroundTint="@color/darkGray"
-                        android:progressTint="@color/highRating"
-                        android:rating="5"
-                        android:secondaryProgressTint="@color/highRating"
-                        android:stepSize="0.5" />
+                        android:orientation="horizontal"
+                        android:layoutDirection="ltr"
+                        android:textDirection="ltr"
+                        android:gravity="center">
+
+                        <androidx.appcompat.widget.AppCompatRatingBar
+                            android:id="@+id/rating_bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:isIndicator="false"
+                            android:numStars="5"
+                            android:stepSize="0.5"
+                            android:rating="5"
+                            android:layoutDirection="ltr"
+                            android:textDirection="ltr"
+                            android:progressBackgroundTint="@color/darkGray"
+                            android:progressTint="@color/highRating"
+                            android:secondaryProgressTint="@color/highRating" />
+                    </LinearLayout>
 
 
                 </LinearLayout>
