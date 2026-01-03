@@ -28,8 +28,6 @@ class ReviewListRepository(val application: Application) {
             reviewListDao?.deleteReview(review)
         }
 
-        fun getReview(id:Int)  = reviewListDao?.getReview(id)
-
         suspend fun deleteAll(){
             reviewListDao?.deleteAll()
         }
