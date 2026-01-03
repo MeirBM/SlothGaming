@@ -36,4 +36,5 @@
     <string name="there_are_no_statistics_to_show">אין סטטיסטיקה להצגה</string>
     <string name="edit_review">ערוך ביקורת</string>
     <string name="edit_review_btn">ערוך ביקורת</string>
+    <string name="platform">פלטפורמה: %1$s</string>
 </resources>

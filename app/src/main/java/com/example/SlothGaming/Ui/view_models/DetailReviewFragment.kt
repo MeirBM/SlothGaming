@@ -42,7 +42,7 @@ class DetailReviewFragment : Fragment() {
             review?.let {
                 binding.reviewTitle.text = it.title
                 binding.reviewDesc.text = it.gameReview
-                binding.reviewConsole.text = it.console
+                binding.reviewConsole.text = getString(R.string.platform, it.console)
                 binding.ratingScore.text = it.rating.toString()
                 Glide.with(requireContext()).load(it.photo)
                     .into(binding.reviewedGameImage)
