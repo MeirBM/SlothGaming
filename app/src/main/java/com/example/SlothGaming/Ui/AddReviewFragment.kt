@@ -92,7 +92,7 @@ class AddReviewFragment : Fragment() {
         binding.addReviewButton.root.setScaleClickAnimation {
 
                 val minTitleLength = 3
-
+                // trim for no whitespaces
                 val title = binding.enteredGameTitle.text.toString().trim()
                 val desc = binding.enteredReview.text.toString().trim()
                 val ratingBar = binding.ratingBar.rating

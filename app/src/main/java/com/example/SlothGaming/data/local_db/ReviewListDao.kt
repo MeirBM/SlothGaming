@@ -1,4 +1,4 @@
-package com.example.architectureproject.data.local_db
+package com.example.SlothGaming.data.local_db
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

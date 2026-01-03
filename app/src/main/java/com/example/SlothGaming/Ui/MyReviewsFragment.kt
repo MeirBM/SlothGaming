@@ -123,7 +123,7 @@ class MyReviewsFragment : Fragment() {
                         R.id.delete_all_reviews -> {
                             when {
                                 viewModel.reviews?.value?.isEmpty() == true -> {
-                                    Toast.makeText(requireContext(), "No reviews to delete", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(requireContext(), getString(R.string.no_reviews_to_delete), Toast.LENGTH_SHORT).show()
                                 }
 
                                 else -> {

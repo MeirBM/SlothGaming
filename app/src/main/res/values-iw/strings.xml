@@ -28,4 +28,7 @@
     <string name="please_enter_game_title_at_least_3_characters">הכנס בבקשה כותרת משחק - לפחות 3 תווים</string>
     <string name="please_enter_description">הכנס בבקשה תיאור</string>
     <string name="please_upload_an_image">העלה בבקשה תמונה</string>
+    <string name="no_reviews_to_delete">אין ביקורות למחוק</string>
+    <string name="your_statistics">הסטטיסטיקה שלך</string>
+    <string name="delete_all_reviews_menu">מחק את כל הביקורות</string>
 </resources>

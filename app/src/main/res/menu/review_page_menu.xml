@@ -4,12 +4,12 @@
 
     <item
         android:id="@+id/stats_menu"
-        android:title="Your Statistics"
+        android:title="@string/your_statistics"
         android:icon="@drawable/chart_646__1_"
         app:showAsAction="always" />
     <item
         android:id="@+id/delete_all_reviews"
-        android:title="Delete All Reviews"
+        android:title="@string/delete_all_reviews_menu"
         android:icon="@drawable/delete_all_reviews"
         app:showAsAction="always"
         />
