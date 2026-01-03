@@ -108,11 +108,11 @@ class AddReviewFragment : Fragment() {
         // permission for photo library
         val pickImageLauncher: ActivityResultLauncher<Array<String>> =
             registerForActivityResult(ActivityResultContracts.OpenDocument()) {
-                binding.gameImage.setImageURI(it)
                 if (it != null) {
+                    binding.gameImage.setImageURI(it)
                     requireActivity().contentResolver.takePersistableUriPermission(it, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    imageUri = it
                 }
-                imageUri = it
             }
 
         // choose image from library
