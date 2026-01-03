@@ -5,7 +5,7 @@ import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.data.local_db.ReviewListDao
 import com.example.SlothGaming.data.local_db.ReviewListDataBase
 
-class ReviewListRepository(val application: Application) {
+class ReviewListRepository(application: Application) {
 
         private var reviewListDao: ReviewListDao?
 
