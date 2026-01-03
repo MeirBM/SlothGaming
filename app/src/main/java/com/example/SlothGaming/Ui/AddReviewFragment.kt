@@ -29,6 +29,8 @@ import com.example.SlothGaming.databinding.AddReviewLayoutBinding
 import com.example.SlothGaming.extensions.setScaleClickAnimation
 import com.example.SlothGaming.utils.ColorProvider
 import kotlin.math.roundToInt
+import androidx.core.net.toUri
+import com.bumptech.glide.Glide
 
 class AddReviewFragment : Fragment() {
     companion object {
@@ -71,6 +73,27 @@ class AddReviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val reviewCheck = viewModel.chosenReview.value
+
+        //Check if add a new review or edit chosen one
+        if(reviewCheck != null){
+            binding.enteredGameTitle.setText(reviewCheck.title)
+            binding.enteredReview.setText(reviewCheck.gameReview)
+            binding.consoleDropdown.setText(reviewCheck.console, false)
+            binding.ratingBar.rating = reviewCheck.rating
+            imageUri = reviewCheck.photo?.toUri()
+            Glide.with(requireContext()).load(imageUri).into(binding.gameImage)
+
+            binding.addReviewTitle.text = getString(R.string.edit_review)
+            binding.addReviewButton.btnText.text = getString(R.string.edit_review_btn)
+
+            val color = ColorProvider.pickColor(reviewCheck.rating, requireContext())
+            binding.ratingBar.progressTintList = ColorStateList.valueOf(color)
+        } else {
+            binding.addReviewTitle.text = getString(R.string.add_a_review)
+            binding.addReviewButton.btnText.text = getString(R.string.add_a_review)
+        }
 
         changeColorOnRatingChange(binding.ratingBar)
 
@@ -135,8 +158,21 @@ class AddReviewFragment : Fragment() {
 
             val image = imageUri.toString()
 
-            val review = Review(title, desc, ratingBar, consoleType, image)
-            viewModel.addReview(review)
+
+
+            val review = Review(title, desc, ratingBar, consoleType, image).apply {
+                id = viewModel.chosenReview.value?.id ?: 0
+            }
+
+            if(review.id == 0){
+                viewModel.addReview(review)
+            }
+            else{
+                viewModel.updateReview(review)
+            }
+            viewModel.setReview(null)
+
+
 
             findNavController().navigate(
                 R.id.action_addReviewFragment_to_myReviewsFragment, bundleOf("reviews" to review)

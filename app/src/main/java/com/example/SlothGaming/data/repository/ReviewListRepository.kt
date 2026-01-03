@@ -19,8 +19,12 @@ class ReviewListRepository(val application: Application) {
         suspend fun addReview(review: Review) {
             reviewListDao?.addReview(review)
         }
+        suspend fun updateReview (review: Review){
+            reviewListDao?.updateReview(review)
+    }
 
-        suspend fun deleteReview(review: Review) {
+
+    suspend fun deleteReview(review: Review) {
             reviewListDao?.deleteReview(review)
         }
 

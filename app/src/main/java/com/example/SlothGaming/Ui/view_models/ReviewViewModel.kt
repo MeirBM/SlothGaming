@@ -11,12 +11,18 @@ import kotlinx.coroutines.launch
 class ReviewViewModel(private val repository : ReviewListRepository) : ViewModel(){
     val reviews : LiveData<List<Review>>? = repository.getReviews()
 
-    private val _chosenReview = MutableLiveData<Review>()
+    private val _chosenReview = MutableLiveData<Review?>()
 
-    val chosenReview : LiveData<Review> get() = _chosenReview
-    fun setReview(review:Review) {
+    val chosenReview : LiveData<Review?> get() = _chosenReview
+    fun setReview(review: Review?) {
 
         _chosenReview.value = review
+    }
+
+    fun updateReview(review: Review){
+        viewModelScope.launch {
+            repository.updateReview(review)
+        }
     }
     fun addReview (review: Review) =
         viewModelScope.launch {

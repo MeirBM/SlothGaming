@@ -34,4 +34,6 @@
     <string name="no_reviews_to_delete_menu">אין ביקורות למחיקה</string>
     <string name="ok">הבנתי</string>
     <string name="there_are_no_statistics_to_show">אין סטטיסטיקה להצגה</string>
+    <string name="edit_review">ערוך ביקורת</string>
+    <string name="edit_review_btn">ערוך ביקורת</string>
 </resources>

@@ -11,19 +11,19 @@ import com.example.SlothGaming.data.models.Review
 @Dao
 interface ReviewListDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addReview(review: Review)
 
     @Delete
     suspend fun deleteReview(vararg review : Review)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateReview (review: Review)
 
     @Query("SELECT * FROM reviews ORDER BY rating ASC")
     fun getReviews(): LiveData<List<Review>>
 
-    @Query("SELECT * FROM reviews WHERE id LIKE :id ")
+    @Query("SELECT * FROM reviews WHERE id = :id ")
     fun getReview(id : Int) : Review
 
     @Query("DELETE FROM reviews")

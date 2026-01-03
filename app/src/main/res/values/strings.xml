@@ -33,4 +33,6 @@
     <string name="no_reviews_to_delete_menu">No reviews to delete</string>
     <string name="ok">OK</string>
     <string name="there_are_no_statistics_to_show">There are no statistics to show</string>
+    <string name="edit_review">Edit Review</string>
+    <string name="edit_review_btn">Edit Review</string>
 </resources>

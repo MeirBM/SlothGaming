@@ -48,6 +48,7 @@ class MyReviewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addReviewButton.root.setScaleClickAnimation {
+            viewModel.setReview(null)
             findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment)
         }
 
