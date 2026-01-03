@@ -11,6 +11,7 @@
     app:cardCornerRadius="10dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:id="@+id/card_layout"
         android:layout_height="match_parent">
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -48,6 +49,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:gravity="start"
             app:layout_constraintTop_toTopOf="@id/game_image"
             app:layout_constraintBottom_toTopOf="@id/review_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,19 +76,16 @@
             android:id="@+id/given_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:padding="5dp"
-            android:drawablePadding="5dp"
             android:drawableStart="@drawable/ic_star"
+            android:drawablePadding="5dp"
             android:fontFamily="sans-serif-light"
-            android:gravity="end"
+            android:padding="5dp"
             android:text="2.5"
             android:textColor="@color/customBlack"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/game_image" />
-
+            app:layout_constraintStart_toStartOf="@id/card_layout"
+            app:layout_constraintTop_toBottomOf="@id/game_image"
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
