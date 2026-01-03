@@ -8,6 +8,12 @@
     android:alpha="0.85"
     tools:context=".Ui.AddReviewFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/add_review_button">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,6 +28,7 @@
                 app:cardBackgroundColor="@color/midGray"
                 app:cardCornerRadius="16dp"
                 app:cardUseCompatPadding="true">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -152,11 +159,10 @@
                             android:progressTint="@color/highRating"
                             android:secondaryProgressTint="@color/highRating" />
                     </LinearLayout>
-
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
+</ScrollView>
 
     <include
         android:id="@+id/add_review_button"
