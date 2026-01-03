@@ -64,19 +64,19 @@
                         android:layout_marginTop="12dp"
                         android:hint="@string/select_console"
                         app:boxBackgroundColor="@color/midGray"
-                        android:textColorHint="@color/customBlack"
-                        app:hintTextColor="@color/customBlack"
-                        app:boxStrokeColor="@color/customBlack">
+                        app:boxStrokeColor="@color/customBlack"
+                        app:hintTextColor="@color/customBlack">
+
                         <com.google.android.material.textfield.MaterialAutoCompleteTextView
                             android:id="@+id/console_dropdown"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/customBlack"
-                            android:focusable="false"
                             android:cursorVisible="false"
+                            android:focusable="false"
                             android:focusableInTouchMode="false"
                             android:inputType="none"
-                            />
+                            android:textColor="@color/customBlack"
+                            android:textColorHint="@color/customBlack" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -88,14 +88,17 @@
                         app:boxBackgroundColor="@color/midGray"
                         app:boxStrokeColor="@color/customBlack"
                         app:counterEnabled="true"
-                        app:counterMaxLength="30">
+                        app:counterMaxLength="30"
+                        app:hintTextColor="@color/customBlack"
+                        app:counterTextColor="@color/customBlack">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/entered_game_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLength="30"
                             android:maxLines="1"
-                            android:textColor="@color/customBlack" />
+                            android:textColor="@color/customBlack"
+                            android:textColorHint="@color/customBlack" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -106,7 +109,9 @@
                         app:boxBackgroundColor="@color/midGray"
                         app:boxStrokeColor="@color/customBlack"
                         app:counterEnabled="true"
-                        app:counterMaxLength="250">
+                        app:counterMaxLength="250"
+                        app:hintTextColor="@color/customBlack"
+                        app:counterTextColor="@color/customBlack">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/entered_review"
                             android:layout_width="match_parent"
@@ -118,7 +123,8 @@
                             android:scrollbars="vertical"
                             android:overScrollMode="always"
                             android:inputType="textMultiLine"
-                            android:textColor="@color/customBlack" />
+                            android:textColor="@color/customBlack"
+                            android:textColorHint="@color/customBlack" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageView
