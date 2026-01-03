@@ -56,11 +56,13 @@ class MyReviewsFragment : Fragment() {
             binding.recycler.adapter = ReviewAdapter(it, object : ReviewAdapter.ReviewListener {
 
                 override fun onReviewClicked(index: Int) {
+                    viewModel.setReview(it[index])
+                    findNavController().navigate(R.id.action_myReviewsFragment_to_detailReviewFragment)
                 }
 
                 override fun onReviewLongClicked(index: Int) {
                     viewModel.setReview(it[index])
-                    findNavController().navigate(R.id.action_myReviewsFragment_to_detailReviewFragment)
+                   findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment)
 
                 }
             })
