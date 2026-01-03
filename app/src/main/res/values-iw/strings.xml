@@ -15,7 +15,7 @@
     <string name="average_rating">דירוג ממוצע</string>
     <string name="reviews">ביקורות</string>
     <string name="top_console">הקונסולה הנבחרת ביותר</string>
-    <string name="delete">מחק</string>
+    <string name="delete">מחיקה</string>
     <string name="are_you_sure_you_want_to_delete_this_review">האם אתה בטוח שברצונך למחוק את הביקורת?</string>
     <string name="yes">כן</string>
     <string name="no">לא</string>
@@ -31,4 +31,7 @@
     <string name="no_reviews_to_delete">אין ביקורות למחוק</string>
     <string name="your_statistics">הסטטיסטיקה שלך</string>
     <string name="delete_all_reviews_menu">מחק את כל הביקורות</string>
+    <string name="no_reviews_to_delete_menu">אין ביקורות למחיקה</string>
+    <string name="ok">הבנתי</string>
+    <string name="there_are_no_statistics_to_show">אין סטטיסטיקה להצגה</string>
 </resources>

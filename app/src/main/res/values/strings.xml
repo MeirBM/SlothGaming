@@ -30,4 +30,7 @@
     <string name="no_reviews_to_delete">No reviews to delete</string>
     <string name="your_statistics">Your Statistics</string>
     <string name="delete_all_reviews_menu">Delete All Reviews</string>
+    <string name="no_reviews_to_delete_menu">No reviews to delete</string>
+    <string name="ok">OK</string>
+    <string name="there_are_no_statistics_to_show">There are no statistics to show</string>
 </resources>

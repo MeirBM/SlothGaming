@@ -52,19 +52,6 @@ class DetailReviewFragment : Fragment() {
             star?.setTint(color)
             binding.ratingStar.setImageDrawable(star)
         }
-
-//        player = ExoPlayer.Builder(requireContext()).build()
-//        binding.playerView.player = player
-//
-//        val mediaItem = MediaItem.fromUri(
-//            Uri.parse("https://www.pornhub.com/view_video.php?viewkey=6504aacd98ccf")
-//        )
-//
-//        player.setMediaItem(mediaItem)
-//        player.prepare()
-//        player.play()
-
-
     }
 
     override fun onDestroyView() {

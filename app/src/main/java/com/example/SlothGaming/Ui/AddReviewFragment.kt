@@ -18,7 +18,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.core.view.ViewCompat
 import com.example.SlothGaming.R
 import com.example.SlothGaming.Ui.view_models.ReviewViewModel
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
@@ -56,11 +55,6 @@ class AddReviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.enteredGameTitle.text.toString()
-        binding.enteredReview.text.toString()
-        binding.consoleDropdown.text.toString()
-
 
 
         changeColorOnRatingChange(binding.ratingBar)

@@ -119,7 +119,7 @@ class MyReviewsFragment : Fragment() {
                         R.id.stats_menu -> {
                             if (viewModel.reviews?.value.isNullOrEmpty()) {
                                 AlertDialog.Builder(requireContext())
-                                    .setMessage("There are no statistics to show")
+                                    .setMessage(getString(R.string.there_are_no_statistics_to_show))
                                     .setPositiveButton("OK", null)
                                     .show()
                             } else {
@@ -132,8 +132,8 @@ class MyReviewsFragment : Fragment() {
                         R.id.delete_all_reviews -> {
                             if (viewModel.reviews?.value?.isEmpty() == true) {
                                 AlertDialog.Builder(requireContext())
-                                    .setMessage("No reviews to delete")
-                                    .setPositiveButton("OK", null)
+                                    .setMessage(getString(R.string.no_reviews_to_delete_menu))
+                                    .setPositiveButton(getString(R.string.ok), null)
                                     .show()
                             }
                             else{
