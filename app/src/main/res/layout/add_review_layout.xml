@@ -62,6 +62,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
+                        android:textColorHint="@color/customBlack"
                         android:hint="@string/select_console"
                         app:boxBackgroundColor="@color/midGray"
                         app:boxStrokeColor="@color/customBlack"
