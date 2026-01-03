@@ -1,5 +1,7 @@
 package com.example.SlothGaming.Ui
 
+import android.text.InputFilter
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -42,6 +44,20 @@ class AddReviewFragment : Fragment() {
     var imageUri: Uri? = null
     private val binding get() = _binding!!
 
+    // Blocks ENTER only when the current line is empty or whitespace
+    private val blockEnterOnEmptyLineFilter = InputFilter { source, start, end, dest, dstart, _ ->
+        for (i in start until end) {
+            if (source[i] == '\n') {
+                val textBeforeCursor = dest.subSequence(0, dstart).toString()
+                val currentLine = textBeforeCursor.substringAfterLast('\n')
+                if (currentLine.trim().isEmpty()) {
+                    return@InputFilter ""
+                }
+            }
+        }
+        null
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,47 +72,49 @@ class AddReviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         changeColorOnRatingChange(binding.ratingBar)
 
-        val adapter = ArrayAdapter(requireContext(),R.layout.console_list_layout,
-            R.id.console_item,consoleList)
+        val adapter = ArrayAdapter(requireContext(), R.layout.console_list_layout,
+            R.id.console_item, consoleList)
 
         binding.consoleDropdown.setAdapter(adapter)
         binding.consoleDropdown.setOnItemClickListener { _, _, _, _ ->
-            binding.consoleDropdown.error = null
+            binding.consoleLayout.error = null
         }
 
-        //permission for photo library
-        val pickImageLauncher : ActivityResultLauncher<Array<String>> =
+        // permission for photo library
+        val pickImageLauncher: ActivityResultLauncher<Array<String>> =
             registerForActivityResult(ActivityResultContracts.OpenDocument()) {
                 binding.gameImage.setImageURI(it)
                 if (it != null) {
-                    requireActivity().contentResolver.takePersistableUriPermission(it,Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    requireActivity().contentResolver.takePersistableUriPermission(it, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 }
                 imageUri = it
             }
 
-        //choose image from library
+        // choose image from library
         binding.chooseImg.setOnClickListener {
             pickImageLauncher.launch(arrayOf("image/*"))
         }
 
-        //Add review text and statements
+        // Keep existing maxLength from XML, add Enter handling to BOTH fields
+        binding.enteredReview.filters = binding.enteredReview.filters + blockEnterOnEmptyLineFilter
+        binding.enteredGameTitle.filters = binding.enteredGameTitle.filters + blockEnterOnEmptyLineFilter
+
+        // Add review text and statements
         binding.addReviewButton.root.setScaleClickAnimation {
 
-                val minTitleLength = 3
-                // trim for no whitespaces
-                val title = binding.enteredGameTitle.text.toString().trim()
-                val desc = binding.enteredReview.text.toString().trim()
-                val ratingBar = binding.ratingBar.rating
-                val consoleType = "${binding.consoleDropdown.text}".trim()
-
+            val minTitleLength = 3
+            // trim for no whitespaces
+            val title = binding.enteredGameTitle.text.toString().trim()
+            val desc = binding.enteredReview.text.toString().trim()
+            val ratingBar = binding.ratingBar.rating
+            val consoleType = "${binding.consoleDropdown.text}".trim()
 
             when {
                 consoleType.isEmpty() -> {
-                    binding.consoleDropdown.error = getString(R.string.please_enter_platform_type)
-                    binding.consoleDropdown.requestFocus()
+                    binding.consoleLayout.error = getString(R.string.please_enter_platform_type)
+                    binding.consoleLayout.requestFocus()
                     return@setScaleClickAnimation
                 }
                 title.length < minTitleLength -> {
@@ -117,10 +135,8 @@ class AddReviewFragment : Fragment() {
 
             val image = imageUri.toString()
 
-
-            val review = Review(title,desc,ratingBar,consoleType,image)
+            val review = Review(title, desc, ratingBar, consoleType, image)
             viewModel.addReview(review)
-
 
             findNavController().navigate(
                 R.id.action_addReviewFragment_to_myReviewsFragment, bundleOf("reviews" to review)
