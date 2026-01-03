@@ -123,7 +123,7 @@ class MyReviewsFragment : Fragment() {
                             if (viewModel.reviews?.value.isNullOrEmpty()) {
                                 AlertDialog.Builder(requireContext())
                                     .setMessage(getString(R.string.there_are_no_statistics_to_show))
-                                    .setPositiveButton("OK", null)
+                                    .setPositiveButton(getString(R.string.ok), null)
                                     .show()
                             } else {
                                 findNavController().navigate(
