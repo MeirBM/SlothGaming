@@ -117,16 +117,26 @@ class MyReviewsFragment : Fragment() {
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                     return when (menuItem.itemId) {
                         R.id.stats_menu -> {
-                            findNavController().navigate(R.id.action_myReviewsFragment_to_statisticsReviewsFragment)
+                            if (viewModel.reviews?.value.isNullOrEmpty()) {
+                                AlertDialog.Builder(requireContext())
+                                    .setMessage("There are no statistics to show")
+                                    .setPositiveButton("OK", null)
+                                    .show()
+                            } else {
+                                findNavController().navigate(
+                                    R.id.action_myReviewsFragment_to_statisticsReviewsFragment
+                                )
+                            }
                             true
                         }
                         R.id.delete_all_reviews -> {
-                            when {
-                                viewModel.reviews?.value?.isEmpty() == true -> {
-                                    Toast.makeText(requireContext(), getString(R.string.no_reviews_to_delete), Toast.LENGTH_SHORT).show()
-                                }
-
-                                else -> {
+                            if (viewModel.reviews?.value?.isEmpty() == true) {
+                                AlertDialog.Builder(requireContext())
+                                    .setMessage("No reviews to delete")
+                                    .setPositiveButton("OK", null)
+                                    .show()
+                            }
+                            else{
                                     AlertDialog.Builder(requireContext()).apply {
                                         setTitle(getString(R.string.delete_all_reviews))
                                         setMessage(getString(R.string.are_you_sure_you_want_to_delete_all_reviews))
@@ -141,8 +151,6 @@ class MyReviewsFragment : Fragment() {
                                         show()
                                     }
                                 }
-                            }
-
                             true
                         }
                         else -> false
@@ -152,7 +160,6 @@ class MyReviewsFragment : Fragment() {
             viewLifecycleOwner
         )
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
