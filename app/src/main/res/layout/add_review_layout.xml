@@ -50,6 +50,7 @@
                         android:textSize="14sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/console_layout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -102,7 +103,11 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/enter_your_review_here"
                             android:maxLength="250"
-                            android:maxLines="5"
+                            android:maxLines="2"
+                            android:gravity="top|start"
+                            android:scrollbars="vertical"
+                            android:overScrollMode="always"
+                            android:inputType="textMultiLine"
                             android:textColor="@color/customBlack" />
                     </com.google.android.material.textfield.TextInputLayout>
 
