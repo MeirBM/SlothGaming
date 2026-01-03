@@ -59,7 +59,7 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/review_title"
-                    tools:text="console" />
+                    tools:text="Platform: PS5" />
 
                 <TextView
                     android:id="@+id/rating_score"
