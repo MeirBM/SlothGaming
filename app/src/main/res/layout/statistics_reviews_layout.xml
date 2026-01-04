@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/customBlack"
     android:alpha="0.85"
-    tools:context=".Ui.view_models.StatisticsReviewsFragment"
+    tools:context=".Ui.reviews_extras.StatisticsReviewsFragment"
     android:padding="16dp">
 
     <com.google.android.material.card.MaterialCardView

@@ -1,4 +1,4 @@
-package com.example.SlothGaming.Ui
+package com.example.SlothGaming.main
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

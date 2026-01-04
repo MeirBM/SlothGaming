@@ -1,34 +1,38 @@
-package com.example.SlothGaming.Ui
+package com.example.SlothGaming.Ui.reviews_handling
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.SlothGaming.R
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.SlothGaming.R
+import com.example.SlothGaming.Ui.reviews_handling.ReviewAdapter
 import com.example.SlothGaming.Ui.view_models.ReviewViewModel
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
 import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
 import com.example.SlothGaming.extensions.setScaleClickAnimation
-import kotlin.getValue
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 
 class MyReviewsFragment : Fragment() {
 
     private val repository : ReviewListRepository by lazy{ ReviewListRepository(requireActivity().application) }
-    private val viewModelFactory : ReviewViewModelFactory by lazy { ReviewViewModelFactory(repository) }
+    private val viewModelFactory : ReviewViewModelFactory by lazy {
+        ReviewViewModelFactory(
+            repository
+        )
+    }
     private var _binding : MyReviewsLayoutBinding? = null
     private val binding get() = _binding!!
 
@@ -63,11 +67,11 @@ class MyReviewsFragment : Fragment() {
 
                 override fun onReviewLongClicked(index: Int) {
                     viewModel.setReview(it[index])
-                   findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment)
+                    findNavController().navigate(R.id.action_myReviewsFragment_to_addReviewFragment)
 
                 }
             })
-            binding.recycler.layoutManager = GridLayoutManager(requireContext(),1)
+            binding.recycler.layoutManager = GridLayoutManager(requireContext(), 1)
         }
 
 
@@ -76,7 +80,10 @@ class MyReviewsFragment : Fragment() {
             override fun getMovementFlags(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder
-            ) = makeFlag(ItemTouchHelper.ACTION_STATE_SWIPE,ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
+            ) = makeFlag(
+                ItemTouchHelper.ACTION_STATE_SWIPE,
+                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+            )
 
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -92,14 +99,17 @@ class MyReviewsFragment : Fragment() {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle(getString(R.string.delete))
                 builder.setMessage(getString(R.string.are_you_sure_you_want_to_delete_this_review))
-                builder.setPositiveButton(getString(R.string.yes)){
-                    dialog, which ->
-                    val item = (binding.recycler.adapter as ReviewAdapter).reviewAt(viewHolder.absoluteAdapterPosition)
+                builder.setPositiveButton(getString(R.string.yes)) { dialog, which ->
+                    val item =
+                        (binding.recycler.adapter as ReviewAdapter).reviewAt(viewHolder.absoluteAdapterPosition)
                     viewModel.deleteReview(item)
-                    Toast.makeText(requireContext(), getString(R.string.review_has_been_deleted),Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.review_has_been_deleted),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-                builder.setNegativeButton(getString(R.string.no)){
-                    dialog, which ->
+                builder.setNegativeButton(getString(R.string.no)) { dialog, which ->
                     binding.recycler.adapter?.notifyItemChanged(viewHolder.absoluteAdapterPosition)
                 }
                 builder.setCancelable(false)

@@ -1,4 +1,4 @@
-package com.example.SlothGaming.Ui.view_models
+package com.example.SlothGaming.Ui.reviews_extras
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.SlothGaming.R
+import com.example.SlothGaming.Ui.view_models.ReviewViewModel
+import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
 import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.StatisticsReviewsLayoutBinding
@@ -16,9 +18,13 @@ import com.example.SlothGaming.utils.ColorProvider
 class StatisticsReviewsFragment : Fragment() {
 
     private val star by lazy{ ContextCompat.
-    getDrawable(requireContext(),R.drawable.ic_star)?.mutate()}
+    getDrawable(requireContext(), R.drawable.ic_star)?.mutate()}
     private val repository : ReviewListRepository by lazy{ ReviewListRepository(requireActivity().application) }
-    private val viewModelFactory : ReviewViewModelFactory by lazy { ReviewViewModelFactory(repository) }
+    private val viewModelFactory : ReviewViewModelFactory by lazy {
+        ReviewViewModelFactory(
+            repository
+        )
+    }
     private var _binding : StatisticsReviewsLayoutBinding? = null
     private val binding get() = _binding!!
 
@@ -57,7 +63,7 @@ class StatisticsReviewsFragment : Fragment() {
     }
 
     private fun emptyStats() {
-        star?.setTint(ContextCompat.getColor(requireContext(),R.color.lowRating))
+        star?.setTint(ContextCompat.getColor(requireContext(), R.color.lowRating))
         binding.ratingStar.setImageDrawable(star)
         binding.avgRating.text = "0.0"
         binding.totalReviews.text = "0"

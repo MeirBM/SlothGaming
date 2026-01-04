@@ -1,4 +1,4 @@
-package com.example.SlothGaming.Ui.view_models
+package com.example.SlothGaming.Ui.reviews_extras
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,14 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.R
+import com.example.SlothGaming.Ui.view_models.ReviewViewModel
 import com.example.SlothGaming.databinding.DetailReviewBinding
 import com.example.SlothGaming.utils.ColorProvider
-import kotlin.getValue
-
 
 class DetailReviewFragment : Fragment() {
     private val star by lazy{ ContextCompat.
-    getDrawable(requireContext(),R.drawable.ic_star)?.mutate()}
+    getDrawable(requireContext(), R.drawable.ic_star)?.mutate()}
     var _binding : DetailReviewBinding?  = null
 
 

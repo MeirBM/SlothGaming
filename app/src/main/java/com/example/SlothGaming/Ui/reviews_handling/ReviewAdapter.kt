@@ -1,20 +1,17 @@
-package com.example.SlothGaming.Ui
+package com.example.SlothGaming.Ui.reviews_handling
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
 import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.databinding.ReviewLayoutBinding
 import com.example.SlothGaming.utils.ColorProvider
 
-
 class ReviewAdapter(
-    private val reviews: List<Review> ,
+    private val reviews: List<Review>,
     val callBack: ReviewListener):
     RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
 
