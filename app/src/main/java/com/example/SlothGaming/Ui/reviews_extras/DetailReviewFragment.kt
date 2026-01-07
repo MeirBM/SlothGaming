@@ -36,7 +36,7 @@ class DetailReviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        // TODO: switch with lifeCycleOwner.lifeCycleScope.launch{....} to implement the flow.connect{...}
         viewModel.chosenReview.observe(viewLifecycleOwner){ review ->
             review?.let {
                 binding.reviewTitle.text = it.title

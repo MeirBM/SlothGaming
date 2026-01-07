@@ -72,7 +72,7 @@ class StatisticsReviewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // TODO: switch with lifeCycleOwner.lifeCycleScope.launch{....} to implement the flow.connect{...}
         viewModel.reviews?.observe(viewLifecycleOwner) { reviews ->
             if (reviews.isNotEmpty()) {
                 calculateStats(reviews)

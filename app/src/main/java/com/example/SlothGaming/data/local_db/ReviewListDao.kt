@@ -23,6 +23,7 @@ interface ReviewListDao {
     @Query("SELECT * FROM reviews ORDER BY id DESC")
     fun getReviews(): LiveData<List<Review>>
 
+    // TODO: Move from live data to Flow
     @Query("SELECT * FROM reviews WHERE id = :id ")
     fun getReview(id : Int) : Review
 

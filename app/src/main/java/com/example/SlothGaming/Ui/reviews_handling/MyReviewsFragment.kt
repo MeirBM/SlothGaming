@@ -13,6 +13,7 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -57,6 +58,7 @@ class MyReviewsFragment : Fragment() {
         }
 
         //Populate the recycler view with reviews
+        // TODO: switch with lifeCycleOwner.lifeCycleScope.launch{....} to implement the flow.connect{...}
         viewModel.reviews?.observe(viewLifecycleOwner) {
             binding.recycler.adapter = ReviewAdapter(it, object : ReviewAdapter.ReviewListener {
 

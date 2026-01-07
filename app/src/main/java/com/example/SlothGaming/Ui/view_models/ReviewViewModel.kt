@@ -9,6 +9,7 @@ import com.example.SlothGaming.data.repository.ReviewListRepository
 import kotlinx.coroutines.launch
 
 class ReviewViewModel(private val repository : ReviewListRepository) : ViewModel(){
+    //  TODO: Move from live data to Flow
     val reviews : LiveData<List<Review>>? = repository.getReviews()
 
     private val _chosenReview = MutableLiveData<Review?>()
