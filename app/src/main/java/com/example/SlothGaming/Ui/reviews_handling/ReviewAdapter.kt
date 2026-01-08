@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.data.models.Review
@@ -11,9 +13,8 @@ import com.example.SlothGaming.databinding.ReviewLayoutBinding
 import com.example.SlothGaming.utils.ColorProvider
 
 class ReviewAdapter(
-    private val reviews: List<Review>,
     val callBack: ReviewListener):
-    RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
+    ListAdapter<Review,ReviewAdapter.ReviewViewHolder>(ReviewDiffCallBack()) {
 
 
     override fun onCreateViewHolder(
@@ -31,12 +32,10 @@ class ReviewAdapter(
 
     override fun onBindViewHolder(
         holder: ReviewViewHolder, position: Int
-    ) = holder.bind(reviews[position])
+    ) = holder.bind(getItem(position))
 
 
-    override fun getItemCount() = reviews.size
-
-    fun reviewAt(position: Int) = reviews[position]
+    fun reviewAt(position: Int): Review = getItem(position)
     inner class ReviewViewHolder(private val binding: ReviewLayoutBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener, View.OnLongClickListener {
 
@@ -87,6 +86,21 @@ class ReviewAdapter(
 
             binding.givenRating.compoundDrawablesRelative[0]?.mutate()?.setTint(color)
 
+        }
+    }
+    class ReviewDiffCallBack: DiffUtil.ItemCallback<Review>(){
+        override fun areItemsTheSame(
+            oldItem: Review,
+            newItem: Review
+        ): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(
+            oldItem: Review,
+            newItem: Review
+        ): Boolean {
+            return oldItem == newItem
         }
     }
 }

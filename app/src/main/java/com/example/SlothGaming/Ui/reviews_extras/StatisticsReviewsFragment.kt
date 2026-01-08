@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.SlothGaming.R
 import com.example.SlothGaming.Ui.view_models.ReviewViewModel
 import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
@@ -14,6 +17,7 @@ import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.StatisticsReviewsLayoutBinding
 import com.example.SlothGaming.utils.ColorProvider
+import kotlinx.coroutines.launch
 
 class StatisticsReviewsFragment : Fragment() {
 
@@ -73,11 +77,15 @@ class StatisticsReviewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // TODO: switch with lifeCycleOwner.lifeCycleScope.launch{....} to implement the flow.connect{...}
-        viewModel.reviews?.observe(viewLifecycleOwner) { reviews ->
-            if (reviews.isNotEmpty()) {
-                calculateStats(reviews)
-            } else {
-                emptyStats()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.reviews.collect { reviews ->
+                    if (reviews.isNotEmpty()) {
+                        calculateStats(reviews)
+                    } else {
+                        emptyStats()
+                    }
+                }
             }
         }
     }

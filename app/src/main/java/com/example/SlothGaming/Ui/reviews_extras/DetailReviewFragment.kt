@@ -7,11 +7,15 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.R
 import com.example.SlothGaming.Ui.view_models.ReviewViewModel
 import com.example.SlothGaming.databinding.DetailReviewBinding
 import com.example.SlothGaming.utils.ColorProvider
+import kotlinx.coroutines.launch
 
 class DetailReviewFragment : Fragment() {
     private val star by lazy{ ContextCompat.
@@ -35,21 +39,23 @@ class DetailReviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         // TODO: switch with lifeCycleOwner.lifeCycleScope.launch{....} to implement the flow.connect{...}
-        viewModel.chosenReview.observe(viewLifecycleOwner){ review ->
-            review?.let {
-                binding.reviewTitle.text = it.title
-                binding.reviewDesc.text = it.gameReview
-                binding.reviewConsole.text = getString(R.string.platform, it.console)
-                binding.ratingScore.text = it.rating.toString()
-                Glide.with(requireContext()).load(it.photo)
-                    .into(binding.reviewedGameImage)
-                // match star color with rating
-                val color = ColorProvider.pickColor(it.rating, requireContext())
 
-                star?.setTint(color)
-                binding.ratingStar.setImageDrawable(star)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.chosenReview.collect { review ->   review?.let {
+                    binding.reviewTitle.text = it.title
+                    binding.reviewDesc.text = it.gameReview
+                    binding.reviewConsole.text = getString(R.string.platform, it.console)
+                    binding.ratingScore.text = it.rating.toString()
+                    Glide.with(requireContext()).load(it.photo)
+                        .into(binding.reviewedGameImage)
+                    // match star color with rating
+                    val color = ColorProvider.pickColor(it.rating, requireContext())
+
+                    star?.setTint(color)
+                    binding.ratingStar.setImageDrawable(star)
+                }}
             }
         }
     }
