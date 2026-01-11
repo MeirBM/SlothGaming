@@ -1,4 +1,4 @@
-package com.example.SlothGaming.extensions
+package com.example.SlothGaming.utils
 /*
  * Copyright (C) 2018 The Android Open Source Project
  *

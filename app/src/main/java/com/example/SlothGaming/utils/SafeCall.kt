@@ -1,4 +1,4 @@
-import com.example.SlothGaming.extensions.Resource
+import com.example.SlothGaming.utils.Resource
 
 inline fun <T> safeCall(action: () -> Resource<T>): Resource<T> {
     return try {
