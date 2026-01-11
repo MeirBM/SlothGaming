@@ -7,29 +7,29 @@ import com.example.SlothGaming.data.local_db.ReviewListDataBase
 
 class ReviewListRepository(application: Application) {
 
-        private var reviewListDao: ReviewListDao?
+        private var reviewListDao: ReviewListDao
 
         init {
             val db = ReviewListDataBase.getDatabase(application.applicationContext)
             reviewListDao = db.reviewDao()
         }
 
-        fun getReviews() = reviewListDao?.getReviews()
+        fun getReviews() = reviewListDao.getReviews()
 
         suspend fun addReview(review: Review) {
-            reviewListDao?.addReview(review)
+            reviewListDao.addReview(review)
         }
         suspend fun updateReview (review: Review){
-            reviewListDao?.updateReview(review)
+            reviewListDao.updateReview(review)
     }
 
 
     suspend fun deleteReview(review: Review) {
-            reviewListDao?.deleteReview(review)
+            reviewListDao.deleteReview(review)
         }
 
         suspend fun deleteAll(){
-            reviewListDao?.deleteAll()
+            reviewListDao.deleteAll()
         }
 
 

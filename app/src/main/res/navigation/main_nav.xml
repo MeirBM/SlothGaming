@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/myReviewsFragment"
-        android:name="com.example.SlothGaming.Ui.MyReviewsFragment"
+        android:name="com.example.SlothGaming.Ui.reviews_handling.MyReviewsFragment"
         android:label="my_reviews_layout"
         tools:layout="@layout/my_reviews_layout" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/addReviewFragment"
-        android:name="com.example.SlothGaming.Ui.AddReviewFragment"
+        android:name="com.example.SlothGaming.Ui.reviews_handling.AddReviewFragment"
         android:label="add_review_layout"
         tools:layout="@layout/add_review_layout">
 
@@ -50,12 +50,12 @@
     </fragment>
     <fragment
         android:id="@+id/detailReviewFragment"
-        android:name="com.example.SlothGaming.Ui.view_models.DetailReviewFragment"
+        android:name="com.example.SlothGaming.Ui.reviews_extras.DetailReviewFragment"
         android:label="DetailReviewFragment"
         tools:layout="@layout/detail_review"/>
     <fragment
         android:id="@+id/statisticsReviewsFragment"
-        android:name="com.example.SlothGaming.Ui.view_models.StatisticsReviewsFragment"
+        android:name="com.example.SlothGaming.Ui.reviews_extras.StatisticsReviewsFragment"
         android:label="StatisticsReviewsFragment"
         tools:layout="@layout/statistics_reviews_layout"/>
 </navigation>
