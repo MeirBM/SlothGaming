@@ -15,7 +15,7 @@ android {
         viewBinding = true
     }
     defaultConfig {
-        applicationId = "com.example.mainproject"
+        applicationId = "com.example.SlothGaming"
         minSdk = 28
         targetSdk = 36
         versionCode = 1
