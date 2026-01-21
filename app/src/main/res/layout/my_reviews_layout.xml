@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@color/customBlack"
-    tools:context=".Ui.MyReviewsFragment"
+    tools:context=".Ui.reviews_handling.MyReviewsFragment"
     android:alpha="0.85">
 
     <TextView
