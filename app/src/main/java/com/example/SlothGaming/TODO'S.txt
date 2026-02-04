@@ -1,0 +1,9 @@
+TODO: change all validation into a class ❌
+TODO: finish Login viewModel❌
+TODO: add menu host to home fragment ❌
+TODO: finish login/home fragments❌
+TODO: change collect ot collectLatest in reviewFragment❌
+
+
+
+✅❌
