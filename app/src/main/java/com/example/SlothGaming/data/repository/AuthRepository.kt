@@ -9,4 +9,6 @@ interface AuthRepository {
                    ,phoneNumber:String,password: String): Resource<User>
     suspend fun login(email:String,password: String): Resource<User>
     fun logOut()
+
+
 }

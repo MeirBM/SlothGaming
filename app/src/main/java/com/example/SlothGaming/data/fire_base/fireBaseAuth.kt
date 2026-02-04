@@ -18,7 +18,7 @@ class fireBaseAuth(): AuthRepository {
     override suspend fun currentUser(): Resource<User> {
         return withContext(Dispatchers.IO){
             safeCall {
-                val userId  = fireBaseAuth.currentUser!!.uid
+                val userId  = fireBaseAuth.currentUser?.uid!!
                 val currentUser =  userRef.document(userId)
                    .get().await().toObject(User::class.java)
                 Resource.Success(currentUser!!)
@@ -57,7 +57,7 @@ class fireBaseAuth(): AuthRepository {
                 val currentUser =  userRef.document(userId)
                     .get().await().toObject(User::class.java)
 
-                Resource(currentUser)
+                Resource.Success(currentUser!!)
             }
         }
     }
