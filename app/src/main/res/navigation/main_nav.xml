@@ -58,4 +58,14 @@
         android:name="com.example.SlothGaming.Ui.reviews_extras.StatisticsReviewsFragment"
         android:label="StatisticsReviewsFragment"
         tools:layout="@layout/statistics_reviews_layout"/>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.SlothGaming.Ui.login_page.LoginFragment"
+        android:label="signin_layout"
+        tools:layout="@layout/signin_layout" />
+    <fragment
+        android:id="@+id/homePageFragment"
+        android:name="com.example.SlothGaming.Ui.home_page.HomePageFragment"
+        android:label="home_page_layout"
+        tools:layout="@layout/home_page_layout" />
 </navigation>
