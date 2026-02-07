@@ -60,12 +60,25 @@
         tools:layout="@layout/statistics_reviews_layout"/>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.SlothGaming.Ui.login_page.LoginFragment"
+        android:name="com.example.SlothGaming.Ui.login_page.SignInFragment"
         android:label="signin_layout"
-        tools:layout="@layout/signin_layout" />
+        tools:layout="@layout/signin_layout" >
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homePageFragment"
         android:name="com.example.SlothGaming.Ui.home_page.HomePageFragment"
         android:label="home_page_layout"
-        tools:layout="@layout/home_page_layout" />
+        tools:layout="@layout/home_page_layout" >
+        <action
+            android:id="@+id/action_homePageFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.SlothGaming.Ui.login_page.SignUpFragment"
+        android:label="sign_up_layout"
+        tools:layout="@layout/sign_up_layout" />
 </navigation>
