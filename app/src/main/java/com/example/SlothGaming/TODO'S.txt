@@ -1,6 +1,8 @@
-TODO: change all validation into a class❌
 TODO: finish Login viewModel✅
 TODO: add menu host to home fragment ✅
+TODO:Create nested recycler in home page✅
+TODO:Create render proxy server for IGDB Wrapper API✅
+TODO: change all validation into a class❌
 TODO: finish login/home fragments❌
 TODO: change collect to collectLatest in reviewFragment❌
 TODO: add hilt❌
@@ -10,8 +12,6 @@ TODO: Check if bottom menu in home works properly❌
 TODO:check if signIn and signUp viewModels word❌
 TODO:Implement signIn,SignUp fragments❌
 TODO:Create profile fragment,nested recycler?❌
-TODO:Create nested recycler in home page❌
-TODO:Create AWS proxy server for IGDB Wrapper API❌
 TODO:Change style of my reviews,statistic's? something more gaming related?❌
 TODO: // REMEMBER TO DELETE SAMPLE DATA ON HOME PAGE ❌
 
