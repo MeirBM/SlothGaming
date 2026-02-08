@@ -81,7 +81,6 @@ class MyReviewsFragment : Fragment() {
 
 
         //Populate the recycler view with reviews
-        // TODO: switch with lifeCycleOwner.lifeCycleScope.launch{....} to implement the flow.connect{...}
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.reviews.collect {

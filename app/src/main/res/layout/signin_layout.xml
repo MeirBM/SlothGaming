@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/customBlack"
-    android:padding="16dp"
-    tools:context=".Ui.login_page.LoginFragment">
+    android:background="@drawable/stars_background"
+    android:padding="8dp"
+    tools:context=".Ui.login_page.SignInFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/main_card"
@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="30dp"
         app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,7 +24,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/stars_background"
             android:padding="20dp">
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
-                    android:inputType="textPassword"
+                    android:inputType="textEmailAddress"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,7 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPassword"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.button.MaterialButton
