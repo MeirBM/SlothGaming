@@ -6,10 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.SlothGaming.data.models.User
 import com.example.SlothGaming.data.repository.AuthRepository
 import com.example.SlothGaming.utils.Resource
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
@@ -17,28 +14,36 @@ class LoginViewModel(private val authRepo: AuthRepository): ViewModel() {
 
     private val _loginStatus = MutableStateFlow<Resource<User>?>(null)
 
-    private val loginStatus = _loginStatus.asStateFlow()
+     val loginStatus = _loginStatus.asStateFlow()
 
     private val _currentUser  = MutableStateFlow<Resource<User>?>(null)
 
-    private val currentUser = _currentUser.asStateFlow()
-
-    private val userRef = FirebaseFirestore.getInstance().collection("users")
+    val currentUser = _currentUser.asStateFlow()
 
 
     init {
-        _currentUser.value = Resource.Loading()
         viewModelScope.launch {
+            _currentUser.value = Resource.Loading()
             _currentUser.value = authRepo.currentUser()
         }
     }
 
     fun signInUser(email: String,password:String){
-
-
+        val error = if(email.isEmpty()||password.isEmpty()){
+            "Please fill all the field's"
+        }else null
+        error?.let{
+           _loginStatus.value = Resource.Error(error)
+            return
         }
-
+        viewModelScope.launch {
+            _loginStatus.value = Resource.Loading()
+            val loginResult =  authRepo.login(email, password)
+            _loginStatus.value = loginResult
+        }
     }
+
+}
 
 
 
