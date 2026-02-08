@@ -13,7 +13,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.SlothGaming.R
+import com.example.SlothGaming.Ui.home_page.adapters.ParentAdapter
+import com.example.SlothGaming.data.models.GameItem
+import com.example.SlothGaming.data.models.Section
 import com.example.SlothGaming.databinding.HomePageLayoutBinding
 import com.example.SlothGaming.utils.autoCleared
 
@@ -33,24 +37,43 @@ class HomePageFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val sections = listOf(
+            Section(
+                "Trending Games",
+                listOf(
+                    GameItem(1, "Elden Ring", ""),
+                    GameItem(1, "Elden Ring", ""),
+                    GameItem(1, "Elden Ring", ""),
+                    GameItem(2, "Hades II", "")
+                )
+            ),
+            Section(
+                "Popular This Month",
+                listOf(GameItem(3, "Silksong", ""), GameItem(4, "Stardew Valley", ""))
+            ), Section(
+                "Trending Games",
+                listOf(GameItem(1, "Elden Ring", ""), GameItem(2, "Hades II", ""))
+            ), Section(
+                "Trending Games",
+                listOf(GameItem(1, "Elden Ring", ""), GameItem(2, "Hades II", ""))
+            )
+        )
 
-        val menu : MenuHost = requireActivity()
-        menu.addMenuProvider(object : MenuProvider{
-            override fun onCreateMenu(
-                menu: Menu,
-                menuInflater: MenuInflater
-            ) {
-                menuInflater.inflate(R.menu.home_page_bottom_bar,menu)
-            }
+        binding.mainRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            // Pass data to the ParentAdapter (using View Binding)
+            adapter = ParentAdapter(sections)
+            setHasFixedSize(true)
+        }
 
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-              return when (menuItem.itemId){
-                  R.id.login_icon -> {findNavController().navigate(R.id.action_homePageFragment_to_loginFragment)
-                         return true}
-                  else ->false
-              }
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
+            when(menuItem.itemId){
+                R.id.login_icon -> {findNavController().navigate(R.id.action_homePageFragment_to_signInFragment)
+                true}
+                else -> false
             }
-        },viewLifecycleOwner, Lifecycle.State.RESUMED)
+        }
+
     }
 
     override fun onDestroyView() {

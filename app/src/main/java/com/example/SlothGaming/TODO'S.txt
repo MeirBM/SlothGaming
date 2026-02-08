@@ -13,6 +13,7 @@ TODO:Create profile fragment,nested recycler?❌
 TODO:Create nested recycler in home page❌
 TODO:Create AWS proxy server for IGDB Wrapper API❌
 TODO:Change style of my reviews,statistic's? something more gaming related?❌
+TODO: // REMEMBER TO DELETE SAMPLE DATA ON HOME PAGE ❌
 
 
 
