@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F9D423"
-    tools:context=".Ui.login_page.SignUpFragment"
+    tools:context=".ui.login_page.SignUpFragment"
     >
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/sign_up_card"
@@ -46,6 +46,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:gravity="center"
+            android:id="@+id/etFirstName"
             android:background="@drawable/border_outline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,6 +73,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:gravity="center"
+            android:id="@+id/etLastName"
             android:background="@drawable/border_outline"
             android:textColor="@color/white"
             android:layout_width="match_parent"
@@ -98,6 +100,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:gravity="center"
+            android:id="@+id/etEmail"
             android:background="@drawable/border_outline"
             android:textColor="@color/white"
             android:layout_width="match_parent"
@@ -124,6 +127,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:gravity="center"
+            android:id="@+id/etPhoneNumber"
             android:background="@drawable/border_outline"
             android:textColor="@color/white"
             android:layout_width="match_parent"
@@ -150,16 +154,18 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:gravity="center"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border_outline"
             android:fontFamily="sans-serif-medium"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
+                android:id="@+id/signup_btn"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/password_signup"
                 app:layout_constraintStart_toStartOf="parent"

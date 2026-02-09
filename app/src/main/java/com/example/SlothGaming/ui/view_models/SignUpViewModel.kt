@@ -1,21 +1,23 @@
-package com.example.SlothGaming.Ui.view_models
+package com.example.SlothGaming.ui.view_models
 
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.SlothGaming.data.models.User
 import com.example.SlothGaming.data.repository.AuthRepository
 import com.example.SlothGaming.utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignUpViewModel(private val authRepo: AuthRepository) : ViewModel() {
-    private val _registerState = MutableStateFlow<Resource<User>?>(null)
-    val registerState = _registerState.asStateFlow()
+@HiltViewModel
+class SignUpViewModel @Inject constructor(private val authRepo: AuthRepository) : ViewModel() {
+    private val _signupState = MutableStateFlow<Resource<User>?>(null)
+    val registerState = _signupState.asStateFlow()
 
-    fun registerUser(
+    fun signUpUser(
         firstName: String, lastName: String, email: String, phoneNumber: String, password: String
     ) {
         val error = when {
@@ -28,23 +30,14 @@ class SignUpViewModel(private val authRepo: AuthRepository) : ViewModel() {
             else -> null
         }
         error?.let {
-            _registerState.value = Resource.Error(it)
+            _signupState.value = Resource.Error(it)
             return
         }
 
         viewModelScope.launch {
-            _registerState.value = Resource.Loading()
+            _signupState.value = Resource.Loading()
             val newUser = authRepo.createUser(firstName, lastName, email, phoneNumber, password)
-            _registerState.value = newUser
-        }
-    }
-
-
-    class RegisterViewModelFactory(private val authRepo: AuthRepository) :
-        ViewModelProvider.NewInstanceFactory() {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return SignUpViewModel(authRepo) as T
-
+            _signupState.value = newUser
         }
     }
 }

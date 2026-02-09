@@ -5,20 +5,22 @@ import com.example.SlothGaming.data.repository.AuthRepository
 import com.example.SlothGaming.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.dataObjects
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import safeCall
+import javax.inject.Inject
 
-class fireBaseAuth(): AuthRepository {
-    private val fireBaseAuth  = FirebaseAuth.getInstance()
+class FirebaseAuthImpl @Inject constructor
+    (private val firebaseAuth: FirebaseAuth,
+     private val firestore: FirebaseFirestore ): AuthRepository {
 
-    private val userRef = FirebaseFirestore.getInstance().collection("users")
+
+    private val userRef = firestore.collection("users")
     override suspend fun currentUser(): Resource<User> {
         return withContext(Dispatchers.IO){
             safeCall {
-                val userId  = fireBaseAuth.currentUser?.uid!!
+                val userId  = firebaseAuth.currentUser?.uid!!
                 val currentUser =  userRef.document(userId)
                    .get().await().toObject(User::class.java)
                 Resource.Success(currentUser!!)
@@ -36,7 +38,7 @@ class fireBaseAuth(): AuthRepository {
         return withContext(Dispatchers.IO){
             safeCall {
                 val registerResult =
-                    fireBaseAuth.createUserWithEmailAndPassword(email, password).await()
+                    firebaseAuth.createUserWithEmailAndPassword(email, password).await()
                 val userId = registerResult.user?.uid!!
                 val newUser = User(firstName,lastName,email,phoneNumber)
                 userRef.document(userId).set(newUser).await()
@@ -52,7 +54,7 @@ class fireBaseAuth(): AuthRepository {
     ): Resource<User> {
         return withContext(Dispatchers.IO){
             safeCall {
-                val loginResult = fireBaseAuth.signInWithEmailAndPassword(email,password).await()
+                val loginResult = firebaseAuth.signInWithEmailAndPassword(email,password).await()
                 val userId = loginResult.user?.uid!!
                 val currentUser =  userRef.document(userId)
                     .get().await().toObject(User::class.java)
@@ -63,6 +65,6 @@ class fireBaseAuth(): AuthRepository {
     }
 
     override fun logOut() {
-        fireBaseAuth.signOut()
+        firebaseAuth.signOut()
     }
 }

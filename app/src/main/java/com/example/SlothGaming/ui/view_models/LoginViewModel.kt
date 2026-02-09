@@ -1,7 +1,6 @@
-package com.example.SlothGaming.Ui.view_models
+package com.example.SlothGaming.ui.view_models
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.SlothGaming.data.models.User
 import com.example.SlothGaming.data.repository.AuthRepository
@@ -9,12 +8,13 @@ import com.example.SlothGaming.utils.Resource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel(private val authRepo: AuthRepository): ViewModel() {
+class LoginViewModel @Inject constructor(private val authRepo: AuthRepository): ViewModel() {
 
     private val _loginStatus = MutableStateFlow<Resource<User>?>(null)
 
-     val loginStatus = _loginStatus.asStateFlow()
+    val loginStatus = _loginStatus.asStateFlow()
 
     private val _currentUser  = MutableStateFlow<Resource<User>?>(null)
 
@@ -33,7 +33,7 @@ class LoginViewModel(private val authRepo: AuthRepository): ViewModel() {
             "Please fill all the field's"
         }else null
         error?.let{
-           _loginStatus.value = Resource.Error(error)
+            _loginStatus.value = Resource.Error(error)
             return
         }
         viewModelScope.launch {
@@ -45,12 +45,3 @@ class LoginViewModel(private val authRepo: AuthRepository): ViewModel() {
 
 }
 
-
-
-
-
-class LoginViewModelFactory(private val authRepo: AuthRepository): ViewModelProvider.NewInstanceFactory(){
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return LoginViewModel(authRepo) as T
-    }
-}

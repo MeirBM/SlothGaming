@@ -1,4 +1,4 @@
-package com.example.SlothGaming.Ui.home_page.adapters
+package com.example.SlothGaming.ui.home_page.adapters
 
 import ChildAdapter
 import android.view.LayoutInflater

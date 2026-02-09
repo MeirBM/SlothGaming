@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/customBlack"
     android:alpha="0.85"
-    tools:context=".Ui.reviews_handling.AddReviewFragment">
+    tools:context=".ui.reviews_handling.AddReviewFragment">
 
     <ScrollView
         android:layout_width="match_parent"

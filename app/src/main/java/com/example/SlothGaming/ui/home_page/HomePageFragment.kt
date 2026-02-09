@@ -1,26 +1,21 @@
-package com.example.SlothGaming.Ui.home_page
+package com.example.SlothGaming.ui.home_page
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.SlothGaming.R
-import com.example.SlothGaming.Ui.home_page.adapters.ParentAdapter
+import com.example.SlothGaming.ui.home_page.adapters.ParentAdapter
 import com.example.SlothGaming.data.models.GameItem
 import com.example.SlothGaming.data.models.Section
 import com.example.SlothGaming.databinding.HomePageLayoutBinding
 import com.example.SlothGaming.utils.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomePageFragment: Fragment() {
 
     private var binding : HomePageLayoutBinding by autoCleared()
@@ -68,7 +63,7 @@ class HomePageFragment: Fragment() {
 
         binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId){
-                R.id.login_icon -> {findNavController().navigate(R.id.action_homePageFragment_to_signInFragment)
+                R.id.login_icon -> {findNavController().navigate(R.id.action_homePageFragment_to_loginFragment)
                 true}
                 else -> false
             }

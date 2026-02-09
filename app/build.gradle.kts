@@ -68,9 +68,14 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
     //Hilt
-    implementation ("com.google.dagger:hilt-android:2.50")
-    kapt ("com.google.dagger:hilt-compiler:2.50")
+    implementation ("com.google.dagger:hilt-android:2.52")
+    kapt ("com.google.dagger:hilt-compiler:2.52")
     //Retrofit
-    implementation("com.squareup.retrofit2:retrofit:3.1.0-SNAPSHOT")
+    // retrofit core
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // Json to Object
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // TO simple String
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
 
 }

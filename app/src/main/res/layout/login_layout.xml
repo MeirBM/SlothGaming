@@ -5,9 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/stars_background"
-    android:padding="8dp"
-    tools:context=".Ui.login_page.SignInFragment">
+    android:background="@android:color/transparent"
+
+    tools:context=".ui.login_page.LoginFragment">
+
+    <ImageView
+        android:id="@+id/login_background"
+        android:src="@drawable/stars_background2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/main_card"
@@ -96,7 +107,7 @@
                 android:textColor="@color/black"
                 android:textAllCaps="false"/>
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/sign_up_button"
+                android:id="@+id/signupnow_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"

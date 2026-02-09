@@ -1,4 +1,4 @@
-package com.example.SlothGaming.Ui.reviews_handling
+package com.example.SlothGaming.ui.reviews_handling
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,37 +13,29 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.SlothGaming.R
-import com.example.SlothGaming.Ui.reviews_handling.ReviewAdapter
-import com.example.SlothGaming.Ui.view_models.ReviewViewModel
-import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
-import com.example.SlothGaming.data.repository.ReviewListRepository
+import com.example.SlothGaming.ui.view_models.ReviewViewModel
 import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
 import com.example.SlothGaming.extensions.setScaleClickAnimation
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class MyReviewsFragment : Fragment() {
     lateinit var reviewAdapter: ReviewAdapter
-    private val repository : ReviewListRepository by lazy{ ReviewListRepository(requireActivity().application) }
-    private val viewModelFactory : ReviewViewModelFactory by lazy {
-        ReviewViewModelFactory(
-            repository
-        )
-    }
+
     private var _binding : MyReviewsLayoutBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : ReviewViewModel by activityViewModels {
-        viewModelFactory
-    }
+    private val viewModel : ReviewViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

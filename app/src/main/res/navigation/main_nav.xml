@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/homePageFragment">
+    app:startDestination="@id/myReviewsFragment">
 
     <fragment
         android:id="@+id/myReviewsFragment"
-        android:name="com.example.SlothGaming.Ui.reviews_handling.MyReviewsFragment"
+        android:name="com.example.SlothGaming.ui.reviews_handling.MyReviewsFragment"
         android:label="my_reviews_layout"
         tools:layout="@layout/my_reviews_layout" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/addReviewFragment"
-        android:name="com.example.SlothGaming.Ui.reviews_handling.AddReviewFragment"
+        android:name="com.example.SlothGaming.ui.reviews_handling.AddReviewFragment"
         android:label="add_review_layout"
         tools:layout="@layout/add_review_layout">
 
@@ -50,33 +50,33 @@
     </fragment>
     <fragment
         android:id="@+id/detailReviewFragment"
-        android:name="com.example.SlothGaming.Ui.reviews_extras.DetailReviewFragment"
+        android:name="com.example.SlothGaming.ui.reviews_extras.DetailReviewFragment"
         android:label="DetailReviewFragment"
         tools:layout="@layout/detail_review"/>
     <fragment
         android:id="@+id/statisticsReviewsFragment"
-        android:name="com.example.SlothGaming.Ui.reviews_extras.StatisticsReviewsFragment"
+        android:name="com.example.SlothGaming.ui.reviews_extras.StatisticsReviewsFragment"
         android:label="StatisticsReviewsFragment"
         tools:layout="@layout/statistics_reviews_layout"/>
     <fragment
         android:id="@+id/homePageFragment"
-        android:name="com.example.SlothGaming.Ui.home_page.HomePageFragment"
+        android:name="com.example.SlothGaming.ui.home_page.HomePageFragment"
         android:label="home_page_layout"
         tools:layout="@layout/home_page_layout" >
         <action
-            android:id="@+id/action_homePageFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            android:id="@+id/action_homePageFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.SlothGaming.Ui.login_page.SignUpFragment"
+        android:name="com.example.SlothGaming.ui.login_page.SignUpFragment"
         android:label="sign_up_layout"
         tools:layout="@layout/sign_up_layout" />
     <fragment
-        android:id="@+id/signInFragment"
-        android:name="com.example.SlothGaming.Ui.login_page.SignInFragment"
+        android:id="@+id/loginFragment"
+        android:name="com.example.SlothGaming.ui.login_page.LoginFragment"
         android:label="signin_layout"
-        tools:layout="@layout/signin_layout" >
+        tools:layout="@layout/login_layout" >
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
