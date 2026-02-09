@@ -71,11 +71,7 @@
         android:id="@+id/signUpFragment"
         android:name="com.example.SlothGaming.ui.login_page.SignUpFragment"
         android:label="sign_up_layout"
-        tools:layout="@layout/sign_up_layout" >
-        <action
-            android:id="@+id/action_signUpFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+        tools:layout="@layout/sign_up_layout" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.SlothGaming.ui.login_page.LoginFragment"
@@ -85,7 +81,7 @@
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_homePageFragment"
-            app:destination="@id/homePageFragment" />
+            android:id="@+id/action_loginFragment_to_myReviewsFragment"
+            app:destination="@id/myReviewsFragment" />
     </fragment>
 </navigation>

@@ -22,12 +22,12 @@ class LoginViewModel @Inject constructor(private val authRepo: AuthRepository): 
     val currentUser = _currentUser.asStateFlow()
 
 
-    init {
-        viewModelScope.launch {
-            _currentUser.value = Resource.Loading()
-            _currentUser.value = authRepo.currentUser()
-        }
-    }
+//    init {
+//        viewModelScope.launch {
+//            _currentUser.value = Resource.Loading()
+//            _currentUser.value = authRepo.currentUser()
+//        }
+//    }
 
     fun signInUser(email: String,password:String){
         val error = if(email.isEmpty()||password.isEmpty()){
