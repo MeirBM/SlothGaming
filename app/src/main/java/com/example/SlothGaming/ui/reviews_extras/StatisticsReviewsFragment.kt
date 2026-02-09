@@ -1,4 +1,4 @@
-package com.example.SlothGaming.Ui.reviews_extras
+package com.example.SlothGaming.ui.reviews_extras
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,29 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.SlothGaming.R
-import com.example.SlothGaming.Ui.view_models.ReviewViewModel
-import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
+import com.example.SlothGaming.ui.view_models.ReviewViewModel
 import com.example.SlothGaming.data.models.Review
-import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.StatisticsReviewsLayoutBinding
 import com.example.SlothGaming.utils.ColorProvider
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class StatisticsReviewsFragment : Fragment() {
 
     private val star by lazy{ ContextCompat.
     getDrawable(requireContext(), R.drawable.ic_star)?.mutate()}
-    private val repository : ReviewListRepository by lazy{ ReviewListRepository(requireActivity().application) }
-    private val viewModelFactory : ReviewViewModelFactory by lazy {
-        ReviewViewModelFactory(
-            repository
-        )
-    }
+
+    private val viewModel: ReviewViewModel by viewModels()
     private var _binding : StatisticsReviewsLayoutBinding? = null
     private val binding get() = _binding!!
 
@@ -41,9 +36,6 @@ class StatisticsReviewsFragment : Fragment() {
         _binding = StatisticsReviewsLayoutBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-    private val viewModel: ReviewViewModel by activityViewModels { viewModelFactory }
-
     private fun calculateStats(reviews: List<Review>) {
 
         //calculate avg for reviews // map for specify from rating

@@ -1,4 +1,4 @@
-package com.example.SlothGaming.Ui.reviews_handling
+package com.example.SlothGaming.ui.reviews_handling
 
 import android.view.LayoutInflater
 import android.view.View

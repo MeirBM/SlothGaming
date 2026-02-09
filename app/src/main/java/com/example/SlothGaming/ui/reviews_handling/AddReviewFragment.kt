@@ -1,4 +1,4 @@
-package com.example.SlothGaming.Ui.reviews_handling
+package com.example.SlothGaming.ui.reviews_handling
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -19,27 +19,24 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.R
-import com.example.SlothGaming.Ui.view_models.ReviewViewModel
-import com.example.SlothGaming.Ui.view_models.ReviewViewModelFactory
+import com.example.SlothGaming.ui.view_models.ReviewViewModel
 import com.example.SlothGaming.data.models.Review
-import com.example.SlothGaming.data.repository.ReviewListRepository
 import com.example.SlothGaming.databinding.AddReviewLayoutBinding
 import com.example.SlothGaming.extensions.setScaleClickAnimation
 import com.example.SlothGaming.utils.ColorProvider
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
-
+@AndroidEntryPoint
 class AddReviewFragment : Fragment() {
     companion object {
          private val consoleList = listOf<String>("PC","PS5","XBOX","Switch")
     }
 
-    private val repository: ReviewListRepository by lazy { ReviewListRepository(requireActivity().application) }
-    private val viewModelFactory: ReviewViewModelFactory by lazy { ReviewViewModelFactory(repository) }
-
-    private val viewModel: ReviewViewModel by activityViewModels { viewModelFactory }
+    private val viewModel: ReviewViewModel by activityViewModels()
     private var _binding: AddReviewLayoutBinding? = null
 
     var imageUri: Uri? = null

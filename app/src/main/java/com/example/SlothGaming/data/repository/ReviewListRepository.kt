@@ -4,16 +4,9 @@ import android.app.Application
 import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.data.local_db.ReviewListDao
 import com.example.SlothGaming.data.local_db.ReviewListDataBase
+import javax.inject.Inject
 
-class ReviewListRepository(application: Application) {
-
-        private var reviewListDao: ReviewListDao
-
-        init {
-            val db = ReviewListDataBase.getDatabase(application.applicationContext)
-            reviewListDao = db.reviewDao()
-        }
-
+class ReviewListRepository @Inject constructor(private val reviewListDao: ReviewListDao) {
         fun getReviews() = reviewListDao.getReviews()
 
         suspend fun addReview(review: Review) {
