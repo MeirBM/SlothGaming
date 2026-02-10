@@ -32,7 +32,7 @@ class HomePageFragment: Fragment() {
 
     private var binding : HomePageLayoutBinding by autoCleared()
 
-    private val viewModel : HomePageViewModel by activityViewModels()
+    private val viewModel : HomePageViewModel by viewModels()
 
 
     override fun onCreateView(

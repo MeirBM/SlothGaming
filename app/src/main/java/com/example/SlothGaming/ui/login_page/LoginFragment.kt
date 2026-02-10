@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment: Fragment() {
-    private val viewModel: LoginViewModel by activityViewModels()
+    private val viewModel: LoginViewModel by viewModels()
     private var binding: LoginLayoutBinding by autoCleared()
     override fun onCreateView(
         inflater: LayoutInflater,
