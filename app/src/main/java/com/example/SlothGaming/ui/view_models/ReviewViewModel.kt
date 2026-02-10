@@ -19,7 +19,6 @@ import javax.inject.Inject
 class ReviewViewModel @Inject constructor(
     private val repository : ReviewListRepository,
     private val authRepository: AuthRepository) : ViewModel(){
-    //  TODO: Move from live data to Flow
     val reviews : StateFlow<List<Review>> = repository.getReviews()
         .stateIn(
         viewModelScope,
@@ -31,13 +30,9 @@ class ReviewViewModel @Inject constructor(
 
     val chosenReview : StateFlow<Review?> get() = _chosenReview.asStateFlow()
 
-    fun isUserLoggedIn(): Boolean {
-        return authRepository.isUserAuth()
-    }
 
-    fun useSignOut(){
-        authRepository.logOut()
-    }
+
+
     fun setReview(review: Review?) {
 
         _chosenReview.value = review

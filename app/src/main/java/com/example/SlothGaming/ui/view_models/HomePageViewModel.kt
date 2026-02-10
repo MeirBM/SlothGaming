@@ -11,30 +11,27 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val authRepo: AuthRepository): ViewModel() {
-
-    private val _loginStatus = MutableStateFlow<Resource<User>?>(null)
-
-    val loginStatus = _loginStatus.asStateFlow()
-
+class HomePageViewModel @Inject constructor(private val authRepo: AuthRepository) : ViewModel() {
     private val _currentUser  = MutableStateFlow<Resource<User>?>(null)
 
     val currentUser = _currentUser.asStateFlow()
 
-    fun signInUser(email: String,password:String){
-        val error = if(email.isEmpty()||password.isEmpty()){
-            "Please fill all the field's"
-        }else null
-        error?.let{
-            _loginStatus.value = Resource.Error(error)
-            return
-        }
+        init {
         viewModelScope.launch {
-            _loginStatus.value = Resource.Loading()
-            val loginResult =  authRepo.login(email, password)
-            _loginStatus.value = loginResult
+            _currentUser.value = Resource.Loading()
+            _currentUser.value = authRepo.currentUser()
         }
     }
 
-}
+        fun isUserLoggedIn(): Boolean {
+            return authRepo.isUserAuth()
+    }
+        fun useSignOut(){
+        authRepo.logOut()
+    }
 
+
+
+
+    //TODO: HERE WE ADD ALL THE API FOR THE RECYCLERS?
+}
