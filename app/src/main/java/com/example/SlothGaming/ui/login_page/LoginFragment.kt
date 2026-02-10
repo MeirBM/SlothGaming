@@ -60,16 +60,14 @@ class LoginFragment: Fragment() {
                         }
 
                         is Resource.Success  -> {
-                            Log.d("check user","${viewModel.currentUser.value}")
-                            if(viewModel.currentUser.value==null) {
-                                Log.d("check user","${viewModel.currentUser.value}")
+
                                 Toast.makeText(
                                     requireContext(),
                                     "Sign in successful",
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 findNavController().navigate(R.id.action_loginFragment_to_homePageFragment)
-                            }
+
 
                         }
 

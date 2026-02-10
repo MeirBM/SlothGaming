@@ -6,6 +6,8 @@ import com.example.SlothGaming.data.local_db.ReviewListDataBase
 import com.example.SlothGaming.data.retrofit.IgdbProxyApi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,17 +15,26 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Singleton
 
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Provides
     @Singleton
-    fun provideRetrofit() : Retrofit{
-        return Retrofit.Builder().baseUrl("https://slothgamingapi.onrender.com").addConverterFactory(GsonConverterFactory.create()).build()
+    fun provideGson(): Gson {
+        return GsonBuilder()
+            .setLenient()
+            .create()
+    }
+    @Provides
+    @Singleton
+    fun provideRetrofit(gson: Gson) : Retrofit{
+        return Retrofit.Builder().baseUrl("https://slothgamingapi.onrender.com")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson)).build()
     }
 
     @Provides
