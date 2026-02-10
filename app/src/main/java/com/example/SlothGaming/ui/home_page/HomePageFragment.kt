@@ -75,73 +75,66 @@ class HomePageFragment: Fragment() {
         }
 
         binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
-            when(menuItem.itemId){
-                R.id.login_icon -> {findNavController().navigate(R.id.action_homePageFragment_to_loginFragment)
-                true}
+            when (menuItem.itemId) {
+                R.id.login_icon -> {
+                    if (!viewModel.isUserLoggedIn()) {
+                        findNavController().navigate(R.id.action_homePageFragment_to_loginFragment)
+                    } else {
+                        Toast.makeText(requireContext(), "You Already logged in", Toast.LENGTH_SHORT).show()
+                    }
+                    true
+                }
                 else -> false
             }
         }
 
         val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(
-            object : MenuProvider {
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.home_top_menu, menu)
+            }
 
-                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                    menuInflater.inflate(R.menu.home_top_menu, menu)
-                }
-
-                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                    return when (menuItem.itemId) {
-                        R.id.my_reviews -> {
-                            if (!viewModel.isUserLoggedIn()) {
-                                AlertDialog.Builder(requireContext())
-                                    .setMessage("You must log in to use this feature")
-                                    .setPositiveButton(getString(R.string.ok),null).show()
-                            }else{
-                                findNavController().navigate(R.id.action_homePageFragment_to_myReviewsFragment)
-                            }
-                            true
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.my_reviews -> {
+                        if (!viewModel.isUserLoggedIn()) {
+                            AlertDialog.Builder(requireContext())
+                                .setMessage("You must log in to use this feature")
+                                .setPositiveButton(getString(R.string.ok), null)
+                                .show()
+                        } else {
+                            findNavController().navigate(R.id.action_homePageFragment_to_myReviewsFragment)
                         }
-
-                        R.id.sign_out -> {
-                            if (!viewModel.isUserLoggedIn()) {
-                                AlertDialog.Builder(requireContext())
-                                    .setMessage("You must be logged in")
-                                    .setPositiveButton(getString(R.string.ok), null)
-                                    .show()
-                            } else {
-                                AlertDialog.Builder(requireContext()).apply {
-                                    setTitle("Sign Out")
-                                    setMessage("Are you sure you want to sign out?")
-                                    setPositiveButton(getString(R.string.yes)) { _,_ ->
-
-                                        viewModel.useSignOut()
-                                        Toast.makeText(
-                                            requireContext(),
-                                            ("Sign Out Successfully"),
-                                            Toast.LENGTH_SHORT
-                                        )
-                                            .show()
-                                        findNavController().navigate(R.id.action_homePageFragment_to_loginFragment)
-                                    }
-                                    setNegativeButton(getString(R.string.no)) { _, _ ->
-                                    }
-                                    show()
-                                }
-                            }
-                            true
-                        }
-
-                        else -> false
+                        true
                     }
+                    R.id.sign_out -> {
+                        if (!viewModel.isUserLoggedIn()) {
+                            AlertDialog.Builder(requireContext())
+                                .setMessage("You must be logged in")
+                                .setPositiveButton(getString(R.string.ok), null)
+                                .show()
+                        } else {
+                            AlertDialog.Builder(requireContext()).apply {
+                                setTitle("Sign Out")
+                                setMessage("Are you sure you want to sign out?")
+                                setPositiveButton(getString(R.string.yes)) { _, _ ->
+                                    viewModel.useSignOut()
+                                    Toast.makeText(requireContext(), "Sign Out Successfully", Toast.LENGTH_SHORT).show()
+
+                                    findNavController().navigate(R.id.action_homePageFragment_to_loginFragment)
+                                }
+                                setNegativeButton("No", null)
+                                show()
+                            }
+                        }
+                        true
+                    }
+                    else -> false
                 }
-            },
-            viewLifecycleOwner
-        )
-
+            }
+        }, viewLifecycleOwner)
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
+            override fun onDestroyView() {
+                super.onDestroyView()
+            }
 }
