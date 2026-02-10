@@ -21,6 +21,7 @@ import com.example.SlothGaming.ui.home_page.adapters.ParentAdapter
 import com.example.SlothGaming.data.models.GameItem
 import com.example.SlothGaming.data.models.Section
 import com.example.SlothGaming.databinding.HomePageLayoutBinding
+import com.example.SlothGaming.ui.view_models.HomePageViewModel
 import com.example.SlothGaming.ui.view_models.ReviewViewModel
 import com.example.SlothGaming.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +32,7 @@ class HomePageFragment: Fragment() {
 
     private var binding : HomePageLayoutBinding by autoCleared()
 
-    private val viewModel : ReviewViewModel by activityViewModels()
+    private val viewModel : HomePageViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -76,7 +77,8 @@ class HomePageFragment: Fragment() {
 
         binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId){
-                R.id.login_icon -> {findNavController().navigate(R.id.action_homePageFragment_to_loginFragment)
+                R.id.login_icon -> {if(!viewModel.isUserLoggedIn())
+                    findNavController().navigate(R.id.action_homePageFragment_to_loginFragment)
                 true}
                 else -> false
             }

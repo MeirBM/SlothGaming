@@ -68,7 +68,7 @@ class FirebaseAuthImpl @Inject constructor
         firebaseAuth.signOut()
     }
 
-    override fun isUserAuth(): Boolean {
+    override   fun isUserAuth(): Boolean {
         return firebaseAuth.currentUser != null
     }
 }
