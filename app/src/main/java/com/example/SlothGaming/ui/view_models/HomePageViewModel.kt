@@ -54,9 +54,9 @@ class HomePageViewModel @Inject constructor(private val authRepo: AuthRepository
                 // work on IO thread for the data fetching
                 val sections = withContext(Dispatchers.IO) {
                     //since igdb and proto don't work well we use manual query's
-                    val latestQuery = "fields name,cover.url; sort first_release_date desc; limit 10;"
-                    val popularQuery = "fields name,cover.url; sort hypes desc; limit 10;"
-                    val topRatedQuery = "fields name,cover.url; where total_rating_count > 10; sort total_rating desc; limit 10;"
+                    val latestQuery = "fields name,platforms.name,cover.url,summary; sort first_release_date desc; limit 10;"
+                    val popularQuery = "fields name,platforms.name,cover.url,summary; sort hypes desc; limit 10;"
+                    val topRatedQuery = "fields name,platforms.name,cover.url,summary; where total_rating_count > 10; sort total_rating desc; limit 10;"
 
                 // call all section's in parallel
                     val latestRes = async { igdbApi.getIgdbData("games", latestQuery) }.await()
@@ -88,10 +88,13 @@ class HomePageViewModel @Inject constructor(private val authRepo: AuthRepository
             val highResUrl = rawUrl.replace("t_thumb", "t_720p").let {
                 if (it.startsWith("//")) "https:$it" else it
             }
+
             GameItem(
                 id = response.id.toInt(),
                 title = response.name,
-                imageUrl = highResUrl
+                imageUrl = highResUrl,
+                platform = response.platforms?.map { it.name }?:emptyList(),
+                summary = response.summary?:"No summary for this game yet"
             )
         }
     }

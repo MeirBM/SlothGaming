@@ -31,4 +31,5 @@ interface ReviewListDao {
 
     @Query("DELETE FROM reviews")
     suspend fun deleteAll()
+
 }
