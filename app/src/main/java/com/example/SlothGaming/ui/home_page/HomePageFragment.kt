@@ -42,7 +42,7 @@ class HomePageFragment: Fragment() {
 
     private val viewModel : HomePageViewModel by viewModels()
 
-
+    private val parentAdapter = ParentAdapter(emptyList())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,8 +57,10 @@ class HomePageFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+
         binding.mainRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
+            adapter = parentAdapter
             setHasFixedSize(true)
         }
         viewLifecycleOwner.lifecycleScope.launch {
@@ -67,7 +69,7 @@ class HomePageFragment: Fragment() {
                     when(resource){
                         is Resource.Success ->
                             resource.data?.let{section ->
-                                binding.mainRecyclerView.adapter = ParentAdapter(section)
+                                parentAdapter.updateList(section)
                             }
                         is Resource.Error ->{Toast.makeText(requireContext(),
                             resource.message, Toast.LENGTH_LONG).show()}

@@ -42,31 +42,37 @@ class HomePageViewModel @Inject constructor(private val authRepo: AuthRepository
     }
 
     //TODO: HERE WE ADD ALL THE API FOR THE RECYCLERS?
+
+    /* Main function to populate the Home page recycler's
+    * fetch each section in different query
+    * return it to the parent recycler which in it will bind the child recycler*/
     fun fetchHomeContent() {
-        // מפעילים על ה-Scope הדיפולטיבי (Main)
+
         viewModelScope.launch {
             _homePageState.value = Resource.Loading()
             try {
-                // עוברים ל-IO רק עבור הקריאות עצמן
+                // work on IO thread for the data fetching
                 val sections = withContext(Dispatchers.IO) {
+                    //since igdb and proto don't work well we use manual query's
                     val latestQuery = "fields name,cover.url; sort first_release_date desc; limit 10;"
                     val popularQuery = "fields name,cover.url; sort hypes desc; limit 10;"
                     val topRatedQuery = "fields name,cover.url; where total_rating_count > 10; sort total_rating desc; limit 10;"
 
+                // call all section's in parallel
                     val latestRes = async { igdbApi.getIgdbData("games", latestQuery) }.await()
                     val popularRes = async { igdbApi.getIgdbData("games", popularQuery) }.await()
                     val topRatedRes = async { igdbApi.getIgdbData("games", topRatedQuery) }.await()
 
 //
-                    Log.d("API_DEBUG", "${latestRes}")
+                    Log.d("API_DEBUG", "${latestRes.body()}")
 
-
+                    // pass to section list to later be passed to the Main thread
                     val mutableSections = mutableListOf<Section>()
                     if (latestRes.isSuccessful) mutableSections.add(Section("Latest Releases", latestRes.body()?.mapToGameItem() ?: emptyList()))
                     if (popularRes.isSuccessful) mutableSections.add(Section("Most Popular", popularRes.body()?.mapToGameItem() ?: emptyList()))
                     if (topRatedRes.isSuccessful) mutableSections.add(Section("Top Rated", topRatedRes.body()?.mapToGameItem() ?: emptyList()))
 
-                    mutableSections // מחזירים את הרשימה ל-Main Thread
+                    mutableSections
                 }
 
                 _homePageState.value = Resource.Success(sections)
@@ -78,10 +84,14 @@ class HomePageViewModel @Inject constructor(private val authRepo: AuthRepository
     }
     private fun List<GameResponse>.mapToGameItem(): List<GameItem> {
         return this.map { response ->
+            val rawUrl = response.cover?.url?:""
+            val highResUrl = rawUrl.replace("t_thumb", "t_720p").let {
+                if (it.startsWith("//")) "https:$it" else it
+            }
             GameItem(
                 id = response.id.toInt(),
                 title = response.name,
-                imageUrl = response.cover?.url?.let { "https:$it" } ?: ""
+                imageUrl = highResUrl
             )
         }
     }
