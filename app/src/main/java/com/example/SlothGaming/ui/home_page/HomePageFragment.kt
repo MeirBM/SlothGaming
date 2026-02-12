@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -70,9 +71,15 @@ class HomePageFragment: Fragment() {
                         is Resource.Success ->
                             resource.data?.let{section ->
                                 parentAdapter.updateList(section)
+                                binding.loginProgressHp.isVisible = false
                             }
+                        is Resource.Loading ->
+                            binding.loginProgressHp.isVisible = true
+
                         is Resource.Error ->{Toast.makeText(requireContext(),
-                            resource.message, Toast.LENGTH_LONG).show()}
+                            resource.message, Toast.LENGTH_LONG).show()
+
+                        }
                     }
 
                 }
