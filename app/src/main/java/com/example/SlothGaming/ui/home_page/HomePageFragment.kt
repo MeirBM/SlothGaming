@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -67,11 +68,13 @@ class HomePageFragment: Fragment() {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.homePageState.collectLatest {
                     when (it.status) {
-                        is Loading -> ""
+                        is Loading -> binding.homeProgress.isVisible = true
                         is Success -> {
                             it.status.data?.let { section ->
                                 binding.mainRecyclerView.adapter = ParentAdapter(section)
                             }
+                            binding.homeProgress.isVisible = false
+
                         }
 
                         is Error -> Toast.makeText(
@@ -82,70 +85,10 @@ class HomePageFragment: Fragment() {
                 }
             }
         }
-        val menuHost: MenuHost = requireActivity()
-        inflateMenu(menuHost)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
     }
 
-
-    private fun inflateMenu(menuHost: MenuHost) {
-        menuHost.addMenuProvider(
-            object : MenuProvider {
-
-                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                    menuInflater.inflate(R.menu.home_top_menu, menu)
-                }
-
-                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                    return when (menuItem.itemId) {
-                        R.id.my_reviews -> {
-                            if (!viewModel.isUserLoggedIn()) {
-                                AlertDialog.Builder(requireContext())
-                                    .setMessage("You must log in to use this feature")
-                                    .setPositiveButton(getString(R.string.ok), null).show()
-                            } else {
-                                findNavController().navigate(R.id.action_homePageFragment_to_myReviewsFragment)
-                            }
-                            true
-                        }
-
-                        R.id.sign_out -> {
-                            if (!viewModel.isUserLoggedIn()) {
-                                AlertDialog.Builder(requireContext())
-                                    .setMessage("You must be logged in")
-                                    .setPositiveButton(getString(R.string.ok), null)
-                                    .show()
-                            } else {
-                                AlertDialog.Builder(requireContext()).apply {
-                                    setTitle("Sign Out")
-                                    setMessage("Are you sure you want to sign out?")
-                                    setPositiveButton(getString(R.string.yes)) { _, _ ->
-
-                                        viewModel.useSignOut()
-                                        Toast.makeText(
-                                            requireContext(),
-                                            ("Sign Out Successfully"),
-                                            Toast.LENGTH_SHORT
-                                        )
-                                            .show()
-                                        findNavController().navigate(R.id.action_homePageFragment_to_loginFragment)
-                                    }
-                                    setNegativeButton(getString(R.string.no)) { _, _ ->
-                                    }
-                                    show()
-                                }
-                            }
-                            true
-                        }
-
-                        else -> false
-                    }
-                }
-            },
-            viewLifecycleOwner
-        )
-    }
 }
