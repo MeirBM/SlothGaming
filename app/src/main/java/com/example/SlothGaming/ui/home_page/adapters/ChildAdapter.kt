@@ -11,7 +11,17 @@ class ChildAdapter(private var items: List<GameItem>) :
     RecyclerView.Adapter<ChildAdapter.ChildViewHolder>() {
 
     inner class ChildViewHolder(val binding: ItemGameCardBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root){
+        private lateinit var gameItem : GameItem
+
+        fun bind (item : GameItem){
+            this.gameItem = item
+            binding.itemTitle.text = item.title
+            Glide.with(binding.root)
+                .load(item.imageUrl).override(300,450)
+                .into(binding.gamePoster)
+            }
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildViewHolder {
         val binding = ItemGameCardBinding.inflate(
@@ -23,14 +33,7 @@ class ChildAdapter(private var items: List<GameItem>) :
     }
 
     override fun onBindViewHolder(holder: ChildViewHolder, position: Int) {
-        val item = items[position]
-        with(holder.binding) {
-            itemTitle.text = item.title
-            // Load image using Glide
-            Glide.with(root.context)
-                .load(item.imageUrl).override(300,450)
-                .into(gamePoster)
-        }
+             holder.bind(items[position])
     }
 
     override fun getItemCount() = items.size

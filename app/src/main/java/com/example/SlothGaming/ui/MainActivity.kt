@@ -7,18 +7,15 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.SlothGaming.R
 import com.example.SlothGaming.databinding.ActivityMainBinding
-import com.example.SlothGaming.ui.view_models.HomePageViewModel
+import com.example.SlothGaming.view_models.HomePageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

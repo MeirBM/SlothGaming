@@ -1,4 +1,4 @@
-package com.example.SlothGaming.ui.view_models
+package com.example.SlothGaming.view_models
 
 import android.util.Patterns
 import androidx.lifecycle.ViewModel

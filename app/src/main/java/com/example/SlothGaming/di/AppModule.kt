@@ -1,9 +1,10 @@
 package com.example.SlothGaming.di
 
 import android.content.Context
+import com.example.SlothGaming.data.local_db.GameDao
 import com.example.SlothGaming.data.local_db.ReviewListDao
 import com.example.SlothGaming.data.local_db.ReviewListDataBase
-import com.example.SlothGaming.data.retrofit.IgdbProxyApi
+import com.example.SlothGaming.data.remote_db.IgdbService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
@@ -33,14 +34,13 @@ object AppModule {
     @Singleton
     fun provideRetrofit(gson: Gson) : Retrofit{
         return Retrofit.Builder().baseUrl("https://slothgamingapi.onrender.com")
-            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
     }
 
     @Provides
     @Singleton
-    fun provideIgdbApi(retrofit: Retrofit): IgdbProxyApi {
-        return retrofit.create(IgdbProxyApi::class.java)
+    fun provideIgdbApi(retrofit: Retrofit): IgdbService {
+        return retrofit.create(IgdbService::class.java)
     }
 
     @Provides
@@ -56,6 +56,10 @@ object AppModule {
     }
 
     // Firebase
+    @Provides
+    fun provideGameDao(database: ReviewListDataBase) : GameDao{
+        return database.gameDao()
+    }
 
     @Provides
     @Singleton

@@ -13,7 +13,6 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -22,7 +21,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.SlothGaming.R
-import com.example.SlothGaming.ui.view_models.ReviewViewModel
+import com.example.SlothGaming.view_models.ReviewViewModel
 import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
 import com.example.SlothGaming.extensions.setScaleClickAnimation
 import dagger.hilt.android.AndroidEntryPoint
