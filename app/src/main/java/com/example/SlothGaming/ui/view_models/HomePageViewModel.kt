@@ -24,7 +24,7 @@ class HomePageViewModel @Inject constructor(private val authRepo: AuthRepository
     private val _currentUser  = MutableStateFlow<Resource<User>?>(null)
 
     val currentUser = _currentUser.asStateFlow()
-    private val _homePageState = MutableStateFlow<Resource<List<Section>>>(Resource.Loading())
+    private val _homePageState = MutableStateFlow<Resource<List<Section>>>(Resource.loading())
     val homePageState = _homePageState.asStateFlow()
         init {
         viewModelScope.launch {
@@ -49,7 +49,7 @@ class HomePageViewModel @Inject constructor(private val authRepo: AuthRepository
     fun fetchHomeContent() {
 
         viewModelScope.launch {
-            _homePageState.value = Resource.Loading()
+            _homePageState.value = Resource.loading()
             try {
                 // work on IO thread for the data fetching
                 val sections = withContext(Dispatchers.IO) {
@@ -75,10 +75,10 @@ class HomePageViewModel @Inject constructor(private val authRepo: AuthRepository
                     mutableSections
                 }
 
-                _homePageState.value = Resource.Success(sections)
+                _homePageState.value = Resource.success(sections)
 
             } catch (e: Exception) {
-                _homePageState.value = Resource.Error(e.message ?: "An unexpected error occurred")
+                _homePageState.value = Resource.error(e.message ?: "An unexpected error occurred")
             }
         }
     }

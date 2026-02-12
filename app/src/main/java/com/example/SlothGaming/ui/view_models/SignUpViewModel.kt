@@ -30,12 +30,12 @@ class SignUpViewModel @Inject constructor(private val authRepo: AuthRepository) 
             else -> null
         }
         error?.let {
-            _signupState.value = Resource.Error(it)
+            _signupState.value = Resource.error(it)
             return
         }
 
         viewModelScope.launch {
-            _signupState.value = Resource.Loading()
+            _signupState.value = Resource.loading()
             val newUser = authRepo.createUser(firstName, lastName, email, phoneNumber, password)
             _signupState.value = newUser
         }

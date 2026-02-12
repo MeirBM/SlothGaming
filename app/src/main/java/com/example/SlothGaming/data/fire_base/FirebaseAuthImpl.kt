@@ -23,7 +23,7 @@ class FirebaseAuthImpl @Inject constructor
                 val userId  = firebaseAuth.currentUser?.uid!!
                 val currentUser =  userRef.document(userId)
                    .get().await().toObject(User::class.java)
-                Resource.Success(currentUser!!)
+                Resource.success(currentUser!!)
             }
         }
     }
@@ -42,7 +42,7 @@ class FirebaseAuthImpl @Inject constructor
                 val userId = registerResult.user?.uid!!
                 val newUser = User(firstName,lastName,email,phoneNumber)
                 userRef.document(userId).set(newUser).await()
-                Resource.Success(newUser)
+                Resource.success(newUser)
             }
 
         }
@@ -58,8 +58,7 @@ class FirebaseAuthImpl @Inject constructor
                 val userId = loginResult.user?.uid!!
                 val currentUser =  userRef.document(userId)
                     .get().await().toObject(User::class.java)
-
-                Resource.Success(currentUser!!)
+                Resource.success(currentUser!!)
             }
         }
     }

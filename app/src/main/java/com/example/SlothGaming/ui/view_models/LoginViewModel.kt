@@ -26,11 +26,11 @@ class LoginViewModel @Inject constructor(private val authRepo: AuthRepository): 
             "Please fill all the field's"
         }else null
         error?.let{
-            _loginStatus.value = Resource.Error(error)
+            _loginStatus.value = Resource.error(error)
             return
         }
         viewModelScope.launch {
-            _loginStatus.value = Resource.Loading()
+            _loginStatus.value = Resource.loading()
             val loginResult =  authRepo.login(email, password)
             _loginStatus.value = loginResult
         }
