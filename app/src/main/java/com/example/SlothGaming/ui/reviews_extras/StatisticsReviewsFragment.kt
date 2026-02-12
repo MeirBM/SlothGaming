@@ -11,7 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.SlothGaming.R
-import com.example.SlothGaming.ui.view_models.ReviewViewModel
+import com.example.SlothGaming.view_models.ReviewViewModel
 import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.databinding.StatisticsReviewsLayoutBinding
 import com.example.SlothGaming.utils.ColorProvider

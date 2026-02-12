@@ -14,10 +14,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.SlothGaming.R
 import com.example.SlothGaming.databinding.SignUpLayoutBinding
-import com.example.SlothGaming.ui.view_models.SignUpViewModel
+import com.example.SlothGaming.view_models.SignUpViewModel
 import com.example.SlothGaming.utils.Error
 import com.example.SlothGaming.utils.Loading
-import com.example.SlothGaming.utils.Resource
 import com.example.SlothGaming.utils.Success
 import com.example.SlothGaming.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint

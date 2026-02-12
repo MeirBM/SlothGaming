@@ -19,11 +19,10 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.R
-import com.example.SlothGaming.ui.view_models.ReviewViewModel
+import com.example.SlothGaming.view_models.ReviewViewModel
 import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.databinding.AddReviewLayoutBinding
 import com.example.SlothGaming.extensions.setScaleClickAnimation

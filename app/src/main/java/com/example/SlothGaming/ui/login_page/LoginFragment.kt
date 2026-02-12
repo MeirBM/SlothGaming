@@ -2,14 +2,12 @@ package com.example.SlothGaming.ui.login_page
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -18,10 +16,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.SlothGaming.R
 import com.example.SlothGaming.databinding.LoginLayoutBinding
 import com.example.SlothGaming.extensions.startLightingAnimation
-import com.example.SlothGaming.ui.view_models.LoginViewModel
+import com.example.SlothGaming.view_models.LoginViewModel
 import com.example.SlothGaming.utils.Error
 import com.example.SlothGaming.utils.Loading
-import com.example.SlothGaming.utils.Resource
 import com.example.SlothGaming.utils.Success
 import com.example.SlothGaming.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint

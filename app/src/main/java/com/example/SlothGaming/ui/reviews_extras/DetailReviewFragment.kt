@@ -1,20 +1,18 @@
 package com.example.SlothGaming.ui.reviews_extras
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.R
-import com.example.SlothGaming.ui.view_models.ReviewViewModel
+import com.example.SlothGaming.view_models.ReviewViewModel
 import com.example.SlothGaming.databinding.DetailReviewBinding
 import com.example.SlothGaming.utils.ColorProvider
 import dagger.hilt.android.AndroidEntryPoint
