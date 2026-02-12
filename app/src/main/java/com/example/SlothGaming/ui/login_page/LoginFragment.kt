@@ -19,7 +19,10 @@ import com.example.SlothGaming.R
 import com.example.SlothGaming.databinding.LoginLayoutBinding
 import com.example.SlothGaming.extensions.startLightingAnimation
 import com.example.SlothGaming.ui.view_models.LoginViewModel
+import com.example.SlothGaming.utils.Error
+import com.example.SlothGaming.utils.Loading
 import com.example.SlothGaming.utils.Resource
+import com.example.SlothGaming.utils.Success
 import com.example.SlothGaming.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -53,13 +56,13 @@ class LoginFragment: Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.loginStatus.collectLatest { resource ->
-                    when (resource) {
-                        is Resource.Loading -> {
+                viewModel.loginStatus.collectLatest {
+                    when (it?.status) {
+                        is Loading -> {
                             binding.loginProgress.isVisible = true
                         }
 
-                        is Resource.Success  -> {
+                        is Success -> {
 
                                 Toast.makeText(
                                     requireContext(),
@@ -71,14 +74,14 @@ class LoginFragment: Fragment() {
 
                         }
 
-                        is Resource.Error -> {
+                        is Error-> {
                             Toast.makeText(
                                 requireContext(),
-                                "${resource.message}",
+                                it.status.message,
                                 Toast.LENGTH_SHORT
                             ).show()
                             binding.loginProgress.isVisible = false
-                        }
+                        }else -> null
 
                     }
                 }
@@ -88,13 +91,13 @@ class LoginFragment: Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.currentUser.collectLatest { resource ->
-                    when (resource) {
-                        is Resource.Loading -> {
+                viewModel.currentUser.collectLatest {
+                    when (it?.status) {
+                        is Loading -> {
                             binding.loginProgress.isVisible = true
                         }
 
-                        is Resource.Success -> {
+                        is Success -> {
                             Toast.makeText(
                                 requireContext(),
                                 "welcome",
@@ -102,14 +105,14 @@ class LoginFragment: Fragment() {
                             ).show()
                         }
 
-                        is Resource.Error -> {
+                        is Error -> {
                             Toast.makeText(
                                 requireContext(),
-                                "${resource.message}",
+                                it.status.message,
                                 Toast.LENGTH_SHORT
                             ).show()
                             binding.loginProgress.isVisible = false
-                        }
+                        }else -> null
 
                     }
                 }

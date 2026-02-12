@@ -15,7 +15,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.SlothGaming.R
 import com.example.SlothGaming.databinding.SignUpLayoutBinding
 import com.example.SlothGaming.ui.view_models.SignUpViewModel
+import com.example.SlothGaming.utils.Error
+import com.example.SlothGaming.utils.Loading
 import com.example.SlothGaming.utils.Resource
+import com.example.SlothGaming.utils.Success
 import com.example.SlothGaming.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -50,21 +53,20 @@ class SignUpFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch{
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.signupState.collectLatest {
-                    when(it){
-                        is Resource.Loading -> {
+                    when(it?.status){
+                        is Loading -> {
                             binding.registerProg.isVisible = true
                             binding.signupBtn.isEnabled = false
                         }
-                        is Resource.Success -> {
+                        is Success -> {
                             Toast.makeText(requireContext(),"Register Successfully",Toast.LENGTH_SHORT).show()
                             findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
                         }
-                        is Resource.Error -> {
-                            Toast.makeText(requireContext(),"${it.message}",Toast.LENGTH_SHORT).show()
+                        is Error -> {
+                            Toast.makeText(requireContext(),it.status.message,Toast.LENGTH_SHORT).show()
                             binding.registerProg.isVisible = false
                             binding.signupBtn.isEnabled = true
-
-                        }
+                        }else->null
                     }
                 }
             }

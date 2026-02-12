@@ -28,7 +28,10 @@ import com.example.SlothGaming.data.models.Section
 import com.example.SlothGaming.databinding.HomePageLayoutBinding
 import com.example.SlothGaming.ui.view_models.HomePageViewModel
 import com.example.SlothGaming.ui.view_models.ReviewViewModel
+import com.example.SlothGaming.utils.Error
+import com.example.SlothGaming.utils.Loading
 import com.example.SlothGaming.utils.Resource
+import com.example.SlothGaming.utils.Success
 import com.example.SlothGaming.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -38,18 +41,17 @@ import kotlin.getValue
 @AndroidEntryPoint
 class HomePageFragment: Fragment() {
 
-    private var binding : HomePageLayoutBinding by autoCleared()
+    private var binding: HomePageLayoutBinding by autoCleared()
 
-    private val viewModel : HomePageViewModel by viewModels()
+    private val viewModel: HomePageViewModel by viewModels()
 
-    private val parentAdapter = ParentAdapter(emptyList())
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = HomePageLayoutBinding.inflate(inflater,container,false)
+        binding = HomePageLayoutBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -57,28 +59,31 @@ class HomePageFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         binding.mainRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = parentAdapter
             setHasFixedSize(true)
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.homePageState.collectLatest { resource ->
-                    when(resource){
-                        is Resource.Success ->
-                            resource.data?.let{section ->
-                                parentAdapter.updateList(section)
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.homePageState.collectLatest {
+                    when (it.status) {
+                        is Loading -> ""
+                        is Success -> {
+                            it.status.data?.let { section ->
+                                binding.mainRecyclerView.adapter = ParentAdapter(section)
                             }
-                        is Resource.Error ->{Toast.makeText(requireContext(),
-                            resource.message, Toast.LENGTH_LONG).show()}
-                    }
+                        }
 
+                        is Error -> Toast.makeText(
+                            requireContext(),
+                            it.status.message, Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
         }
-
+        val menuHost: MenuHost = requireActivity()
+        inflateMenu(menuHost)
     }
 
     override fun onDestroyView() {
@@ -86,4 +91,61 @@ class HomePageFragment: Fragment() {
     }
 
 
+    private fun inflateMenu(menuHost: MenuHost) {
+        menuHost.addMenuProvider(
+            object : MenuProvider {
+
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.home_top_menu, menu)
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return when (menuItem.itemId) {
+                        R.id.my_reviews -> {
+                            if (!viewModel.isUserLoggedIn()) {
+                                AlertDialog.Builder(requireContext())
+                                    .setMessage("You must log in to use this feature")
+                                    .setPositiveButton(getString(R.string.ok), null).show()
+                            } else {
+                                findNavController().navigate(R.id.action_homePageFragment_to_myReviewsFragment)
+                            }
+                            true
+                        }
+
+                        R.id.sign_out -> {
+                            if (!viewModel.isUserLoggedIn()) {
+                                AlertDialog.Builder(requireContext())
+                                    .setMessage("You must be logged in")
+                                    .setPositiveButton(getString(R.string.ok), null)
+                                    .show()
+                            } else {
+                                AlertDialog.Builder(requireContext()).apply {
+                                    setTitle("Sign Out")
+                                    setMessage("Are you sure you want to sign out?")
+                                    setPositiveButton(getString(R.string.yes)) { _, _ ->
+
+                                        viewModel.useSignOut()
+                                        Toast.makeText(
+                                            requireContext(),
+                                            ("Sign Out Successfully"),
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
+                                        findNavController().navigate(R.id.action_homePageFragment_to_loginFragment)
+                                    }
+                                    setNegativeButton(getString(R.string.no)) { _, _ ->
+                                    }
+                                    show()
+                                }
+                            }
+                            true
+                        }
+
+                        else -> false
+                    }
+                }
+            },
+            viewLifecycleOwner
+        )
+    }
 }
