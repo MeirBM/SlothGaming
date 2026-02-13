@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: HomePageViewModel by viewModels()
 
-    // משתנה לשמירת ה-Provider כדי שנוכל להסיר אותו במסכים אחרים
+    // Saving provider for manage it on other fragments
     private var topMenuProvider: MenuProvider? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,12 +36,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // הגדרת ה-Navigation Controller
+        // Configure nav controller
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        // מאזין לשינויי מסכים - שולט בנראות של התפריטים
+        // Listening to changes -> Remove / keep menu
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.homePageFragment -> {
@@ -50,21 +50,21 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.myReviewsFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
-                    removeTopMenu() // נסיר את התפריט העליון של הבית בפרגמנטים אחרים
+                    removeTopMenu()
                 }
                 R.id.loginFragment -> {
                     binding.bottomNavigation.visibility =
                         View.VISIBLE
                 }
                 else -> {
-                    // במסך לוגין או ספלאש - נסתיר הכל
+                    // if not said -> remove
                     binding.bottomNavigation.visibility = View.GONE
                     removeTopMenu()
                 }
             }
         }
 
-        // הגדרת הלוגיקה של ה-Bottom Navigation
+        // Bottom navigation
         binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.login_icon -> {
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.homePage_icon -> {
-                    // מנווט לבית רק אם אנחנו לא שם כבר
+                    // Only if current dest != home
                     if (navController.currentDestination?.id != R.id.homePageFragment) {
                         navController.navigate(R.id.homePageFragment)
                     }
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showTopMenu(navController: NavController) {
-        if (topMenuProvider != null) return // מונע הוספה כפולה
+        if (topMenuProvider != null) return // Prevent double add
 
         topMenuProvider = object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

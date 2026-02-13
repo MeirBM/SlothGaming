@@ -7,17 +7,6 @@
     tools:context=".ui.home_page.HomePageFragment"
     android:background="@color/customBlack"
     >
-    <ProgressBar
-        android:id="@+id/homeProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
 
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/mainRecyclerView"
@@ -28,7 +17,7 @@
        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
    <ProgressBar
-       android:id="@+id/loginProgress_hp"
+       android:id="@+id/loadingProgress_hp"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:visibility="gone"

@@ -5,6 +5,8 @@ plugins {
     id("kotlin-kapt")
     id("org.jetbrains.kotlin.plugin.parcelize")
     id ("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
+
 }
 
 android {
@@ -79,6 +81,9 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     // TO simple String
     implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
-    // igdb api wrapper
+    //args nav
+    implementation("androidx.navigation:navigation-fragment-ktx:$2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:$2.7.7")
+
 }
 

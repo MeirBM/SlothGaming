@@ -14,6 +14,7 @@ data class GameItem(
     val genre: String?=null,
     val imageUrl: String,
     val timeToBeat: Int? = null,
+    val rating: Double? = null,
     val summary:String?,
     val section : String
 ) : Parcelable
