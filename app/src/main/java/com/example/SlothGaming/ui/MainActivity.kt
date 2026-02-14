@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                         if (!viewModel.isUserLoggedIn()) {
                             showLoginRequiredDialog()
                         } else {
-                            navController.navigate(R.id.myReviewsFragment)
+                            navController.navigate(R.id.action_homePageFragment_to_myReviewsFragment)
                         }
                         true
                     }

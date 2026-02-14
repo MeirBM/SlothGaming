@@ -79,7 +79,11 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_homePageFragment_to_myReviewsFragment"
-            app:destination="@id/myReviewsFragment" />
+            app:destination="@id/myReviewsFragment"
+            app:enterAnim="@anim/from_down"
+            app:exitAnim="@anim/to_up"
+            app:popEnterAnim="@anim/from_up"
+            app:popExitAnim="@anim/to_down" />
         <action
             android:id="@+id/action_homePageFragment_to_detailReviewFragment"
             app:destination="@id/detailReviewFragment"
