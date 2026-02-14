@@ -70,6 +70,7 @@ class DetailReviewFragment : Fragment() {
         Log.d("NAV_DEBUG", "Sending Game: ${game.title}, Rating: ${game.rating}")
         binding.reviewTitle.text = game.title // push title
         binding.reviewDesc.text = game.summary// push description
+        binding.reviewConsole.text=game.platform// push source
         binding.ratingScore.text= String.format("%.1f",ratingOutOfFive) // cut to .x number
 
         //Load image with glide

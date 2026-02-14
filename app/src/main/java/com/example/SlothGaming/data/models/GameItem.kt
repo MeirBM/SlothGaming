@@ -10,11 +10,9 @@ import kotlinx.parcelize.Parcelize
 data class GameItem(
     @PrimaryKey (autoGenerate = true) val id: Int,
     val title: String,
-    val platform:String?,
-    val genre: String?=null,
+    val platform:String? = null,
     val imageUrl: String,
-    val timeToBeat: Int? = null,
     val rating: Double? = null,
-    val summary:String?,
+    val summary:String? = null,
     val section : String
 ) : Parcelable
