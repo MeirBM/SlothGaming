@@ -30,6 +30,7 @@
         android:background="@drawable/bottom_gradint_game_crad"
         app:menu="@menu/home_page_bottom_bar"
         app:itemIconTint="@color/pearlWhite"
+        app:itemTextColor="@color/pearlWhite"
         app:itemHorizontalTranslationEnabled="true"
         app:itemGravity="center"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
