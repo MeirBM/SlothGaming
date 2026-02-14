@@ -59,7 +59,9 @@
         tools:layout="@layout/detail_review">
         <argument
             android:name="GameDetail"
-            app:argType="com.example.SlothGaming.data.models.GameItem" />
+            app:argType="com.example.SlothGaming.data.models.GameItem"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/statisticsReviewsFragment"
