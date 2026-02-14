@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -41,10 +40,7 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val anim = AnimationUtils.loadAnimation(requireContext(),R.anim.spinning_for_sloth)
         binding.signupBtn.setOnClickListener {
-
-
             val firstname = binding.etFirstName.text.toString().trim()
             val lastname = binding.etLastName.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
@@ -58,23 +54,16 @@ class SignUpFragment : Fragment() {
                 viewModel.signupState.collectLatest {
                     when(it?.status){
                         is Loading -> {
-                            binding.loadingProgressRegister.apply{
-                                isVisible = true
-                                startAnimation(anim)}
+                            binding.registerProg.isVisible = true
                             binding.signupBtn.isEnabled = false
                         }
                         is Success -> {
-                            binding.loadingProgressRegister.apply{
-                                isVisible = false
-                                clearAnimation()}
-                            Toast.makeText(requireContext(),"Register Successfully",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(),getString(R.string.register_successfully),Toast.LENGTH_SHORT).show()
                             findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
                         }
                         is Error -> {
                             Toast.makeText(requireContext(),it.status.message,Toast.LENGTH_SHORT).show()
-                            binding.loadingProgressRegister.apply{
-                                isVisible = false
-                                clearAnimation()}
+                            binding.registerProg.isVisible = false
                             binding.signupBtn.isEnabled = true
                         }else->null
                     }

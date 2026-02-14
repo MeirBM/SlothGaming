@@ -37,4 +37,39 @@
     <string name="edit_review">ערוך ביקורת</string>
     <string name="edit_review_btn">ערוך ביקורת</string>
     <string name="platform">פלטפורמה: %1$s</string>
+    <string name="first_name">שם פרטי</string>
+    <string name="email">אימייל</string>
+    <string name="last_name">שם משפחה</string>
+    <string name="password">סיסמה</string>
+    <string name="phone_number">מספר טלפון</string>
+    <string name="search">חיפוש</string>
+
+    <!-- Login / Sign Up -->
+    <string name="sign_in">התחברות</string>
+    <string name="sign_up">הרשמה</string>
+    <string name="sign_up_now">לא רשום?\nהירשם עכשיו!</string>
+    <string name="sign_in_successful">ההתחברות הצליחה</string>
+    <string name="welcome">ברוך הבא</string>
+    <string name="register_successfully">ההרשמה הצליחה</string>
+
+    <!-- Bottom Nav / Top Menu -->
+    <string name="home">בית</string>
+    <string name="login">התחברות</string>
+    <string name="sign_out">התנתקות</string>
+
+    <!-- Dialogs / Toasts -->
+    <string name="welcome_title">ברוכים הבאים ל-Sloth Gaming\n</string>
+    <string name="welcome_message">שלום גיימר!\nכאן תוכל לקבל את כל המידע על המשחקים החדשים, המשחקים בעלי הדירוג הגבוה ועוד.\nבנוסף תוכל לכתוב ביקורות משלך על כל משחק ופלטפורמה עם דירוג משלך!\nתהנה והישאר עצלן.</string>
+    <string name="already_logged_in">אתה כבר מחובר</string>
+    <string name="not_logged_in">אתה לא מחובר</string>
+    <string name="must_log_in">עליך להתחבר כדי להשתמש בתכונה זו</string>
+    <string name="sign_out_confirmation">האם אתה בטוח שברצונך להתנתק?</string>
+    <string name="sign_out_success">ההתנתקות הצליחה</string>
+
+    <!-- Home Page Sections -->
+    <string name="section_top_rated">דירוג גבוה</string>
+    <string name="section_coming_soon">בקרוב</string>
+    <string name="section_ubisoft_spotlight">זרקור Ubisoft</string>
+    <string name="no_description_available">אין תיאור זמין.</string>
+    <string name="no_platform_available">אין פלטפורמה זמינה</string>
 </resources>

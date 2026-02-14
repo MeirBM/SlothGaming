@@ -35,7 +35,7 @@ class ParentAdapter(private val gameClick: (GameItem) -> Unit) :
         }
 
         fun bind(section: Section) {
-            binding.sectionTitle.text = section.title
+            binding.sectionTitle.text = binding.root.context.getString(section.titleRes)
             // Use the ChildAdapter's DiffUtil update method
             childAdapter.updateData(section.items)
         }
@@ -58,7 +58,7 @@ class ParentAdapter(private val gameClick: (GameItem) -> Unit) :
 class SectionDiffCallback : DiffUtil.ItemCallback<Section>() {
     override fun areItemsTheSame(oldItem: Section, newItem: Section): Boolean {
         // Sections are the same if they have the same title
-        return oldItem.title == newItem.title
+        return oldItem.titleRes == newItem.titleRes
     }
 
     override fun areContentsTheSame(oldSection: Section, newSection: Section): Boolean {
