@@ -86,4 +86,5 @@
     <string name="error_fill_all_fields">נא למלא את כל השדות</string>
     <string name="error_email_format">כתובת אימייל אינה תקינה</string>
     <string name="error_password_short">הסיסמה קצרה מדי</string>
+    <string name="error_wrong_credentials">אימייל או סיסמה שגויים</string>
 </resources>

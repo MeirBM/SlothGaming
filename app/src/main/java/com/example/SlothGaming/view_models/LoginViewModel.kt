@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.SlothGaming.data.models.User
 import com.example.SlothGaming.data.repository.AuthRepository
+import com.example.SlothGaming.utils.Error
 import com.example.SlothGaming.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +22,7 @@ class LoginViewModel @Inject constructor(private val authRepo: AuthRepository): 
 
     val currentUser = _currentUser.asStateFlow()
 
-    fun signInUser(email: String, password: String, emptyFieldsError: String) {
+    fun signInUser(email: String, password: String, emptyFieldsError: String, wrongCredentialsError: String) {
         val error = if (email.isEmpty() || password.isEmpty()) {
             emptyFieldsError
         } else null
@@ -31,8 +32,12 @@ class LoginViewModel @Inject constructor(private val authRepo: AuthRepository): 
         }
         viewModelScope.launch {
             _loginStatus.value = Resource.loading()
-            val loginResult =  authRepo.login(email, password)
-            _loginStatus.value = loginResult
+            val loginResult = authRepo.login(email, password)
+            if (loginResult.status is Error) {
+                _loginStatus.value = Resource.error(wrongCredentialsError)
+            } else {
+                _loginStatus.value = loginResult
+            }
         }
     }
 

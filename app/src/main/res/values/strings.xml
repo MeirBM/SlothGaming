@@ -85,4 +85,5 @@
     <string name="error_fill_all_fields">Please fill all the fields</string>
     <string name="error_email_format">Email does not match format</string>
     <string name="error_password_short">Password too short</string>
+    <string name="error_wrong_credentials">Wrong email or password</string>
 </resources>

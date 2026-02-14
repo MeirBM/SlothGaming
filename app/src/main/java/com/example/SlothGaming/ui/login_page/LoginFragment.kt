@@ -52,7 +52,8 @@ class LoginFragment: Fragment() {
         binding.signInButton.setOnClickListener { viewModel.signInUser(
             binding.emailSignIn.text.toString().trim(),
             binding.passwordSignIn.text.toString(),
-            getString(R.string.error_fill_all_fields))}
+            getString(R.string.error_fill_all_fields),
+            getString(R.string.error_wrong_credentials))}
 
 
         viewLifecycleOwner.lifecycleScope.launch {

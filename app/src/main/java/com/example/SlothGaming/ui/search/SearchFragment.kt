@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -14,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.SlothGaming.R
 import com.example.SlothGaming.databinding.SearchFragmentLayoutBinding
 import com.example.SlothGaming.utils.Error
 import com.example.SlothGaming.utils.Loading
@@ -42,6 +44,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.spinning_for_sloth)
 
         searchAdapter = SearchAdapter { selectedGame ->
             val action = SearchFragmentDirections
@@ -63,18 +66,27 @@ class SearchFragment : Fragment() {
                 viewModel.searchState.collectLatest { resource ->
                     when (resource.status) {
                         is Loading -> {
-                            binding.searchProgressBar.isVisible = true
+                            binding.searchProgressBar.apply {
+                                isVisible = true
+                                startAnimation(anim)
+                            }
                             binding.noResultsText.isVisible = false
                         }
                         is Success -> {
-                            binding.searchProgressBar.isVisible = false
+                            binding.searchProgressBar.apply {
+                                clearAnimation()
+                                isVisible = false
+                            }
                             val items = resource.status.data.orEmpty()
                             searchAdapter.submitList(items)
                             val hasQuery = binding.searchEditText.text?.isNotBlank() == true
                             binding.noResultsText.isVisible = items.isEmpty() && hasQuery
                         }
                         is Error -> {
-                            binding.searchProgressBar.isVisible = false
+                            binding.searchProgressBar.apply {
+                                clearAnimation()
+                                isVisible = false
+                            }
                             binding.noResultsText.isVisible = false
                             Toast.makeText(
                                 requireContext(),
