@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -44,6 +45,8 @@ class LoginFragment: Fragment() {
             findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
         }
         startLightingAnimation(binding.loginBackground)
+        val anim = AnimationUtils.loadAnimation(requireContext(),R.anim.spinning_for_sloth)
+
 
 
         binding.signInButton.setOnClickListener { viewModel.signInUser(
@@ -57,11 +60,16 @@ class LoginFragment: Fragment() {
                 viewModel.loginStatus.collectLatest {
                     when (it?.status) {
                         is Loading -> {
-                            binding.loginProgress.isVisible = true
+                            binding.loadingProgressLogin.apply{
+                                isVisible = true
+                                startAnimation(anim)}
                         }
 
                         is Success -> {
-
+                            binding.loadingProgressLogin.apply{
+                                clearAnimation()
+                                isVisible = false
+                            }
                                 Toast.makeText(
                                     requireContext(),
                                     getString(R.string.sign_in_successful),
@@ -78,7 +86,10 @@ class LoginFragment: Fragment() {
                                 it.status.message,
                                 Toast.LENGTH_SHORT
                             ).show()
-                            binding.loginProgress.isVisible = false
+                            binding.loadingProgressLogin.apply{
+                                clearAnimation()
+                                isVisible = false
+                            }
                         }else -> null
 
                     }
@@ -92,10 +103,17 @@ class LoginFragment: Fragment() {
                 viewModel.currentUser.collectLatest {
                     when (it?.status) {
                         is Loading -> {
-                            binding.loginProgress.isVisible = true
+                            binding.loadingProgressLogin.apply{
+                                isVisible = true
+                                startAnimation(anim)
+                            }
                         }
 
                         is Success -> {
+                            binding.loadingProgressLogin.apply{
+                                clearAnimation()
+                                isVisible = false
+                            }
                             Toast.makeText(
                                 requireContext(),
                                 getString(R.string.welcome),
@@ -109,7 +127,10 @@ class LoginFragment: Fragment() {
                                 it.status.message,
                                 Toast.LENGTH_SHORT
                             ).show()
-                            binding.loginProgress.isVisible = false
+                            binding.loadingProgressLogin.apply{
+                                clearAnimation()
+                                isVisible = false
+                            }
                         }else -> null
 
                     }

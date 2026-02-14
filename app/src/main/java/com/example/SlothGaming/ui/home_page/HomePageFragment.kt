@@ -1,11 +1,10 @@
 package com.example.SlothGaming.ui.home_page
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -24,7 +23,6 @@ import com.example.SlothGaming.utils.Loading
 import com.example.SlothGaming.utils.Success
 import com.example.SlothGaming.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.getValue
@@ -34,7 +32,7 @@ class HomePageFragment: Fragment() {
 
     private var binding: HomePageLayoutBinding by autoCleared()
 
-    private lateinit var parentAdapter: ParentAdapter
+    lateinit var parentAdapter: ParentAdapter
 
     private val viewModel: HomePageViewModel by viewModels()
 
@@ -51,7 +49,7 @@ class HomePageFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
-
+        val anim = AnimationUtils.loadAnimation(requireContext(),R.anim.spinning_for_sloth)
         binding.mainRecyclerView.apply {
             adapter = parentAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -61,21 +59,31 @@ class HomePageFragment: Fragment() {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.homePageState.collectLatest {
                     when (it.status) {
-                        is Loading -> binding.loadingProgressHp.isVisible = true
+                        is Loading -> binding.loadingProgressHp.apply{
+                        isVisible = true
+                        startAnimation(anim)}
                         is Success -> {
-                            binding.loadingProgressHp.isVisible = false
+                            binding.loadingProgressHp.apply{
+                                clearAnimation()
+                                isVisible = false
+                            }
                             it.status.data?.let { sections ->
                                 parentAdapter.submitList(sections)
                             }
                         }
 
                         is Error -> {
-                            binding.loadingProgressHp.isVisible = false
+                            binding.loadingProgressHp.apply{
+                                clearAnimation()
+                                isVisible = false
                             Toast.makeText(
                                 requireContext(),
                                 it.status.message, Toast.LENGTH_LONG
                             ).show()
+
+                            }
                         }
+
                     }
                 }
             }
