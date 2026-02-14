@@ -90,7 +90,6 @@ class HomePageFragment: Fragment() {
                         .actionHomePageFragmentToDetailReviewFragment(selectedGame)
                     findNavController().navigate(action)
                 }
-
         }
     }
 
