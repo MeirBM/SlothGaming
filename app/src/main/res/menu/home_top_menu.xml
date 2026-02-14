@@ -4,12 +4,12 @@
 
     <item
         android:id="@+id/my_reviews"
-        android:title="My Reviews"
+        android:title="@string/my_reviews"
         android:icon="@drawable/reviews_logo"
         app:showAsAction="always" />
     <item
         android:id="@+id/sign_out"
-        android:title="Sign Out"
+        android:title="@string/sign_out"
         android:icon="@drawable/signout"
         app:showAsAction="always"
         />
