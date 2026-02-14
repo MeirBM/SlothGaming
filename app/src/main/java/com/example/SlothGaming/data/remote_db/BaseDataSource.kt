@@ -11,11 +11,9 @@ abstract class BaseDataSource {
 
         try {
             val result  = call()
-            Log.d("API_DEBUG", "$result")
 
             if(result.isSuccessful) {
                 val body = result.body()
-                Log.d("API_DEBUG", "$body")
 
                 if(body != null) return  Resource.success(body)
             }

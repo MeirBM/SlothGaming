@@ -10,19 +10,17 @@ TODO: add hilt✅
 TODO:finish sign up✅
 TODO:check if signIn and signUp viewModels work✅
 TODO:Implement signIn,SignUp fragments✅
-TODO:Create profile fragment,nested recycler?❌✅
 TODO: change all validation into a class❌
-TODO:Add profile fragment and view model ❌
-TODO: finish login❌✅
-TODO:home fragments❌
-TODO: change collect to collectLatest in reviewFragment❌
-TODO: USE  IGDB API https://github.com/husnjak/IGDB-API-JVM, https://api-docs.igdb.com/#game-video❌
-TODO: ADD THE BOTTOM MENU TO ALL PAGES ❌
-TODO: Check if bottom menu in home works properly❌
+TODO: finish login✅
+TODO:home fragments✅
+TODO: change collect to collectLatest in reviewFragment✅
+TODO: USE  IGDB API https://github.com/husnjak/IGDB-API-JVM, https://api-docs.igdb.com/#game-video✅
+TODO: ADD THE BOTTOM MENU TO ALL PAGES ✅
+TODO: Check if bottom menu in home works properly✅
 TODO:Change style of my reviews,statistic's? something more gaming related?❌
-TODO: // REMEMBER TO DELETE SAMPLE DATA ON HOME PAGE ❌
-TODO:after being logged in app shouldnt come back to sign in fragment -> GOTO PROFILE
-TODO:after being logged add LOGOUT ICON ❌
+TODO: // REMEMBER TO DELETE SAMPLE DATA ON HOME PAGE ✅
+TODO:after being logged in app shouldnt come back to sign in fragment -> GOTO HOME✅
+TODO:after being logged add LOGOUT ICON ✅
 
 
 

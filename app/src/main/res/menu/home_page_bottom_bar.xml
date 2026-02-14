@@ -3,16 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/homePage_icon"
+        android:title="home"
         android:icon="@drawable/menu_home"
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/search_icon"
-        android:icon="@drawable/home_search"
-        app:showAsAction="never"
-        />
-    <item
         android:id="@+id/login_icon"
+        android:title="login"
         android:icon="@drawable/login_home"
         app:showAsAction="never"
 

@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.example.SlothGaming.data.models.GameItem
 import kotlinx.coroutines.flow.Flow
@@ -15,22 +16,17 @@ interface GameDao {
 
     @Query("SELECT * FROM games WHERE section = :sectionName")
     fun getItemsBySection(sectionName: String): Flow<List<GameItem>>
+
+    @Query("DELETE FROM games WHERE section = :sectionName")
+    suspend fun clearSection(sectionName: String)
+
+
+    @Transaction
+    suspend fun updateSection(sectionName: String, games: List<GameItem>) {
+        clearSection(sectionName)
+        insertAll(games)
+    }
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(items: List<GameItem>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addGames(game: List<GameItem>)
-
-    @Query("SELECT * FROM games WHERE id = :id")
-    fun getGame(id:Int) : Flow<GameItem>
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateGames(game: List<GameItem>)
-
-    @Query("SELECT * FROM games")
-    fun getGames() : Flow<List<GameItem>>
-
-
-
 
 }

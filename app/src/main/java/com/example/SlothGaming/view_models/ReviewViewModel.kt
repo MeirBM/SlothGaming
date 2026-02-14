@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ReviewViewModel @Inject constructor(
     private val repository : ReviewListRepository,
-    private val authRepository: AuthRepository) : ViewModel(){
+    ) : ViewModel(){
     val reviews : StateFlow<List<Review>> = repository.getReviews()
         .stateIn(
         viewModelScope,

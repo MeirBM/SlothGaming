@@ -28,6 +28,8 @@ fun View.setScaleClickAnimation(
             .start()
     }
 }
+
+// For login background make it light and dark repeating
 fun startLightingAnimation(imageView: ImageView) {
     val animator = ValueAnimator.ofInt(50, 150)
     animator.duration = 4000

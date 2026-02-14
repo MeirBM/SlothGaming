@@ -14,14 +14,14 @@ interface IgdbService {
 
     @Headers("Content-Type: text/plain")
     @POST("proxy/games")
-    suspend fun getLatestGames(@Body query: RequestBody): Response<List<GameResponse>>
+    suspend fun getTopRatedGamesService(@Body query: RequestBody): Response<List<GameResponse>>
 
     @Headers("Content-Type: text/plain")
     @POST("proxy/release_dates")
-    suspend fun getPopularGames(@Body query: RequestBody): Response<List<LatestResponse>>
+    suspend fun getComingSoonGamesService(@Body query: RequestBody): Response<List<LatestResponse>>
 
     @Headers("Content-Type: text/plain")
     @POST("proxy/involved_companies")
-    suspend fun getTopRatedGames(@Body query: RequestBody): Response<List<CompanyResponse>>
+    suspend fun getPublisherSpotlightGamesService(@Body query: RequestBody): Response<List<CompanyResponse>>
 
 }

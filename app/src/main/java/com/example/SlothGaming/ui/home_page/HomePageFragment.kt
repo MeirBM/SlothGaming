@@ -34,6 +34,8 @@ class HomePageFragment: Fragment() {
 
     private var binding: HomePageLayoutBinding by autoCleared()
 
+    lateinit var parentAdapter: ParentAdapter
+
     private val viewModel: HomePageViewModel by viewModels()
 
 
@@ -48,9 +50,10 @@ class HomePageFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setupAdapter()
 
         binding.mainRecyclerView.apply {
+            adapter = parentAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
         }
@@ -60,24 +63,10 @@ class HomePageFragment: Fragment() {
                     when (it.status) {
                         is Loading -> binding.loadingProgressHp.isVisible = true
                         is Success -> {
-                            it.status.data?.let { section ->
-                                val adapter = ParentAdapter(section){
-                                    selectedGame ->
-                                    Log.d("Selected game","$selectedGame")
-                                    AlertDialog.Builder(requireContext())
-                                        .setMessage("Do you want to watch detail?")
-                                        .setPositiveButton("Yes"){_,_ ->
-                                            Log.d("NAV_DEBUG", "Sending Game: ${selectedGame.title}, Rating: ${selectedGame.rating}")
-                                            val action = HomePageFragmentDirections
-                                                .actionHomePageFragmentToDetailReviewFragment(selectedGame)
-                                            findNavController().navigate(action)
-                                        }
-                                        .setNegativeButton("No",null).show()
-
-                                }
-                                binding.mainRecyclerView.adapter = adapter
-                            }
                             binding.loadingProgressHp.isVisible = false
+                            it.status.data?.let { sections ->
+                                parentAdapter.submitList(sections)
+                            }
                         }
 
                         is Error -> Toast.makeText(
@@ -94,4 +83,19 @@ class HomePageFragment: Fragment() {
         super.onDestroyView()
     }
 
+    private fun setupAdapter() {
+        // Initialize with an empty list initially
+        parentAdapter = ParentAdapter{ selectedGame ->
+            AlertDialog.Builder(requireContext())
+                .setMessage("Do you want to watch detail?")
+                .setPositiveButton("Yes") { _, _ ->
+                    val action = HomePageFragmentDirections
+                        .actionHomePageFragmentToDetailReviewFragment(selectedGame)
+                    findNavController().navigate(action)
+                }
+                .setNegativeButton("No", null).show()
+        }
+    }
 }
+
+

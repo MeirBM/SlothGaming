@@ -1,24 +1,45 @@
 package com.example.SlothGaming.ui.home_page.adapters
 
 import ChildAdapter
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.SlothGaming.data.models.GameItem
 import com.example.SlothGaming.data.models.Section
 import com.example.SlothGaming.databinding.ItemSectionRowBinding
 
-class ParentAdapter(private var sections: List<Section>,
-                    private var gameClick:(GameItem) -> Unit) :
-    RecyclerView.Adapter<ParentAdapter.ParentViewHolder>() {
+class ParentAdapter(private val gameClick: (GameItem) -> Unit) :
+    ListAdapter<Section, ParentAdapter.ParentViewHolder>(SectionDiffCallback()) {
 
+    // Shared ViewPool for all child RecyclerViews to improve performance
     private val viewPool = RecyclerView.RecycledViewPool().apply { setMaxRecycledViews(0, 20) }
 
     inner class ParentViewHolder(val binding: ItemSectionRowBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+
+        // Init the child adapter once per ViewHolder
+        private val childAdapter = ChildAdapter(emptyList(), gameClick)
+
+        init {
+            binding.childRecyclerView.apply {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false).apply {
+                    initialPrefetchItemCount = 4
+                }
+                setRecycledViewPool(viewPool)
+                setHasFixedSize(true)
+                adapter = childAdapter
+            }
+        }
+
+        fun bind(section: Section) {
+            binding.sectionTitle.text = section.title
+            // Use the ChildAdapter's DiffUtil update method
+            childAdapter.updateData(section.items)
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParentViewHolder {
         val binding = ItemSectionRowBinding.inflate(
@@ -30,57 +51,18 @@ class ParentAdapter(private var sections: List<Section>,
     }
 
     override fun onBindViewHolder(holder: ParentViewHolder, position: Int) {
-        val section = sections[position]
-        holder.binding.sectionTitle.text = section.title
-
-        holder.binding.childRecyclerView.apply {
-            // Config LayoutManager with prefetch
-            if (layoutManager == null) {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false).apply {
-                    initialPrefetchItemCount = 4
-                }
-            }
-
-            // Connection of the common ViewPool
-            setRecycledViewPool(viewPool)
-            setHasFixedSize(true)
-            setItemViewCacheSize(10)
-
-            if (adapter == null) {
-                Log.d("crash","from parent")
-                adapter = ChildAdapter(section.items, gameClick)
-            } else {
-                // Smart update of the child with DiffUtil
-                (adapter as ChildAdapter).updateData(section.items)
-            }
-        }
-    }
-
-    override fun getItemCount() = sections.size
-    fun updateList(newSections: List<Section>) {
-        val diffCallback = ParentDiffCallback(sections, newSections)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-
-        sections = newSections
-        // Update only where there's a change
-        diffResult.dispatchUpdatesTo(this)
+        holder.bind(getItem(position))
     }
 }
 
-class ParentDiffCallback(
-    private val oldList: List<Section>,
-    private val newList: List<Section>
-) : DiffUtil.Callback() {
-    override fun getOldListSize() = oldList.size
-    override fun getNewListSize() = newList.size
-
-    // Check if item the same
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].title == newList[newItemPosition].title
+class SectionDiffCallback : DiffUtil.ItemCallback<Section>() {
+    override fun areItemsTheSame(oldItem: Section, newItem: Section): Boolean {
+        // Sections are the same if they have the same title
+        return oldItem.title == newItem.title
     }
 
-    // Check if content the same
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].items == newList[newItemPosition].items
+    override fun areContentsTheSame(oldSection: Section, newSection: Section): Boolean {
+        // Contents are the same if the list of games matches
+        return oldSection.items == newSection.items
     }
 }

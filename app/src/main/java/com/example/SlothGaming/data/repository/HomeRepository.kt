@@ -22,7 +22,7 @@ class HomeRepository @Inject constructor(
             val items = games.map {
                 it.toGameItem(section = "top_rated", platformName = it.platforms?.random()?.name?:"")
             }
-            dao.insertAll(items)
+            dao.updateSection("top_rated",items)
         }
     )
 
@@ -43,7 +43,7 @@ class HomeRepository @Inject constructor(
                 )
             }
             Log.d("items","$items")
-            dao.insertAll(items)
+            dao.updateSection("coming_soon", items)
         }
     )
 
@@ -60,7 +60,7 @@ class HomeRepository @Inject constructor(
                     platformName = response.game.platforms?.random()?.name?:""
                 )
             }
-            dao.insertAll(items)
+            dao.updateSection("ubisoft_spotlight",items)
         }
     )
 
