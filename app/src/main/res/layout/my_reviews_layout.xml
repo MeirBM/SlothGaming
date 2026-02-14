@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/customBlack"
-    tools:context=".ui.reviews_handling.MyReviewsFragment"
-    android:alpha="0.85">
+    android:background="@drawable/stars_background2"
+    tools:context=".ui.reviews_handling.MyReviewsFragment">
 
     <TextView
         android:id="@+id/wish_list"

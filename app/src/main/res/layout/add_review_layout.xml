@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/customBlack"
-    android:alpha="0.85"
+    android:background="@drawable/stars_background2"
     tools:context=".ui.reviews_handling.AddReviewFragment">
 
     <ScrollView
@@ -25,7 +24,7 @@
                 android:id="@+id/form_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/midGray"
+                app:cardBackgroundColor="#CC1E1E2E"
                 app:cardCornerRadius="16dp"
                 app:cardUseCompatPadding="true">
 
@@ -41,7 +40,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/add_a_review_title"
-                        android:textColor="@color/customBlack"
+                        android:textColor="@color/pearlWhite"
                         android:textSize="22sp"
                         android:textAlignment="viewStart"
                         android:textStyle="bold" />
@@ -51,9 +50,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:alpha="0.8"
+                        android:alpha="0.7"
                         android:text="@string/tell_others_what_you_thought"
-                        android:textColor="@color/customBlack"
+                        android:textColor="@color/pearlWhite"
                         android:textSize="14sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -62,11 +61,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:textColorHint="@color/customBlack"
+                        android:textColorHint="@color/pearlWhite"
                         android:hint="@string/select_console"
-                        app:boxBackgroundColor="@color/midGray"
-                        app:boxStrokeColor="@color/customBlack"
-                        app:hintTextColor="@color/customBlack">
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="@color/pearlWhite"
+                        app:hintTextColor="@color/pearlWhite">
 
                         <com.google.android.material.textfield.MaterialAutoCompleteTextView
                             android:id="@+id/console_dropdown"
@@ -76,8 +75,8 @@
                             android:focusable="false"
                             android:focusableInTouchMode="false"
                             android:inputType="none"
-                            android:textColor="@color/customBlack"
-                            android:textColorHint="@color/customBlack" />
+                            android:textColor="@color/pearlWhite"
+                            android:textColorHint="@color/pearlWhite" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -86,20 +85,20 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:hint="@string/game_title"
-                        app:boxBackgroundColor="@color/midGray"
-                        app:boxStrokeColor="@color/customBlack"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="@color/pearlWhite"
                         app:counterEnabled="true"
                         app:counterMaxLength="30"
-                        app:hintTextColor="@color/customBlack"
-                        app:counterTextColor="@color/customBlack">
+                        app:hintTextColor="@color/pearlWhite"
+                        app:counterTextColor="@color/pearlWhite">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/entered_game_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLength="30"
                             android:maxLines="1"
-                            android:textColor="@color/customBlack"
-                            android:textColorHint="@color/customBlack" />
+                            android:textColor="@color/pearlWhite"
+                            android:textColorHint="@color/pearlWhite" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -107,12 +106,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        app:boxBackgroundColor="@color/midGray"
-                        app:boxStrokeColor="@color/customBlack"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:boxStrokeColor="@color/pearlWhite"
                         app:counterEnabled="true"
                         app:counterMaxLength="250"
-                        app:hintTextColor="@color/customBlack"
-                        app:counterTextColor="@color/customBlack">
+                        app:hintTextColor="@color/pearlWhite"
+                        app:counterTextColor="@color/pearlWhite">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/entered_review"
                             android:layout_width="match_parent"
@@ -124,8 +123,8 @@
                             android:scrollbars="vertical"
                             android:overScrollMode="always"
                             android:inputType="textMultiLine"
-                            android:textColor="@color/customBlack"
-                            android:textColorHint="@color/customBlack" />
+                            android:textColor="@color/pearlWhite"
+                            android:textColorHint="@color/pearlWhite" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageView
