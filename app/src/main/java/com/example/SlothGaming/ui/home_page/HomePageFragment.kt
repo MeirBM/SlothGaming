@@ -86,16 +86,11 @@ class HomePageFragment: Fragment() {
     private fun setupAdapter() {
         // Initialize with an empty list initially
         parentAdapter = ParentAdapter{ selectedGame ->
-            AlertDialog.Builder(requireContext())
-                .setMessage("Do you want to watch detail?")
-                .setPositiveButton("Yes") { _, _ ->
                     val action = HomePageFragmentDirections
                         .actionHomePageFragmentToDetailReviewFragment(selectedGame)
                     findNavController().navigate(action)
                 }
-                .setNegativeButton("No", null).show()
         }
     }
-}
 
 

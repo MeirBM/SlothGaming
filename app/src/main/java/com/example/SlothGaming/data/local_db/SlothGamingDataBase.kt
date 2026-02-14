@@ -21,7 +21,6 @@ abstract class SlothGamingDataBase : RoomDatabase() {
         fun getDatabase(context: Context) = instance ?: synchronized(this) {
             Room.databaseBuilder(context.applicationContext, SlothGamingDataBase::class.java,"reviews_db")
                 .fallbackToDestructiveMigration(true).build()
-            // TODO  switch fallbackToDestructiveMigration with AddMigration in Future
         }
     }
 }
