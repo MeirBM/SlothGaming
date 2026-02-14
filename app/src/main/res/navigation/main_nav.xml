@@ -106,6 +106,8 @@
             app:destination="@id/signUpFragment" />
         <action
             android:id="@+id/action_loginFragment_to_homePageFragment"
-            app:destination="@id/homePageFragment" />
+            app:destination="@id/homePageFragment"
+            app:popUpTo="@id/homePageFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
