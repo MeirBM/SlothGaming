@@ -17,6 +17,7 @@ import com.example.SlothGaming.R
 import com.example.SlothGaming.databinding.ActivityMainBinding
 import com.example.SlothGaming.view_models.HomePageViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.core.content.edit
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -30,8 +31,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //file for saving preference status.
+        val pref = getSharedPreferences("SlothPref",MODE_PRIVATE)
+        val seenWelcome = pref.getBoolean("seenWelcome",false)
 
-
+        //Welcome message for first time
+        if(!viewModel.isUserLoggedIn() && !seenWelcome){
+            AlertDialog.Builder(this)
+                .setTitle("Welcome To Sloth Gaming"+"\n")
+                .setMessage("Hello Sloth Gamer!"+"\n"+"Here, you can get all the information about the latest games, top rated games and more."+"\n"+"Additionaly you can write your own reviews for any game and any platform with your own rating!"+"\n"+"Have fun and stay Sloth.")
+                .setPositiveButton(getString(R.string.ok)) { _, _ ->
+                    pref.edit { putBoolean("seenWelcome", true) }} // Change preference status to True.
+                .show()
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

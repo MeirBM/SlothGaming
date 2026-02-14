@@ -64,17 +64,15 @@ class DetailReviewFragment : Fragment() {
             }
         }
 
-        val game = args.GameDetail // for getting current GameItem
-        val ratingOutOfFive = (game.rating ?: 0.0) / 20.0 // for getting rating between 0-5
-
-        Log.d("NAV_DEBUG", "Sending Game: ${game.title}, Rating: ${game.rating}")
-        binding.reviewTitle.text = game.title // push title
-        binding.reviewDesc.text = game.summary// push description
-        binding.reviewConsole.text=game.platform// push source
+        val game = args.GameDetail// for getting current GameItem
+        val ratingOutOfFive = (game?.rating ?: 0.0) / 20.0 // for getting rating between 0-5
+        binding.reviewTitle.text = game?.title // push title
+        binding.reviewDesc.text = game?.summary// push description
+        binding.reviewConsole.text=game?.platform// push source
         binding.ratingScore.text= String.format("%.1f",ratingOutOfFive) // cut to .x number
 
         //Load image with glide
-        Glide.with(this).load(game.imageUrl).into(binding.reviewedGameImage)
+        Glide.with(this).load(game?.imageUrl).into(binding.reviewedGameImage)
         val color = ColorProvider.pickColor(ratingOutOfFive, requireContext())
         star?.setTint(color)
         binding.ratingStar.setImageDrawable(star)

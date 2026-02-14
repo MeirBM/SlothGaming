@@ -1,6 +1,7 @@
 package com.example.SlothGaming.ui.reviews_handling
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -57,6 +58,7 @@ class MyReviewsFragment : Fragment() {
             override fun onReviewClicked(index: Int) {
                 val review = reviewAdapter.reviewAt(index)
                 viewModel.setReview(review)
+                Log.d("myreview","Here you get")
                 findNavController().navigate(R.id.action_myReviewsFragment_to_detailReviewFragment)
             }
 
