@@ -72,16 +72,18 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.homePageFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
+                    binding.bottomNavigation.menu.findItem(R.id.search_games)?.isEnabled = true
                     showTopMenu(navController)
                     requestNotificationPermission()
                 }
                 R.id.myReviewsFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
+                    binding.bottomNavigation.menu.findItem(R.id.search_games)?.isEnabled = true
                     removeTopMenu()
                 }
                 R.id.loginFragment -> {
-                    binding.bottomNavigation.visibility =
-                        View.VISIBLE
+                    binding.bottomNavigation.visibility = View.VISIBLE
+                    binding.bottomNavigation.menu.findItem(R.id.search_games)?.isEnabled = false
                 }
                 else -> {
                     // if not said -> remove
