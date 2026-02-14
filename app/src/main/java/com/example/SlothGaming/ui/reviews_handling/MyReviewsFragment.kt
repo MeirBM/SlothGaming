@@ -183,7 +183,8 @@ class MyReviewsFragment : Fragment() {
                         }
                     }
                 },
-                viewLifecycleOwner
+                viewLifecycleOwner,
+                Lifecycle.State.RESUMED
             )
 
     }
