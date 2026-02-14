@@ -76,6 +76,7 @@ class HomeRepository @Inject constructor(
         return GameItem(
             id = this.id.toInt(),
             title = this.name,
+            rating = this.rating,
             imageUrl = highResUrl,
             summary = this.summary,
             platform = platformName,

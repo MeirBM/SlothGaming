@@ -1,6 +1,7 @@
 package com.example.SlothGaming.ui.reviews_extras
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.R
 import com.example.SlothGaming.view_models.ReviewViewModel
@@ -23,6 +25,9 @@ class DetailReviewFragment : Fragment() {
     private val star by lazy{ ContextCompat.
     getDrawable(requireContext(), R.drawable.ic_star)?.mutate()}
     var _binding : DetailReviewBinding?  = null
+
+    // pass arguments by navArgs
+    private val args : DetailReviewFragmentArgs by navArgs()
 
 
     val viewModel : ReviewViewModel by activityViewModels()
@@ -58,6 +63,18 @@ class DetailReviewFragment : Fragment() {
                 }}
             }
         }
+
+        val game = args.GameDetail // for getting current GameItem
+        val ratingOutOfFive = (game.rating ?: 0.0) / 20.0 // for getting rating between 0-5
+
+        Log.d("NAV_DEBUG", "Sending Game: ${game.title}, Rating: ${game.rating}")
+        binding.reviewTitle.text = game.title // push title
+        binding.reviewDesc.text = game.summary// push description
+        binding.ratingScore.text= String.format("%.1f",ratingOutOfFive) // cut to .x number
+
+        //Load image with glide
+        Glide.with(this).load(game.imageUrl).into(binding.reviewedGameImage)
+
     }
 
     override fun onDestroyView() {

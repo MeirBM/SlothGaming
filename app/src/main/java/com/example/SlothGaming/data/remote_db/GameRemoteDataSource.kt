@@ -12,8 +12,7 @@ class GameRemoteDataSource @Inject constructor (private val gameService: IgdbSer
         return RequestBody.create(mediaType, this)
     }
         suspend fun getTopRatedGames() = getResult {
-            Log.d("API_DEBUG", "Calling Top Rated Games API...")
-            val query = "fields name,platforms.name,cover.url,summary; sort total_rating desc; limit 10;"
+            val query = "fields name,rating,platforms.name,cover.url,summary;where name != null; sort rating desc; limit 10;"
             gameService.getLatestGames(query.toRawBody())}
 
         suspend fun getComingSoonGames() = getResult {
@@ -22,7 +21,7 @@ class GameRemoteDataSource @Inject constructor (private val gameService: IgdbSer
 
 
         suspend fun getPubSpotlightGames() = getResult {
-            val query = "fields game.name, game.platforms.name, game.cover.url, game.summary;where game.cover!=null; limit 10;"
+            val query = "fields game.name, game.platforms.name, game.cover.url, game.summary;where company.name ~ *\"Ubisoft\"* & game.cover!=null; limit 10;"
             gameService.getTopRatedGames(query.toRawBody()) }
     }
 

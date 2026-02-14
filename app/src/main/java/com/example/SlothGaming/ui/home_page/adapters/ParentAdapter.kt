@@ -1,15 +1,18 @@
 package com.example.SlothGaming.ui.home_page.adapters
 
 import ChildAdapter
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.SlothGaming.data.models.GameItem
 import com.example.SlothGaming.data.models.Section
 import com.example.SlothGaming.databinding.ItemSectionRowBinding
 
-class ParentAdapter(private var sections: List<Section>) :
+class ParentAdapter(private var sections: List<Section>,
+                    private var gameClick:(GameItem) -> Unit) :
     RecyclerView.Adapter<ParentAdapter.ParentViewHolder>() {
 
     private val viewPool = RecyclerView.RecycledViewPool().apply { setMaxRecycledViews(0, 20) }
@@ -31,22 +34,23 @@ class ParentAdapter(private var sections: List<Section>) :
         holder.binding.sectionTitle.text = section.title
 
         holder.binding.childRecyclerView.apply {
-            // הגדרת LayoutManager עם Prefetch
+            // Config LayoutManager with prefetch
             if (layoutManager == null) {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false).apply {
                     initialPrefetchItemCount = 4
                 }
             }
 
-            // חיבור ה-ViewPool המשותף
+            // Connection of the common ViewPool
             setRecycledViewPool(viewPool)
             setHasFixedSize(true)
             setItemViewCacheSize(10)
 
             if (adapter == null) {
-                adapter = ChildAdapter(section.items)
+                Log.d("crash","from parent")
+                adapter = ChildAdapter(section.items, gameClick)
             } else {
-                // עדכון חכם באמצעות ה-DiffUtil של ה-Child
+                // Smart update of the child with DiffUtil
                 (adapter as ChildAdapter).updateData(section.items)
             }
         }
@@ -58,7 +62,7 @@ class ParentAdapter(private var sections: List<Section>) :
         val diffResult = DiffUtil.calculateDiff(diffCallback)
 
         sections = newSections
-        // זה יעדכן רק את השורות שבהן המשחקים באמת השתנו
+        // Update only where there's a change
         diffResult.dispatchUpdatesTo(this)
     }
 }
@@ -70,12 +74,12 @@ class ParentDiffCallback(
     override fun getOldListSize() = oldList.size
     override fun getNewListSize() = newList.size
 
-    // האם זה אותו Section (לפי הכותרת למשל)
+    // Check if item the same
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldList[oldItemPosition].title == newList[newItemPosition].title
     }
 
-    // האם תוכן הרשימה בתוך ה-Section השתנה
+    // Check if content the same
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldList[oldItemPosition].items == newList[newItemPosition].items
     }

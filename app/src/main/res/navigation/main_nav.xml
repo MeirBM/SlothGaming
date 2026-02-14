@@ -56,7 +56,11 @@
         android:id="@+id/detailReviewFragment"
         android:name="com.example.SlothGaming.ui.reviews_extras.DetailReviewFragment"
         android:label="DetailReviewFragment"
-        tools:layout="@layout/detail_review"/>
+        tools:layout="@layout/detail_review">
+        <argument
+            android:name="GameDetail"
+            app:argType="com.example.SlothGaming.data.models.GameItem" />
+    </fragment>
     <fragment
         android:id="@+id/statisticsReviewsFragment"
         android:name="com.example.SlothGaming.ui.reviews_extras.StatisticsReviewsFragment"
@@ -73,6 +77,9 @@
         <action
             android:id="@+id/action_homePageFragment_to_myReviewsFragment"
             app:destination="@id/myReviewsFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_detailReviewFragment"
+            app:destination="@id/detailReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"

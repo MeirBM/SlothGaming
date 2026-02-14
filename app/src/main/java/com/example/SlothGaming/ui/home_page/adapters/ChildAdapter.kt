@@ -1,3 +1,4 @@
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,7 +8,8 @@ import com.example.SlothGaming.data.models.GameItem
 import com.example.SlothGaming.data.models.Section
 import com.example.SlothGaming.databinding.ItemGameCardBinding
 
-class ChildAdapter(private var items: List<GameItem>) :
+class ChildAdapter(private var items: List<GameItem>,
+                   private var gameClick:(GameItem) -> Unit) :
     RecyclerView.Adapter<ChildAdapter.ChildViewHolder>() {
 
     inner class ChildViewHolder(val binding: ItemGameCardBinding) :
@@ -33,7 +35,12 @@ class ChildAdapter(private var items: List<GameItem>) :
     }
 
     override fun onBindViewHolder(holder: ChildViewHolder, position: Int) {
-             holder.bind(items[position])
+        holder.bind(items[position])
+        val item = items[position]
+        Log.d("crash","from child")
+        holder.binding.gamePoster.setOnClickListener {
+            gameClick(item)
+        }
     }
 
     override fun getItemCount() = items.size
@@ -41,7 +48,7 @@ class ChildAdapter(private var items: List<GameItem>) :
     fun updateData(newGames: List<GameItem>) {
         val diffCallBack = ChildDiffCallback(items,newGames)
         val diffResult = DiffUtil.calculateDiff(diffCallBack)
-         // בתוך רשימה אופקית קטנה זה בסדר, אבל תמיד עדיף DiffUtil בעתיד
+         // // For small list its ok, but better use diffUtil
         items = newGames
         diffResult.dispatchUpdatesTo(this)
     }
@@ -55,12 +62,12 @@ class ChildDiffCallback(
     override fun getOldListSize() = oldList.size
     override fun getNewListSize() = newList.size
 
-    // האם זה אותו Section (לפי הכותרת למשל)
+    //check if it's the same section
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldList[oldItemPosition].id == newList[newItemPosition].id
     }
 
-    // האם תוכן הרשימה בתוך ה-Section השתנה
+    // check if the data inside the section has been changed
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldList[oldItemPosition]== newList[newItemPosition]
     }

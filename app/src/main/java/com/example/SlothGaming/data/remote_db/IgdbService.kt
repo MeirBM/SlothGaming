@@ -18,7 +18,7 @@ interface IgdbService {
 
     @Headers("Content-Type: text/plain")
     @POST("proxy/release_dates")
-        suspend fun getPopularGames(@Body query: RequestBody): Response<List<LatestResponse>>
+    suspend fun getPopularGames(@Body query: RequestBody): Response<List<LatestResponse>>
 
     @Headers("Content-Type: text/plain")
     @POST("proxy/involved_companies")
