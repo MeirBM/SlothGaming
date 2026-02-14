@@ -16,7 +16,7 @@ class GameRemoteDataSource @Inject constructor (private val gameService: IgdbSer
             gameService.getTopRatedGamesService(query.toRawBody())}
 
         suspend fun getComingSoonGames() = getResult {
-            val query = "fields game.name,game.platforms.name,game.cover.url,game.summary,game.rating; where game.cover != null; sort date asc; limit 10;"
+            val query = "fields game.name,game.platforms.name,game.cover.url,game.summary,game.rating; where game.cover != null & & date > 1767225600; sort date asc; limit 10;"
             gameService.getComingSoonGamesService(query.toRawBody()) }
 
 

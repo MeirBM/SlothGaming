@@ -1,7 +1,6 @@
 package com.example.SlothGaming.ui.reviews_extras
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,78 +13,86 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.R
-import com.example.SlothGaming.view_models.ReviewViewModel
+import com.example.SlothGaming.data.models.GameItem
+import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.databinding.DetailReviewBinding
 import com.example.SlothGaming.utils.ColorProvider
+import com.example.SlothGaming.view_models.ReviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
 @AndroidEntryPoint
 class DetailReviewFragment : Fragment() {
-    private val star by lazy{ ContextCompat.
-    getDrawable(requireContext(), R.drawable.ic_star)?.mutate()}
-    var _binding : DetailReviewBinding?  = null
 
-    // pass arguments by navArgs
-    private val args : DetailReviewFragmentArgs by navArgs()
+    private var _binding: DetailReviewBinding? = null
+    private val binding get() = _binding!!
 
+    private val star by lazy {
+        ContextCompat.getDrawable(requireContext(), R.drawable.ic_star)?.mutate()
+    }
 
-    val viewModel : ReviewViewModel by activityViewModels()
-
-    val binding get() = _binding!!
+    private val args: DetailReviewFragmentArgs by navArgs()
+    private val viewModel: ReviewViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = DetailReviewBinding.inflate(inflater,container,false)
-
+    ): View {
+        _binding = DetailReviewBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //If GameItem(GameDetail) Casting to Review
+        args.GameDetail?.let { game ->
+            viewModel.setReview(game.toReview())
+        }
+
+        // Listening to ViewModel
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.chosenReview.collect { review ->   review?.let {
-                    binding.reviewTitle.text = it.title
-                    binding.reviewDesc.text = it.gameReview
-                    binding.reviewConsole.text = getString(R.string.platform, it.console)
-                    binding.ratingScore.text = it.rating.toString()
-                    Glide.with(requireContext()).load(it.photo)
-                        .into(binding.reviewedGameImage)
-                    // match star color with rating
-                    val color = ColorProvider.pickColor(it.rating.toDouble(), requireContext())
-                    star?.setTint(color)
-                    binding.ratingStar.setImageDrawable(star)
-                }}
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.chosenReview.collect { review ->
+                    review?.let { updateUI(it) }
+                }
             }
         }
+    }
+    private fun updateUI(review: Review) {
+        binding.apply {
+            reviewTitle.text = review.title
+            reviewDesc.text = review.gameReview
+            reviewConsole.text = getString(R.string.platform, review.console)
+            val ratingValue = review.rating.toDouble()
+            ratingScore.text = String.format("%.1f", ratingValue)
 
-        val game = args.GameDetail // for getting current GameItem
-        if (game != null) {
-            val ratingOutOfFive = (game.rating ?: 0.0) / 20.0 // for getting rating between 0-5
+            Glide.with(requireContext())
+                .load(review.photo)
+                .into(reviewedGameImage)
 
-            Log.d("NAV_DEBUG", "Sending Game: ${game.title}, Rating: ${game.rating}")
-            binding.reviewTitle.text = game.title // push title
-            binding.reviewDesc.text = game.summary// push description
-            binding.reviewConsole.text = game.platform// push source
-            binding.ratingScore.text = String.format("%.1f", ratingOutOfFive) // cut to .x number
-
-            //Load image with glide
-            Glide.with(this).load(game.imageUrl).into(binding.reviewedGameImage)
-            val color = ColorProvider.pickColor(ratingOutOfFive, requireContext())
+            //Color change by rating
+            val color = ColorProvider.pickColor(ratingValue, requireContext())
             star?.setTint(color)
-            binding.ratingStar.setImageDrawable(star)
+            ratingStar.setImageDrawable(star)
         }
+    }
 
+    //To Review
+    private fun GameItem.toReview(): Review {
+        val ratingOutOfFive = (this.rating ?: 0.0) / 20.0
+        return Review(
+            title = this.title ?: "",
+            gameReview = this.summary ?: "No description available.",
+            console = this.platform ?: "No Platform available",
+            rating = ratingOutOfFive.toFloat(),
+            photo = this.imageUrl
+        )
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.setReview(null)
-        _binding=null
+        _binding = null
     }
 }
