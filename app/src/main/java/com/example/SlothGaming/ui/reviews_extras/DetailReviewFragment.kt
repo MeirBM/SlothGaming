@@ -59,6 +59,8 @@ class DetailReviewFragment : Fragment() {
             }
         }
     }
+
+    //Update UI
     private fun updateUI(review: Review) {
         binding.apply {
             reviewTitle.text = review.title
