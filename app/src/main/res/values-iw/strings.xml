@@ -65,4 +65,11 @@
     <string name="must_log_in">עליך להתחבר כדי להשתמש בתכונה זו</string>
     <string name="sign_out_confirmation">האם אתה בטוח שברצונך להתנתק?</string>
     <string name="sign_out_success">ההתנתקות הצליחה</string>
+
+    <!-- Home Page Sections -->
+    <string name="section_top_rated">דירוג גבוה</string>
+    <string name="section_coming_soon">בקרוב</string>
+    <string name="section_ubisoft_spotlight">זרקור Ubisoft</string>
+    <string name="no_description_available">אין תיאור זמין.</string>
+    <string name="no_platform_available">אין פלטפורמה זמינה</string>
 </resources>

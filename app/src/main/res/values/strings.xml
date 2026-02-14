@@ -64,4 +64,11 @@
     <string name="must_log_in">You must log in to use this feature</string>
     <string name="sign_out_confirmation">Are you sure you want to sign out?</string>
     <string name="sign_out_success">Sign Out Successfully</string>
+
+    <!-- Home Page Sections -->
+    <string name="section_top_rated">Top Rated</string>
+    <string name="section_coming_soon">Coming Soon</string>
+    <string name="section_ubisoft_spotlight">Ubisoft Spotlight</string>
+    <string name="no_description_available">No description available.</string>
+    <string name="no_platform_available">No Platform available</string>
 </resources>
