@@ -3,7 +3,7 @@ package com.example.SlothGaming.di
 import android.content.Context
 import com.example.SlothGaming.data.local_db.GameDao
 import com.example.SlothGaming.data.local_db.ReviewListDao
-import com.example.SlothGaming.data.local_db.ReviewListDataBase
+import com.example.SlothGaming.data.local_db.SlothGamingDataBase
 import com.example.SlothGaming.data.remote_db.IgdbService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,7 +16,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Singleton
 
 
@@ -45,19 +44,19 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): ReviewListDataBase {
-        //getDatabase function from ReviewListDataBase impl
-        return ReviewListDataBase.getDatabase(context)
+    fun provideDatabase(@ApplicationContext context: Context): SlothGamingDataBase {
+        //getDatabase function from SlothGamingDataBase impl
+        return SlothGamingDataBase.getDatabase(context)
     }
 
     @Provides
-    fun provideReviewDao(database: ReviewListDataBase): ReviewListDao {
+    fun provideReviewDao(database: SlothGamingDataBase): ReviewListDao {
         return database.reviewDao()
     }
 
     // Firebase
     @Provides
-    fun provideGameDao(database: ReviewListDataBase) : GameDao{
+    fun provideGameDao(database: SlothGamingDataBase) : GameDao{
         return database.gameDao()
     }
 
