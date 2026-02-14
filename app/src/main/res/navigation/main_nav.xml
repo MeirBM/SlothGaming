@@ -79,7 +79,11 @@
             app:destination="@id/myReviewsFragment" />
         <action
             android:id="@+id/action_homePageFragment_to_detailReviewFragment"
-            app:destination="@id/detailReviewFragment" />
+            app:destination="@id/detailReviewFragment"
+            app:enterAnim="@anim/from_up"
+            app:exitAnim="@anim/to_down"
+            app:popEnterAnim="@anim/from_down"
+            app:popExitAnim="@anim/to_up" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
