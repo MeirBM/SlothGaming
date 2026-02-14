@@ -1,6 +1,8 @@
 package com.example.SlothGaming.data.repository
 
+import android.content.Context
 import android.util.Log
+import androidx.core.content.edit
 import com.example.SlothGaming.data.local_db.GameDao
 import com.example.SlothGaming.data.models.GameItem
 import com.example.SlothGaming.data.models.GameResponse
@@ -8,13 +10,32 @@ import com.example.SlothGaming.data.remote_db.GameRemoteDataSource
 import com.example.SlothGaming.utils.Resource
 import com.example.SlothGaming.utils.Success
 import com.example.SlothGaming.utils.performFetchingAndSaving
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 
 class HomeRepository @Inject constructor(
     private val remoteDataSource: GameRemoteDataSource,
-    private val dao: GameDao
+    private val dao: GameDao,
+    @ApplicationContext private val context: Context
 ) {
+
+    companion object {
+        private const val PREF_NAME = "SlothPref"
+        private const val KEY_LAST_FETCH = "lastHomeFetch"
+        private const val FETCH_INTERVAL_MS = 60 * 60 * 1000L // 1 hour
+    }
+
+    private fun shouldFetchFromRemote(): Boolean {
+        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val lastFetch = pref.getLong(KEY_LAST_FETCH, 0)
+        return System.currentTimeMillis() - lastFetch > FETCH_INTERVAL_MS
+    }
+
+    private fun updateLastFetchTime() {
+        context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            .edit { putLong(KEY_LAST_FETCH, System.currentTimeMillis()) }
+    }
 
     // 1. Top Rated Games
     fun getTopRatedGames() = performFetchingAndSaving(
@@ -25,7 +46,9 @@ class HomeRepository @Inject constructor(
                 it.toGameItem(section = "top_rated", platformName = it.platforms?.first()?.name?:"")
             }
             dao.updateSection("top_rated",items)
-        }
+            updateLastFetchTime()
+        },
+        shouldFetch = shouldFetchFromRemote()
     )
 
     // 2. Coming Soon (Unwrapping the Release Date)
@@ -33,20 +56,17 @@ class HomeRepository @Inject constructor(
         localDbFetch = { dao.getItemsBySection("coming_soon") },
         remoteDbFetch = { remoteDataSource.getComingSoonGames() },
         localDbSave = { responses ->
-            // 1. mapNotNull filters out any nulls we return from the block
             val items = responses.mapNotNull { response ->
                 val game = response.game
-
-                // 2. Only proceed if we actually have a game object
                 game?.toGameItem(
                     section = "coming_soon",
-                    // Use the date if available, otherwise a fallback string
                     platformName = response.game.platforms?.first()?.name?:""
                 )
             }
             Log.d("items","$items")
             dao.updateSection("coming_soon", items)
-        }
+        },
+        shouldFetch = shouldFetchFromRemote()
     )
 
     // 3. Publisher Spotlight (Unwrapping the Company Link)
@@ -54,16 +74,15 @@ class HomeRepository @Inject constructor(
         localDbFetch = { dao.getItemsBySection("ubisoft_spotlight") },
         remoteDbFetch = { remoteDataSource.getPubSpotlightGames() },
         localDbSave = { responses ->
-            // FIX: Use mapNotNull to filter out any nulls produced by the block
             val items = responses.mapNotNull { response ->
-                // Safely handle if 'game' is null
                 response.game?.toGameItem(
                     section = "ubisoft_spotlight",
                     platformName = response.game.platforms?.first()?.name?:""
                 )
             }
             dao.updateSection("ubisoft_spotlight",items)
-        }
+        },
+        shouldFetch = shouldFetchFromRemote()
     )
 
     // Search games — API only, no local caching

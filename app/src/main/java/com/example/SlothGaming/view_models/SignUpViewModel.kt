@@ -1,10 +1,10 @@
 package com.example.SlothGaming.view_models
 
-import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.SlothGaming.data.models.User
 import com.example.SlothGaming.data.repository.AuthRepository
+import com.example.SlothGaming.utils.InputValidator
 import com.example.SlothGaming.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,16 +21,10 @@ class SignUpViewModel @Inject constructor(private val authRepo: AuthRepository) 
         firstName: String, lastName: String, email: String, phoneNumber: String, password: String,
         emptyFieldsError: String, emailFormatError: String, passwordShortError: String
     ) {
-        val error = when {
-            firstName.isEmpty() || lastName.isEmpty() || email.isEmpty()
-                    || phoneNumber.isEmpty() || password.isEmpty() -> emptyFieldsError
-
-            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> emailFormatError
-            password.length < 8 -> passwordShortError
-
-            else -> null
-        }
-        error?.let {
+        InputValidator.validateSignUp(
+            firstName, lastName, email, phoneNumber, password,
+            emptyFieldsError, emailFormatError, passwordShortError
+        )?.let {
             _signupState.value = Resource.error(it)
             return
         }

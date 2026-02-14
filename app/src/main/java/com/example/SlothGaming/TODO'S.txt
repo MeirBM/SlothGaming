@@ -10,7 +10,7 @@ TODO: add hilt✅
 TODO:finish sign up✅
 TODO:check if signIn and signUp viewModels work✅
 TODO:Implement signIn,SignUp fragments✅
-TODO: change all validation into a class❌
+TODO: change all validation into a class✅
 TODO: finish login✅
 TODO:home fragments✅
 TODO: change collect to collectLatest in reviewFragment✅
