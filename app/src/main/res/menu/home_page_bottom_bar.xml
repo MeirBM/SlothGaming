@@ -5,13 +5,15 @@
         android:id="@+id/homePage_icon"
         android:title="@string/home"
         android:icon="@drawable/menu_home"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/search_games"
+        android:title="@string/search"
+        android:icon="@drawable/home_search"
+        app:showAsAction="never" />
     <item
         android:id="@+id/login_icon"
         android:title="@string/login"
         android:icon="@drawable/login_home"
-        app:showAsAction="never"
-
-        />
+        app:showAsAction="never" />
 </menu>

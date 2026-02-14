@@ -23,6 +23,10 @@ class GameRemoteDataSource @Inject constructor (private val gameService: IgdbSer
         suspend fun getPubSpotlightGames() = getResult {
             val query = "fields game.name, game.platforms.name, game.cover.url, game.summary,game.rating;where company.name ~ *\"Ubisoft\"* & game.cover!=null; limit 10;"
             gameService.getPublisherSpotlightGamesService(query.toRawBody()) }
+
+        suspend fun searchGames(searchQuery: String) = getResult {
+            val query = "fields name,rating,platforms.name,cover.url,summary; search \"$searchQuery\"; limit 20;"
+            gameService.searchGamesService(query.toRawBody()) }
     }
 
 

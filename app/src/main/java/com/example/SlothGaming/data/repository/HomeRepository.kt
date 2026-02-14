@@ -5,6 +5,8 @@ import com.example.SlothGaming.data.local_db.GameDao
 import com.example.SlothGaming.data.models.GameItem
 import com.example.SlothGaming.data.models.GameResponse
 import com.example.SlothGaming.data.remote_db.GameRemoteDataSource
+import com.example.SlothGaming.utils.Resource
+import com.example.SlothGaming.utils.Success
 import com.example.SlothGaming.utils.performFetchingAndSaving
 import javax.inject.Inject
 
@@ -63,6 +65,22 @@ class HomeRepository @Inject constructor(
             dao.updateSection("ubisoft_spotlight",items)
         }
     )
+
+    // Search games — API only, no local caching
+    suspend fun searchGames(query: String): Resource<List<GameItem>> {
+        val result = remoteDataSource.searchGames(query)
+        return if (result.status is Success) {
+            val items = result.status.data!!.map {
+                it.toGameItem(
+                    section = "search",
+                    platformName = it.platforms?.firstOrNull()?.name ?: ""
+                )
+            }
+            Resource.success(items)
+        } else {
+            Resource.error((result.status as com.example.SlothGaming.utils.Error).message)
+        }
+    }
 
     // Helper to map GameResponse -> GameItem Entity
     private fun GameResponse.toGameItem(section: String, platformName: String): GameItem {

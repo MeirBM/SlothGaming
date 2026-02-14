@@ -24,4 +24,8 @@ interface IgdbService {
     @POST("proxy/involved_companies")
     suspend fun getPublisherSpotlightGamesService(@Body query: RequestBody): Response<List<CompanyResponse>>
 
+    @Headers("Content-Type: text/plain")
+    @POST("proxy/games")
+    suspend fun searchGamesService(@Body query: RequestBody): Response<List<GameResponse>>
+
 }
