@@ -82,7 +82,7 @@ class ReviewAdapter(
                 .into(binding.gameImage)
 
             // set color to match rating score
-            val color = ColorProvider.pickColor(review.rating, context)
+            val color = ColorProvider.pickColor(review.rating.toDouble(), context)
 
             binding.givenRating.compoundDrawablesRelative[0]?.mutate()?.setTint(color)
 

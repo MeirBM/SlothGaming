@@ -57,7 +57,7 @@ class DetailReviewFragment : Fragment() {
                     Glide.with(requireContext()).load(it.photo)
                         .into(binding.reviewedGameImage)
                     // match star color with rating
-                    val color = ColorProvider.pickColor(it.rating, requireContext())
+                    val color = ColorProvider.pickColor(it.rating.toDouble(), requireContext())
                     star?.setTint(color)
                     binding.ratingStar.setImageDrawable(star)
                 }}
@@ -75,6 +75,9 @@ class DetailReviewFragment : Fragment() {
 
         //Load image with glide
         Glide.with(this).load(game.imageUrl).into(binding.reviewedGameImage)
+        val color = ColorProvider.pickColor(ratingOutOfFive, requireContext())
+        star?.setTint(color)
+        binding.ratingStar.setImageDrawable(star)
 
     }
 

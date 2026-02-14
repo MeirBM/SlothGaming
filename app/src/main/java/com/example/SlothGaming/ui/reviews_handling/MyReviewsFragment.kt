@@ -105,7 +105,7 @@ class MyReviewsFragment : Fragment() {
                     val builder = AlertDialog.Builder(requireContext())
                     builder.setTitle(getString(R.string.delete))
                     builder.setMessage(getString(R.string.are_you_sure_you_want_to_delete_this_review))
-                    builder.setPositiveButton(getString(R.string.yes)) { dialog, which ->
+                    builder.setPositiveButton(getString(R.string.yes)) { _,_ ->
                         val item =
                             (binding.recycler.adapter as ReviewAdapter).reviewAt(viewHolder.absoluteAdapterPosition)
                         viewModel.deleteReview(item)
@@ -115,7 +115,7 @@ class MyReviewsFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    builder.setNegativeButton(getString(R.string.no)) { dialog, which ->
+                    builder.setNegativeButton(getString(R.string.no)) { _,_ ->
                         binding.recycler.adapter?.notifyItemChanged(viewHolder.absoluteAdapterPosition)
                     }
                     builder.setCancelable(false)
@@ -136,7 +136,7 @@ class MyReviewsFragment : Fragment() {
                     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                         return when (menuItem.itemId) {
                             R.id.stats_menu -> {
-                                if (viewModel.reviews?.value.isNullOrEmpty()) {
+                                if (viewModel.reviews.value.isEmpty()) {
                                     AlertDialog.Builder(requireContext())
                                         .setMessage(getString(R.string.there_are_no_statistics_to_show))
                                         .setPositiveButton(getString(R.string.ok), null)
@@ -150,7 +150,7 @@ class MyReviewsFragment : Fragment() {
                             }
 
                             R.id.delete_all_reviews -> {
-                                if (viewModel.reviews?.value?.isEmpty() == true) {
+                                if (viewModel.reviews.value.isEmpty()) {
                                     AlertDialog.Builder(requireContext())
                                         .setMessage(getString(R.string.no_reviews_to_delete_menu))
                                         .setPositiveButton(getString(R.string.ok), null)
@@ -159,7 +159,7 @@ class MyReviewsFragment : Fragment() {
                                     AlertDialog.Builder(requireContext()).apply {
                                         setTitle(getString(R.string.delete_all_reviews))
                                         setMessage(getString(R.string.are_you_sure_you_want_to_delete_all_reviews))
-                                        setPositiveButton(getString(R.string.yes)) { dialog, which ->
+                                        setPositiveButton(getString(R.string.yes)) { _, _ ->
 
                                             viewModel.deleteAll()
                                             Toast.makeText(

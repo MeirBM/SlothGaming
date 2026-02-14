@@ -1,5 +1,6 @@
 package com.example.SlothGaming.data.repository
 
+import android.util.Log
 import com.example.SlothGaming.data.local_db.GameDao
 import com.example.SlothGaming.data.models.GameItem
 import com.example.SlothGaming.data.models.GameResponse
@@ -19,7 +20,7 @@ class HomeRepository @Inject constructor(
         remoteDbFetch = { remoteDataSource.getTopRatedGames() },
         localDbSave = { games ->
             val items = games.map {
-                it.toGameItem(section = "top_rated", platformName = "Top Rated")
+                it.toGameItem(section = "top_rated", platformName = it.platforms?.random()?.name?:"")
             }
             dao.insertAll(items)
         }
@@ -35,17 +36,13 @@ class HomeRepository @Inject constructor(
                 val game = response.game
 
                 // 2. Only proceed if we actually have a game object
-                if (game != null) {
-                    game.toGameItem(
-                        section = "coming_soon",
-                        // Use the date if available, otherwise a fallback string
-                        platformName = response.release_date ?: "Coming Soon"
-                    )
-                } else {
-                    // 3. Return null for this item so it gets skipped
-                    null
-                }
+                game?.toGameItem(
+                    section = "coming_soon",
+                    // Use the date if available, otherwise a fallback string
+                    platformName = response.game.platforms?.random()?.name?:""
+                )
             }
+            Log.d("items","$items")
             dao.insertAll(items)
         }
     )
@@ -60,7 +57,7 @@ class HomeRepository @Inject constructor(
                 // Safely handle if 'game' is null
                 response.game?.toGameItem(
                     section = "ubisoft_spotlight",
-                    platformName = "Ubisoft"
+                    platformName = response.game.platforms?.random()?.name?:""
                 )
             }
             dao.insertAll(items)

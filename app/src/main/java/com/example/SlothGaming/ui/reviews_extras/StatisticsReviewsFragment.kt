@@ -42,7 +42,7 @@ class StatisticsReviewsFragment : Fragment() {
         val avg = reviews.map {
             it.rating
         }.average()
-        val color = ColorProvider.pickColor(avg.toFloat(),requireContext())
+        val color = ColorProvider.pickColor(avg,requireContext())
 
         star?.setTint(color)
         binding.ratingStar.setImageDrawable(star)

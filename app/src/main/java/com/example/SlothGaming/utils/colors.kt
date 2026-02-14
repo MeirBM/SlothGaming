@@ -15,7 +15,7 @@ object ColorProvider {
         )
 
     }
-    fun pickColor(rating: Float,context: Context): Int{
+    fun pickColor(rating: Double, context: Context): Int{
 
         val color = when {
             rating <= 2.0f -> ContextCompat.getColor(context, R.color.lowRating)

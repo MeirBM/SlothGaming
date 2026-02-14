@@ -83,7 +83,7 @@ class AddReviewFragment : Fragment() {
             binding.addReviewTitle.text = getString(R.string.edit_review)
             binding.addReviewButton.btnText.text = getString(R.string.edit_review_btn)
 
-            val color = ColorProvider.pickColor(reviewCheck.rating, requireContext())
+            val color = ColorProvider.pickColor(reviewCheck.rating.toDouble(), requireContext())
             binding.ratingBar.progressTintList = ColorStateList.valueOf(color)
         } else {
             binding.addReviewTitle.text = getString(R.string.add_a_review)
@@ -201,7 +201,7 @@ class AddReviewFragment : Fragment() {
 
                     // Update Color LIVE while sliding
 
-                val color = ColorProvider.pickColor(steppedRating,context)
+                val color = ColorProvider.pickColor(steppedRating.toDouble(),context)
 
                     //change the xml
                     ratingBar.progressTintList = ColorStateList.valueOf(color)

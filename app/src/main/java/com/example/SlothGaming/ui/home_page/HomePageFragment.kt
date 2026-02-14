@@ -63,6 +63,7 @@ class HomePageFragment: Fragment() {
                             it.status.data?.let { section ->
                                 val adapter = ParentAdapter(section){
                                     selectedGame ->
+                                    Log.d("Selected game","$selectedGame")
                                     AlertDialog.Builder(requireContext())
                                         .setMessage("Do you want to watch detail?")
                                         .setPositiveButton("Yes"){_,_ ->
