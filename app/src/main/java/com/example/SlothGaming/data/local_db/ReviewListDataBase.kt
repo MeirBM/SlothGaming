@@ -9,7 +9,7 @@ import androidx.room.TypeConverters
 import com.example.SlothGaming.data.models.GameItem
 import com.example.SlothGaming.data.models.Review
 
-@Database(entities = [Review::class,GameItem::class], version = 2, exportSchema = false)
+@Database(entities = [Review::class,GameItem::class], version = 1, exportSchema = false)
 abstract class ReviewListDataBase : RoomDatabase() {
 
     abstract fun reviewDao() : ReviewListDao
