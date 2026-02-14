@@ -20,7 +20,7 @@ class HomeRepository @Inject constructor(
         remoteDbFetch = { remoteDataSource.getTopRatedGames() },
         localDbSave = { games ->
             val items = games.map {
-                it.toGameItem(section = "top_rated", platformName = it.platforms?.random()?.name?:"")
+                it.toGameItem(section = "top_rated", platformName = it.platforms?.first()?.name?:"")
             }
             dao.updateSection("top_rated",items)
         }
@@ -39,7 +39,7 @@ class HomeRepository @Inject constructor(
                 game?.toGameItem(
                     section = "coming_soon",
                     // Use the date if available, otherwise a fallback string
-                    platformName = response.game.platforms?.random()?.name?:""
+                    platformName = response.game.platforms?.first()?.name?:""
                 )
             }
             Log.d("items","$items")
@@ -57,7 +57,7 @@ class HomeRepository @Inject constructor(
                 // Safely handle if 'game' is null
                 response.game?.toGameItem(
                     section = "ubisoft_spotlight",
-                    platformName = response.game.platforms?.random()?.name?:""
+                    platformName = response.game.platforms?.first()?.name?:""
                 )
             }
             dao.updateSection("ubisoft_spotlight",items)
