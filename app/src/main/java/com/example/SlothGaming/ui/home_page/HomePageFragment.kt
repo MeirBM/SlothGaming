@@ -34,7 +34,7 @@ class HomePageFragment: Fragment() {
 
     private var binding: HomePageLayoutBinding by autoCleared()
 
-    lateinit var parentAdapter: ParentAdapter
+    private lateinit var parentAdapter: ParentAdapter
 
     private val viewModel: HomePageViewModel by viewModels()
 
@@ -69,10 +69,13 @@ class HomePageFragment: Fragment() {
                             }
                         }
 
-                        is Error -> Toast.makeText(
-                            requireContext(),
-                            it.status.message, Toast.LENGTH_LONG
-                        ).show()
+                        is Error -> {
+                            binding.loadingProgressHp.isVisible = false
+                            Toast.makeText(
+                                requireContext(),
+                                it.status.message, Toast.LENGTH_LONG
+                            ).show()
+                        }
                     }
                 }
             }

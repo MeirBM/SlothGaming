@@ -21,11 +21,11 @@ class LoginViewModel @Inject constructor(private val authRepo: AuthRepository): 
 
     val currentUser = _currentUser.asStateFlow()
 
-    fun signInUser(email: String,password:String){
-        val error = if(email.isEmpty()||password.isEmpty()){
-            "Please fill all the field's"
-        }else null
-        error?.let{
+    fun signInUser(email: String, password: String, emptyFieldsError: String) {
+        val error = if (email.isEmpty() || password.isEmpty()) {
+            emptyFieldsError
+        } else null
+        error?.let {
             _loginStatus.value = Resource.error(error)
             return
         }

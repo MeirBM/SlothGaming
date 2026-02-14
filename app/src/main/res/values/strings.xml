@@ -75,4 +75,14 @@
     <!-- Search -->
     <string name="search_games_hint">Search games…</string>
     <string name="search_no_results">No results found</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Game Reminders</string>
+    <string name="notification_channel_description">Reminders about new and top-rated games</string>
+    <string name="notification_reminder_text">New top-rated games are waiting for you!</string>
+
+    <!-- Validation Errors -->
+    <string name="error_fill_all_fields">Please fill all the fields</string>
+    <string name="error_email_format">Email does not match format</string>
+    <string name="error_password_short">Password too short</string>
 </resources>

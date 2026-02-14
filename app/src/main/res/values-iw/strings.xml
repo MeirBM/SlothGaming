@@ -76,4 +76,14 @@
     <!-- Search -->
     <string name="search_games_hint">חיפוש משחקים…</string>
     <string name="search_no_results">לא נמצאו תוצאות</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">תזכורות משחקים</string>
+    <string name="notification_channel_description">תזכורות על משחקים חדשים ובעלי דירוג גבוה</string>
+    <string name="notification_reminder_text">משחקים חדשים בדירוג גבוה מחכים לך!</string>
+
+    <!-- Validation Errors -->
+    <string name="error_fill_all_fields">נא למלא את כל השדות</string>
+    <string name="error_email_format">כתובת אימייל אינה תקינה</string>
+    <string name="error_password_short">הסיסמה קצרה מדי</string>
 </resources>

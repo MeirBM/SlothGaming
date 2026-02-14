@@ -18,14 +18,15 @@ class SignUpViewModel @Inject constructor(private val authRepo: AuthRepository) 
     val signupState = _signupState.asStateFlow()
 
     fun signUpUser(
-        firstName: String, lastName: String, email: String, phoneNumber: String, password: String
+        firstName: String, lastName: String, email: String, phoneNumber: String, password: String,
+        emptyFieldsError: String, emailFormatError: String, passwordShortError: String
     ) {
         val error = when {
             firstName.isEmpty() || lastName.isEmpty() || email.isEmpty()
-                    || phoneNumber.isEmpty() || password.isEmpty() -> "Please fill all fields"
+                    || phoneNumber.isEmpty() || password.isEmpty() -> emptyFieldsError
 
-            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> "email does not match format"
-            password.length < 8 -> "Password too short"
+            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> emailFormatError
+            password.length < 8 -> passwordShortError
 
             else -> null
         }

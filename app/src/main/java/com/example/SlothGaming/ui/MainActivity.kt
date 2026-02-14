@@ -1,20 +1,26 @@
 package com.example.SlothGaming.ui
 
+import android.Manifest
 import android.app.AlertDialog
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.SlothGaming.R
 import com.example.SlothGaming.databinding.ActivityMainBinding
+import com.example.SlothGaming.utils.NotificationHelper
 import com.example.SlothGaming.view_models.HomePageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.content.edit
@@ -27,6 +33,14 @@ class MainActivity : AppCompatActivity() {
 
     // Saving provider for manage it on other fragments
     private var topMenuProvider: MenuProvider? = null
+
+    private val notificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) {
+            NotificationHelper.scheduleReminder(this)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +73,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.homePageFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
                     showTopMenu(navController)
+                    requestNotificationPermission()
                 }
                 R.id.myReviewsFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
@@ -143,6 +158,21 @@ class MainActivity : AppCompatActivity() {
         topMenuProvider?.let {
             removeMenuProvider(it)
             topMenuProvider = null
+        }
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    this, Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                NotificationHelper.scheduleReminder(this)
+            } else {
+                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        } else {
+            NotificationHelper.scheduleReminder(this)
         }
     }
 

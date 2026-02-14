@@ -47,7 +47,12 @@ class SignUpFragment : Fragment() {
             val phone = binding.etPhoneNumber.text.toString().trim()
             val password = binding.etPassword.text.toString()
 
-            viewModel.signUpUser(firstname,lastname,email,phone,password)
+            viewModel.signUpUser(
+                firstname, lastname, email, phone, password,
+                getString(R.string.error_fill_all_fields),
+                getString(R.string.error_email_format),
+                getString(R.string.error_password_short)
+            )
         }
         viewLifecycleOwner.lifecycleScope.launch{
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){

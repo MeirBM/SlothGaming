@@ -25,14 +25,15 @@ class SearchViewModel @Inject constructor(
 
     fun onQueryChanged(query: String) {
         searchJob?.cancel()
-        if (query.isBlank()) {
+        val trimmed = query.trim()
+        if (trimmed.isBlank()) {
             _searchState.value = Resource.success(emptyList())
             return
         }
         searchJob = viewModelScope.launch {
             delay(300)
             _searchState.value = Resource.loading()
-            _searchState.value = repository.searchGames(query)
+            _searchState.value = repository.searchGames(trimmed)
         }
     }
 }

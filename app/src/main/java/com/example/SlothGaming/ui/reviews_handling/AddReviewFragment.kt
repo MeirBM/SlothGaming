@@ -1,6 +1,5 @@
 package com.example.SlothGaming.ui.reviews_handling
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -38,7 +37,7 @@ class AddReviewFragment : Fragment() {
     private val viewModel: ReviewViewModel by activityViewModels()
     private var _binding: AddReviewLayoutBinding? = null
 
-    var imageUri: Uri? = null
+    private var imageUri: Uri? = null
     private val binding get() = _binding!!
 
     // Blocks ENTER only when the current line is empty or whitespace
@@ -182,7 +181,6 @@ class AddReviewFragment : Fragment() {
     }
 
 
-    @SuppressLint("ClickableViewAccessibility")
     private fun changeColorOnRatingChange(ratingBar: RatingBar) {
         ratingBar.setOnTouchListener { v, event ->
             val context = requireContext()
@@ -208,6 +206,9 @@ class AddReviewFragment : Fragment() {
                     ratingBar.secondaryProgressTintList = ColorStateList.valueOf(color)
                     //tell the RatingBar to update its stars to follow the finger
                     ratingBar.rating = steppedRating
+                }
+                MotionEvent.ACTION_UP -> {
+                    v.performClick()
                 }
             }
             false
