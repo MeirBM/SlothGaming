@@ -72,4 +72,8 @@
     <string name="section_ubisoft_spotlight">זרקור Ubisoft</string>
     <string name="no_description_available">אין תיאור זמין.</string>
     <string name="no_platform_available">אין פלטפורמה זמינה</string>
+
+    <!-- Search -->
+    <string name="search_games_hint">חיפוש משחקים…</string>
+    <string name="search_no_results">לא נמצאו תוצאות</string>
 </resources>

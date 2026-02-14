@@ -87,6 +87,10 @@ class MainActivity : AppCompatActivity() {
                     }
                     true
                 }
+                R.id.search_games -> {
+                    navController.navigate(R.id.action_homePageFragment_to_searchFragment)
+                    true
+                }
                 R.id.homePage_icon -> {
                     // Only if current dest != home
                     if (navController.currentDestination?.id != R.id.homePageFragment) {

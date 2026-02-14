@@ -71,4 +71,8 @@
     <string name="section_ubisoft_spotlight">Ubisoft Spotlight</string>
     <string name="no_description_available">No description available.</string>
     <string name="no_platform_available">No Platform available</string>
+
+    <!-- Search -->
+    <string name="search_games_hint">Search games…</string>
+    <string name="search_no_results">No results found</string>
 </resources>
