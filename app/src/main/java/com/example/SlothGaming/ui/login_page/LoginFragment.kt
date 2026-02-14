@@ -63,7 +63,7 @@ class LoginFragment: Fragment() {
 
                                 Toast.makeText(
                                     requireContext(),
-                                    "Sign in successful",
+                                    getString(R.string.sign_in_successful),
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 findNavController().navigate(R.id.action_loginFragment_to_homePageFragment)
@@ -97,7 +97,7 @@ class LoginFragment: Fragment() {
                         is Success -> {
                             Toast.makeText(
                                 requireContext(),
-                                "welcome",
+                                getString(R.string.welcome),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }

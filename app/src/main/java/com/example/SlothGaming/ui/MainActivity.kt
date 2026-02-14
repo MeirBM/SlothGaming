@@ -38,8 +38,8 @@ class MainActivity : AppCompatActivity() {
         //Welcome message for first time
         if(!viewModel.isUserLoggedIn() && !seenWelcome){
             AlertDialog.Builder(this)
-                .setTitle("Welcome To Sloth Gaming"+"\n")
-                .setMessage("Hello Sloth Gamer!"+"\n"+"Here, you can get all the information about the latest games, top rated games and more."+"\n"+"Additionaly you can write your own reviews for any game and any platform with your own rating!"+"\n"+"Have fun and stay Sloth.")
+                .setTitle(getString(R.string.welcome_title))
+                .setMessage(getString(R.string.welcome_message))
                 .setPositiveButton(getString(R.string.ok)) { _, _ ->
                     pref.edit { putBoolean("seenWelcome", true) }} // Change preference status to True.
                 .show()
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                     if (!viewModel.isUserLoggedIn()) {
                         navController.navigate(R.id.loginFragment)
                     } else {
-                        Toast.makeText(this, "You're already logged in", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.already_logged_in), Toast.LENGTH_SHORT).show()
                     }
                     true
                 }
@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.sign_out -> {
                         if (!viewModel.isUserLoggedIn()) {
-                            Toast.makeText(this@MainActivity, "You are not logged in", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, getString(R.string.not_logged_in), Toast.LENGTH_SHORT).show()
                         } else {
                             showSignOutDialog(navController)
                         }
@@ -144,18 +144,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun showLoginRequiredDialog() {
         AlertDialog.Builder(this)
-            .setMessage("You must log in to use this feature")
+            .setMessage(getString(R.string.must_log_in))
             .setPositiveButton(getString(R.string.ok), null)
             .show()
     }
 
     private fun showSignOutDialog(navController: NavController) {
         AlertDialog.Builder(this).apply {
-            setTitle("Sign Out")
-            setMessage("Are you sure you want to sign out?")
+            setTitle(getString(R.string.sign_out))
+            setMessage(getString(R.string.sign_out_confirmation))
             setPositiveButton(getString(R.string.yes)) { _, _ ->
                 viewModel.useSignOut()
-                Toast.makeText(this@MainActivity, "Sign Out Successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, getString(R.string.sign_out_success), Toast.LENGTH_SHORT).show()
                 navController.navigate(R.id.loginFragment)
             }
             setNegativeButton(getString(R.string.no), null)

@@ -42,4 +42,33 @@
     <string name="password">Password</string>
     <string name="phone_number">Phone number</string>
     <string name="search">search</string>
+
+    <!-- Login / Sign Up -->
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_up_now">Not a member?\nSIGN UP now!</string>
+    <string name="sign_in_successful">Sign in successful</string>
+    <string name="welcome">welcome</string>
+    <string name="register_successfully">Register Successfully</string>
+
+    <!-- Bottom Nav / Top Menu -->
+    <string name="home">Home</string>
+    <string name="login">Login</string>
+    <string name="sign_out">Sign Out</string>
+
+    <!-- Dialogs / Toasts -->
+    <string name="welcome_title">Welcome To Sloth Gaming\n</string>
+    <string name="welcome_message">Hello Sloth Gamer!\nHere, you can get all the information about the latest games, top rated games and more.\nAdditionaly you can write your own reviews for any game and any platform with your own rating!\nHave fun and stay Sloth.</string>
+    <string name="already_logged_in">You\'re already logged in</string>
+    <string name="not_logged_in">You are not logged in</string>
+    <string name="must_log_in">You must log in to use this feature</string>
+    <string name="sign_out_confirmation">Are you sure you want to sign out?</string>
+    <string name="sign_out_success">Sign Out Successfully</string>
+
+    <!-- Home Page Sections -->
+    <string name="section_top_rated">Top Rated</string>
+    <string name="section_coming_soon">Coming Soon</string>
+    <string name="section_ubisoft_spotlight">Ubisoft Spotlight</string>
+    <string name="no_description_available">No description available.</string>
+    <string name="no_platform_available">No Platform available</string>
 </resources>

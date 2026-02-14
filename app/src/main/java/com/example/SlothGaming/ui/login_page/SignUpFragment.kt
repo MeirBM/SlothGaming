@@ -58,7 +58,7 @@ class SignUpFragment : Fragment() {
                             binding.signupBtn.isEnabled = false
                         }
                         is Success -> {
-                            Toast.makeText(requireContext(),"Register Successfully",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(),getString(R.string.register_successfully),Toast.LENGTH_SHORT).show()
                             findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
                         }
                         is Error -> {

@@ -3,6 +3,7 @@ package com.example.SlothGaming.view_models
 import android.net.http.UrlRequest
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.SlothGaming.R
 import com.example.SlothGaming.data.models.Section
 import com.example.SlothGaming.data.repository.AuthRepository
 import com.example.SlothGaming.data.repository.HomeRepository
@@ -50,19 +51,19 @@ class HomePageViewModel @Inject constructor(
 
                 if (topRated.status is Success) {
                     topRated.status.data?.let { games ->
-                        sections.add(Section("Top Rated", games))
+                        sections.add(Section(R.string.section_top_rated, games))
                     }
                 }
 
                 if (comingSoon.status is Success) {
                     comingSoon.status.data?.let { games ->
-                        sections.add(Section("Coming Soon", games))
+                        sections.add(Section(R.string.section_coming_soon, games))
                     }
                 }
 
                 if (ubisoft.status is Success) {
                     ubisoft.status.data?.let { games ->
-                        sections.add(Section("Ubisoft Spotlight", games))
+                        sections.add(Section(R.string.section_ubisoft_spotlight, games))
                     }
                 }
 

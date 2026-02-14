@@ -85,8 +85,8 @@ class DetailReviewFragment : Fragment() {
         val ratingOutOfFive = (this.rating ?: 0.0) / 20.0
         return Review(
             title = this.title ?: "",
-            gameReview = this.summary ?: "No description available.",
-            console = this.platform ?: "No Platform available",
+            gameReview = this.summary ?: getString(R.string.no_description_available),
+            console = this.platform ?: getString(R.string.no_platform_available),
             rating = ratingOutOfFive.toFloat(),
             photo = this.imageUrl
         )

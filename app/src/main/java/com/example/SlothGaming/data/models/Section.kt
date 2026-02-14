@@ -1,3 +1,5 @@
 package com.example.SlothGaming.data.models
 
-data class Section(val title: String, val items: List<GameItem>)
+import androidx.annotation.StringRes
+
+data class Section(@StringRes val titleRes: Int, val items: List<GameItem>)
