@@ -8,7 +8,7 @@ data class GameResponse(
     @SerializedName("cover") val cover: CoverResponse? = null,
     @SerializedName("platforms") val platforms: List<PlatformResponse>? = null
     ,@SerializedName("summary") val summary :String?
-    ,@SerializedName("human") val  date :String
+    ,@SerializedName("human") val  date :String? = null
     ,@SerializedName("rating") val rating: Double? = null
 
 )
