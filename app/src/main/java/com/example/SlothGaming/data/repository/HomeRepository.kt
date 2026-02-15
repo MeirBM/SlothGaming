@@ -81,6 +81,8 @@ class HomeRepository @Inject constructor(
 
     // Helper to map GameResponse -> GameItem Entity
     private fun GameResponse.toGameItem(section: String, platformName: String): GameItem {
+
+        // Take t_thumb and convert to 720p
         val rawUrl = this.cover?.url?:""
         val highResUrl = rawUrl.replace("t_thumb", "t_720p").let {
             if (it.startsWith("//")) "https:$it" else it

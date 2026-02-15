@@ -8,7 +8,6 @@ data class GameResponse(
     @SerializedName("cover") val cover: CoverResponse? = null,
     @SerializedName("platforms") val platforms: List<PlatformResponse>? = null
     ,@SerializedName("summary") val summary :String?
-    ,@SerializedName("human") val  date :String? = null
     ,@SerializedName("rating") val rating: Double? = null
 
 )
@@ -16,7 +15,6 @@ data class CompanyResponse(
     @SerializedName("game") val game: GameResponse?
 )
 data class LatestResponse(
-    @SerializedName("human") val  release_date :String?,
     @SerializedName("game") val game: GameResponse?
 )
 

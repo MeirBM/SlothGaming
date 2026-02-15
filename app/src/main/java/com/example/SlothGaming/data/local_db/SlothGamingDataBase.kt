@@ -15,7 +15,7 @@ abstract class SlothGamingDataBase : RoomDatabase() {
 
     companion object {
 
-        @Volatile
+        @Volatile//atomic action
         private var instance:SlothGamingDataBase? = null
 
         fun getDatabase(context: Context) = instance ?: synchronized(this) {

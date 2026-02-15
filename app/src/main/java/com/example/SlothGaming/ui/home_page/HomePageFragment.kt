@@ -32,7 +32,7 @@ class HomePageFragment: Fragment() {
 
     private var binding: HomePageLayoutBinding by autoCleared()
 
-    lateinit var parentAdapter: ParentAdapter
+    private lateinit var parentAdapter: ParentAdapter
 
     private val viewModel: HomePageViewModel by viewModels()
 
