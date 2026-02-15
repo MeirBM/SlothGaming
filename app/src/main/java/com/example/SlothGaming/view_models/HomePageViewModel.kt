@@ -38,7 +38,7 @@ class HomePageViewModel @Inject constructor(
         authRepo.logOut()
     }
 
-    fun fetchHomeContent() {
+    private fun fetchHomeContent() {
         viewModelScope.launch {
             // Combine all 3 flows into one state
             combine(

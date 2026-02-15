@@ -25,6 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.content.edit
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
+import androidx.navigation.navOptions
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -196,13 +197,6 @@ class MainActivity : AppCompatActivity() {
             removeMenuProvider(it)
             topMenuProvider = null
         }
-    }
-
-    private fun showLoginRequiredDialog() {
-        AlertDialog.Builder(this)
-            .setMessage(getString(R.string.must_log_in))
-            .setPositiveButton(getString(R.string.ok), null)
-            .show()
     }
 
     private fun showSignOutDialog(navController: NavController) {

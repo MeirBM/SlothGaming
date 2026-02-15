@@ -21,7 +21,7 @@ TODO:Change style of my reviews,statistic's? something more gaming related?✅
 TODO: // REMEMBER TO DELETE SAMPLE DATA ON HOME PAGE ✅
 TODO:after being logged in app shouldnt come back to sign in fragment -> GOTO HOME✅
 TODO:after being logged add LOGOUT ICON ✅
-
+TODO:לבדוק את הקוד בDETAILFRAGMENT❌
 
 
 

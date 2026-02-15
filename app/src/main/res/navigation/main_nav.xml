@@ -34,7 +34,11 @@
         <action
             android:id="@+id/action_myReviewsFragment_to_homePageFragment"
             app:destination="@id/homePageFragment"
+            app:enterAnim="@anim/from_up"
+            app:exitAnim="@anim/to_down"
             app:launchSingleTop="true"
+            app:popEnterAnim="@anim/from_down"
+            app:popExitAnim="@anim/to_up"
             app:popUpTo="@id/homePageFragment" />
     </fragment>
     <fragment
@@ -88,7 +92,8 @@
             app:enterAnim="@anim/from_down"
             app:exitAnim="@anim/to_up"
             app:popEnterAnim="@anim/from_up"
-            app:popExitAnim="@anim/to_down" />
+            app:popExitAnim="@anim/to_down"
+            app:popUpTo="@id/homePageFragment" />
         <action
             android:id="@+id/action_homePageFragment_to_detailReviewFragment"
             app:destination="@id/detailReviewFragment"
@@ -96,13 +101,13 @@
             app:exitAnim="@anim/to_down"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/from_down"
-            app:popExitAnim="@anim/to_up" />
+            app:popExitAnim="@anim/to_up"
+            app:popUpTo="@id/homePageFragment" />
         <action
             android:id="@+id/action_homePageFragment_to_searchFragment"
             app:destination="@id/searchFragment"
             app:enterAnim="@anim/from_up"
             app:exitAnim="@anim/to_down"
-            app:launchSingleTop="true"
             app:popEnterAnim="@anim/from_down"
             app:popExitAnim="@anim/to_up" />
     </fragment>
@@ -159,7 +164,11 @@
         <action
             android:id="@+id/action_searchFragment_to_homePageFragment"
             app:destination="@id/homePageFragment"
+            app:enterAnim="@anim/from_down"
+            app:exitAnim="@anim/to_up"
             app:launchSingleTop="true"
+            app:popEnterAnim="@anim/from_up"
+            app:popExitAnim="@anim/to_down"
             app:popUpTo="@id/homePageFragment" />
     </fragment>
 </navigation>

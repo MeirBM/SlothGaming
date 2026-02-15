@@ -6,6 +6,7 @@ import okhttp3.RequestBody
 import javax.inject.Inject
 class GameRemoteDataSource @Inject constructor (private val gameService: IgdbService)
     : BaseDataSource(){
+        //convert the query to plain text with rawBody to unsure we dont pass Json
     private fun String.toRawBody(): RequestBody {
         // This is the "Java style" way that always works
         val mediaType = MediaType.parse("text/plain")

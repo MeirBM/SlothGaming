@@ -23,10 +23,7 @@ interface ReviewListDao {
     suspend fun updateReview (review: Review)
 
     @Query("SELECT * FROM reviews ORDER BY id DESC")
-    fun getReviews(): Flow<List<Review>>//LiveData<List<Review>>
-
-    @Query("SELECT * FROM reviews WHERE id = :id ")
-    fun getReview(id : Int) : Review
+    fun getReviews(): Flow<List<Review>>
 
     @Query("DELETE FROM reviews")
     suspend fun deleteAll()
