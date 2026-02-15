@@ -156,5 +156,10 @@
             app:exitAnim="@anim/to_down"
             app:popEnterAnim="@anim/from_down"
             app:popExitAnim="@anim/to_up" />
+        <action
+            android:id="@+id/action_searchFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homePageFragment" />
     </fragment>
 </navigation>

@@ -109,6 +109,14 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigation.menu.findItem(R.id.login_icon)?.isVisible = false
                     removeTopMenu()
                 }
+                R.id.searchFragment ->{
+                    // Show home while searching
+                    binding.bottomNavigation.visibility = View.VISIBLE
+
+                    binding.bottomNavigation.menu.findItem(R.id.homePage_icon)?.isVisible = true
+
+                    binding.bottomNavigation.menu.findItem(R.id.search_games)?.isVisible = false
+                }
                 else -> {
                     // All other pages that doesn't require bottom bar
                     binding.bottomNavigation.visibility = View.GONE
@@ -142,6 +150,8 @@ class MainActivity : AppCompatActivity() {
                         (navController.currentDestination?.id == R.id.loginFragment) ->
                         navController.navigate(R.id.action_loginFragment_to_homePageFragment)
 
+                        (navController.currentDestination?.id == R.id.searchFragment) ->
+                            navController.navigate(R.id.action_searchFragment_to_homePageFragment)
                         else -> false
                     }
                     true
@@ -163,19 +173,12 @@ class MainActivity : AppCompatActivity() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.my_reviews -> {
-                        if (!viewModel.isUserLoggedIn()) {
-                            showLoginRequiredDialog()
-                        } else {
-                            navController.navigate(R.id.action_homePageFragment_to_myReviewsFragment)
-                        }
+                        navController.navigate(R.id.action_homePageFragment_to_myReviewsFragment)
+
                         true
                     }
                     R.id.sign_out -> {
-                        if (!viewModel.isUserLoggedIn()) {
-                            Toast.makeText(this@MainActivity, getString(R.string.not_logged_in), Toast.LENGTH_SHORT).show()
-                        } else {
-                            showSignOutDialog(navController)
-                        }
+                        showSignOutDialog(navController)
                         true
                     }
                     else -> false
