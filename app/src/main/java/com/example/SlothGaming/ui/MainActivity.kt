@@ -140,20 +140,8 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.homePage_icon -> {
-                    /* Home page has users check from which fragment
-                    home page was called preform correct action
-                     */
-                    when(navController.currentDestination?.id != R.id.homePageFragment){
-
-                        (navController.currentDestination?.id == R.id.myReviewsFragment) ->
-                            navController.navigate(R.id.action_myReviewsFragment_to_homePageFragment)
-
-                        (navController.currentDestination?.id == R.id.loginFragment) ->
-                        navController.navigate(R.id.action_loginFragment_to_homePageFragment)
-
-                        (navController.currentDestination?.id == R.id.searchFragment) ->
-                            navController.navigate(R.id.action_searchFragment_to_homePageFragment)
-                        else -> false
+                    if (navController.currentDestination?.id != R.id.homePageFragment) {
+                        navController.popBackStack(R.id.homePageFragment, false)
                     }
                     true
                 }
