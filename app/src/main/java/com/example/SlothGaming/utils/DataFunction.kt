@@ -11,7 +11,8 @@ import kotlinx.coroutines.flow.map
 
 fun <T,A> performFetchingAndSaving(localDbFetch: () -> Flow<T>,
                                    remoteDbFetch: suspend () ->Resource<A>,
-                                   localDbSave: suspend (A) -> Unit) : Flow<Resource<T>> = flow{
+                                   localDbSave: suspend (A) -> Unit
+                                   ) : Flow<Resource<T>> = flow{
 
         emit(Resource.loading())
 

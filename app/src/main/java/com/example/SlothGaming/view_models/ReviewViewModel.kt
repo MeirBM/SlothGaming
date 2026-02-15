@@ -1,16 +1,14 @@
 package com.example.SlothGaming.view_models
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.SlothGaming.data.fire_base.FirebaseAuthImpl
 import com.example.SlothGaming.data.models.Review
-import com.example.SlothGaming.data.repository.AuthRepository
 import com.example.SlothGaming.data.repository.ReviewListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,9 +24,9 @@ class ReviewViewModel @Inject constructor(
             emptyList()
     )
 
-    private val _chosenReview = MutableStateFlow<Review?>(null)
+    private val _chosenReview = MutableLiveData<Review?>()
 
-    val chosenReview : StateFlow<Review?> get() = _chosenReview.asStateFlow()
+    val chosenReview : LiveData<Review?> get() = _chosenReview
 
 
 

@@ -7,9 +7,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.R
@@ -19,7 +16,6 @@ import com.example.SlothGaming.databinding.DetailReviewBinding
 import com.example.SlothGaming.utils.ColorProvider
 import com.example.SlothGaming.view_models.ReviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class DetailReviewFragment : Fragment() {
 
@@ -50,13 +46,9 @@ class DetailReviewFragment : Fragment() {
             viewModel.setReview(game.toReview())
         }
 
-        // Listening to ViewModel
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.chosenReview.collect { review ->
-                    review?.let { updateUI(it) }
-                }
-            }
+        // Listening to ViewModel via LiveData
+        viewModel.chosenReview.observe(viewLifecycleOwner) { review ->
+            review?.let { updateUI(it) }
         }
     }
 
@@ -80,7 +72,7 @@ class DetailReviewFragment : Fragment() {
         }
     }
 
-    //To Review
+    //gameItem --> Review
     private fun GameItem.toReview(): Review {
         val ratingOutOfFive = (this.rating ?: 0.0) / 20.0
         return Review(
@@ -94,6 +86,8 @@ class DetailReviewFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        /*Detail review will be always empty ,
+        and will wait to see where it gets its data from*/
         viewModel.setReview(null)
         _binding = null
     }

@@ -1,10 +1,10 @@
 package com.example.SlothGaming.view_models
 
-import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.SlothGaming.data.models.User
 import com.example.SlothGaming.data.repository.AuthRepository
+import com.example.SlothGaming.utils.InputValidator
 import com.example.SlothGaming.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,18 +18,13 @@ class SignUpViewModel @Inject constructor(private val authRepo: AuthRepository) 
     val signupState = _signupState.asStateFlow()
 
     fun signUpUser(
-        firstName: String, lastName: String, email: String, phoneNumber: String, password: String
+        firstName: String, lastName: String, email: String, phoneNumber: String, password: String,
+        emptyFieldsError: String, emailFormatError: String, passwordShortError: String
     ) {
-        val error = when {
-            firstName.isEmpty() || lastName.isEmpty() || email.isEmpty()
-                    || phoneNumber.isEmpty() || password.isEmpty() -> "Please fill all fields"
-
-            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> "email does not match format"
-            password.length < 8 -> "Password too short"
-
-            else -> null
-        }
-        error?.let {
+        InputValidator.validateSignUp(
+            firstName, lastName, email, phoneNumber, password,
+            emptyFieldsError, emailFormatError, passwordShortError
+        )?.let {
             _signupState.value = Resource.error(it)
             return
         }

@@ -29,7 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MyReviewsFragment : Fragment() {
-    lateinit var reviewAdapter: ReviewAdapter
+    private lateinit var reviewAdapter: ReviewAdapter
 
     private var _binding : MyReviewsLayoutBinding? = null
     private val binding get() = _binding!!

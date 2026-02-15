@@ -1,6 +1,5 @@
 package com.example.SlothGaming.ui.reviews_handling
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -27,6 +26,7 @@ import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.databinding.AddReviewLayoutBinding
 import com.example.SlothGaming.extensions.setScaleClickAnimation
 import com.example.SlothGaming.utils.ColorProvider
+import com.example.SlothGaming.utils.InputValidator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
 @AndroidEntryPoint
@@ -38,7 +38,7 @@ class AddReviewFragment : Fragment() {
     private val viewModel: ReviewViewModel by activityViewModels()
     private var _binding: AddReviewLayoutBinding? = null
 
-    var imageUri: Uri? = null
+    private var imageUri: Uri? = null
     private val binding get() = _binding!!
 
     // Blocks ENTER only when the current line is empty or whitespace
@@ -124,33 +124,39 @@ class AddReviewFragment : Fragment() {
         // Add review text and statements
         binding.addReviewButton.root.setScaleClickAnimation {
 
-            val minTitleLength = 3
             // trim for no whitespaces
             val title = binding.enteredGameTitle.text.toString().trim()
             val desc = binding.enteredReview.text.toString().trim()
             val ratingBar = binding.ratingBar.rating
             val consoleType = "${binding.consoleDropdown.text}".trim()
 
-            when {
-                consoleType.isEmpty() -> {
-                    binding.consoleLayout.error = getString(R.string.please_enter_platform_type)
-                    binding.consoleLayout.requestFocus()
-                    return@setScaleClickAnimation
+            val validationError = InputValidator.validateReview(
+                consoleType, title, desc, imageUri,
+                getString(R.string.please_enter_platform_type),
+                getString(R.string.please_enter_game_title_at_least_3_characters),
+                getString(R.string.please_enter_description),
+                getString(R.string.please_upload_an_image)
+            )
+            if (validationError != null) {
+                val (field, message) = validationError
+                when (field) {
+                    InputValidator.ReviewField.CONSOLE -> {
+                        binding.consoleLayout.error = message
+                        binding.consoleLayout.requestFocus()
+                    }
+                    InputValidator.ReviewField.TITLE -> {
+                        binding.enteredGameTitle.error = message
+                        binding.enteredGameTitle.requestFocus()
+                    }
+                    InputValidator.ReviewField.DESCRIPTION -> {
+                        binding.enteredReview.error = message
+                        binding.enteredReview.requestFocus()
+                    }
+                    InputValidator.ReviewField.IMAGE -> {
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    }
                 }
-                title.length < minTitleLength -> {
-                    binding.enteredGameTitle.error = getString(R.string.please_enter_game_title_at_least_3_characters)
-                    binding.enteredGameTitle.requestFocus()
-                    return@setScaleClickAnimation
-                }
-                desc.isEmpty() -> {
-                    binding.enteredReview.error = getString(R.string.please_enter_description)
-                    binding.enteredReview.requestFocus()
-                    return@setScaleClickAnimation
-                }
-                imageUri == null -> {
-                    Toast.makeText(requireContext(), getString(R.string.please_upload_an_image), Toast.LENGTH_SHORT).show()
-                    return@setScaleClickAnimation
-                }
+                return@setScaleClickAnimation
             }
 
             val image = imageUri.toString()
@@ -182,7 +188,6 @@ class AddReviewFragment : Fragment() {
     }
 
 
-    @SuppressLint("ClickableViewAccessibility")
     private fun changeColorOnRatingChange(ratingBar: RatingBar) {
         ratingBar.setOnTouchListener { v, event ->
             val context = requireContext()
@@ -208,6 +213,9 @@ class AddReviewFragment : Fragment() {
                     ratingBar.secondaryProgressTintList = ColorStateList.valueOf(color)
                     //tell the RatingBar to update its stars to follow the finger
                     ratingBar.rating = steppedRating
+                }
+                MotionEvent.ACTION_UP -> {
+                    v.performClick()
                 }
             }
             false
