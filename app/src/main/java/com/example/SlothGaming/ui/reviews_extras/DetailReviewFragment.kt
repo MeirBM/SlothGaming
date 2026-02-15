@@ -72,7 +72,7 @@ class DetailReviewFragment : Fragment() {
         }
     }
 
-    //To Review
+    //gameItem --> Review
     private fun GameItem.toReview(): Review {
         val ratingOutOfFive = (this.rating ?: 0.0) / 20.0
         return Review(
@@ -86,6 +86,8 @@ class DetailReviewFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        /*Detail review will be always empty ,
+        and will wait to see where it gets its data from*/
         viewModel.setReview(null)
         _binding = null
     }

@@ -23,6 +23,10 @@ import com.example.SlothGaming.databinding.ActivityMainBinding
 import com.example.SlothGaming.view_models.HomePageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.content.edit
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -31,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: HomePageViewModel by viewModels()
 
     // Saving provider for manage it on other fragments
-    private var topMenuProvider: MenuProvider? = null
+    private var topMenuProvider: MenuProvider? = null// already in activity no need for menuHost
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,48 +62,67 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        // Listening to changes -> Remove / keep menu
+        /* Listening to changes -> Remove / keep menu
+            based on which page you are positioned show/hide buttons
+         */
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.homePageFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
+                    // No reason for home page to be visible on home page ..
+                    binding.bottomNavigation.menu.findItem(R.id.homePage_icon)?.isVisible = false
+
+                    // Home page is the only place to preform a search so show it here
                     binding.bottomNavigation.menu.findItem(R.id.search_games)?.isVisible = true
                     binding.bottomNavigation.menu.findItem(R.id.search_games)?.isEnabled = true
-                    if(viewModel.isUserLoggedIn())
+
+                    /* Check if user is logged in,
+                    based on status show the "Login button"
+                    yes -> don't show
+                    no -> show
+                     */
+                    if(viewModel.isUserLoggedIn()) {
+                        showTopMenu(navController)
                         binding.bottomNavigation.menu.findItem(R.id.login_icon)?.isVisible = false
-                    else
+                    }
+                    else {
                         binding.bottomNavigation.menu.findItem(R.id.login_icon)?.isVisible = true
-                    showTopMenu(navController)
+                        removeTopMenu()
+                    }
                 }
                 R.id.myReviewsFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
-                    binding.bottomNavigation.menu.findItem(R.id.search_games)?.isVisible = true
-                    binding.bottomNavigation.menu.findItem(R.id.search_games)?.isEnabled = true
+                    //show home page button
+                    binding.bottomNavigation.menu.findItem(R.id.homePage_icon)?.isVisible = true
+                    // hide search button
+                    binding.bottomNavigation.menu.findItem(R.id.search_games)?.isVisible = false
+                    // reviews has its own top menu implemented in MyReviewsFragment
                     removeTopMenu()
                 }
                 R.id.loginFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
+                    //show home page button
+                    binding.bottomNavigation.menu.findItem(R.id.homePage_icon)?.isVisible = true
+                    //hide search button on login page
                     binding.bottomNavigation.menu.findItem(R.id.search_games)?.isVisible = false
+                    // no reason for login button to show on login page
                     binding.bottomNavigation.menu.findItem(R.id.login_icon)?.isVisible = false
-                    binding.bottomNavigation.menu.findItem(R.id.search_games)?.isEnabled = false
+                    removeTopMenu()
                 }
                 else -> {
-                    // if not said -> remove
+                    // All other pages that doesn't require bottom bar
                     binding.bottomNavigation.visibility = View.GONE
                     removeTopMenu()
                 }
             }
         }
 
-        // Bottom navigation
+        // Manage's all the bottom bar actions
         binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.login_icon -> {
                     if (!viewModel.isUserLoggedIn()) {
-                        navController.navigate(R.id.loginFragment)
-
-                    } else {
-                        Toast.makeText(this, getString(R.string.already_logged_in), Toast.LENGTH_SHORT).show()
+                        navController.navigate(R.id.action_homePageFragment_to_loginFragment)
                     }
                     true
                 }
@@ -108,9 +131,18 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.homePage_icon -> {
-                    // Only if current dest != home
-                    if (navController.currentDestination?.id != R.id.homePageFragment) {
-                        navController.navigate(R.id.homePageFragment)
+                    /* Home page has users check from which fragment
+                    home page was called preform correct action
+                     */
+                    when(navController.currentDestination?.id != R.id.homePageFragment){
+
+                        (navController.currentDestination?.id == R.id.myReviewsFragment) ->
+                            navController.navigate(R.id.action_myReviewsFragment_to_homePageFragment)
+
+                        (navController.currentDestination?.id == R.id.loginFragment) ->
+                        navController.navigate(R.id.action_loginFragment_to_homePageFragment)
+
+                        else -> false
                     }
                     true
                 }
@@ -118,10 +150,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
+// Manage Main top menu and who will share and use it
     private fun showTopMenu(navController: NavController) {
-        if (topMenuProvider != null) return // Prevent double add
+        if (topMenuProvider != null) return // Prevent multi layered menu
 
+        //standard menu host
         topMenuProvider = object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.home_top_menu, menu)

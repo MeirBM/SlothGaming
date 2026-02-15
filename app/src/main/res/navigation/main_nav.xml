@@ -34,8 +34,8 @@
         <action
             android:id="@+id/action_myReviewsFragment_to_homePageFragment"
             app:destination="@id/homePageFragment"
-            app:popUpTo="@id/homePageFragment"
-            app:popUpToInclusive="true" />
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homePageFragment" />
     </fragment>
     <fragment
         android:id="@+id/addReviewFragment"
@@ -77,8 +77,11 @@
         <action
             android:id="@+id/action_homePageFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/homePageFragment"
-            app:popUpToInclusive="false" />
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@id/homePageFragment" />
         <action
             android:id="@+id/action_homePageFragment_to_myReviewsFragment"
             app:destination="@id/myReviewsFragment"
@@ -91,6 +94,7 @@
             app:destination="@id/detailReviewFragment"
             app:enterAnim="@anim/from_up"
             app:exitAnim="@anim/to_down"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/from_down"
             app:popExitAnim="@anim/to_up" />
         <action
@@ -98,6 +102,7 @@
             app:destination="@id/searchFragment"
             app:enterAnim="@anim/from_up"
             app:exitAnim="@anim/to_down"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/from_down"
             app:popExitAnim="@anim/to_up" />
     </fragment>
@@ -109,6 +114,10 @@
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -119,10 +128,19 @@
         tools:layout="@layout/login_layout" >
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_loginFragment_to_homePageFragment"
             app:destination="@id/homePageFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@id/homePageFragment"
             app:popUpToInclusive="true" />
     </fragment>
