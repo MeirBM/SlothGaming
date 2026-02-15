@@ -7,8 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.data.repository.ReviewListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,9 +26,9 @@ class ReviewViewModel @Inject constructor(
             emptyList()
     )
 
-    private val _chosenReview = MutableLiveData<Review?>()
+    private val _chosenReview = MutableStateFlow<Review?>(null)
 
-    val chosenReview : LiveData<Review?> get() = _chosenReview
+    val chosenReview = _chosenReview.asStateFlow()
 
 
 

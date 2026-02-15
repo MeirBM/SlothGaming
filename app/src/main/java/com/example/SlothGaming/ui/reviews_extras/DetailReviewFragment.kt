@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.SlothGaming.R
@@ -16,6 +19,9 @@ import com.example.SlothGaming.databinding.DetailReviewBinding
 import com.example.SlothGaming.utils.ColorProvider
 import com.example.SlothGaming.view_models.ReviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
 class DetailReviewFragment : Fragment() {
 
@@ -46,10 +52,16 @@ class DetailReviewFragment : Fragment() {
             viewModel.setReview(game.toReview())
         }
 
-        // Listening to ViewModel via LiveData
-        viewModel.chosenReview.observe(viewLifecycleOwner) { review ->
-            review?.let { updateUI(it) }
+        // Listening to ViewModel for changes
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED){
+                viewModel.chosenReview.collectLatest { review ->
+                    review?.let { updateUI(it) }
+
+                }
+            }
         }
+
     }
 
     //Update UI

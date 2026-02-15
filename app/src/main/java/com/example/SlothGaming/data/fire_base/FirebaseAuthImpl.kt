@@ -28,6 +28,7 @@ class FirebaseAuthImpl @Inject constructor
         }
     }
 
+    // Async functions to create on fire base
     override suspend fun createUser(
         firstName: String,
         lastName: String,
@@ -37,23 +38,26 @@ class FirebaseAuthImpl @Inject constructor
     ): Resource<User> {
         return withContext(Dispatchers.IO){
             safeCall {
+                //call sign up
                 val registerResult =
                     firebaseAuth.createUserWithEmailAndPassword(email, password).await()
                 val userId = registerResult.user?.uid!!
                 val newUser = User(firstName,lastName,email,phoneNumber)
+                //
                 userRef.document(userId).set(newUser).await()
                 Resource.success(newUser)
             }
 
         }
     }
-
+    // Async functions to login the specified user
     override suspend fun login(
         email: String,
         password: String
     ): Resource<User> {
         return withContext(Dispatchers.IO){
             safeCall {
+                //call login
                 val loginResult = firebaseAuth.signInWithEmailAndPassword(email,password).await()
                 val userId = loginResult.user?.uid!!
                 val currentUser =  userRef.document(userId)
