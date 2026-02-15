@@ -20,7 +20,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.SlothGaming.R
 import com.example.SlothGaming.databinding.ActivityMainBinding
-import com.example.SlothGaming.utils.NotificationHelper
 import com.example.SlothGaming.view_models.HomePageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.content.edit
@@ -33,14 +32,6 @@ class MainActivity : AppCompatActivity() {
 
     // Saving provider for manage it on other fragments
     private var topMenuProvider: MenuProvider? = null
-
-    private val notificationPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { granted ->
-        if (granted) {
-            NotificationHelper.scheduleReminder(this)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +65,6 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigation.visibility = View.VISIBLE
                     binding.bottomNavigation.menu.findItem(R.id.search_games)?.isEnabled = true
                     showTopMenu(navController)
-                    requestNotificationPermission()
                 }
                 R.id.myReviewsFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
@@ -160,21 +150,6 @@ class MainActivity : AppCompatActivity() {
         topMenuProvider?.let {
             removeMenuProvider(it)
             topMenuProvider = null
-        }
-    }
-
-    private fun requestNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(
-                    this, Manifest.permission.POST_NOTIFICATIONS
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                NotificationHelper.scheduleReminder(this)
-            } else {
-                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-            }
-        } else {
-            NotificationHelper.scheduleReminder(this)
         }
     }
 
