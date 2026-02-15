@@ -12,7 +12,7 @@ class GameRemoteDataSource @Inject constructor (private val gameService: IgdbSer
         return RequestBody.create(mediaType, this)
     }
         suspend fun getTopRatedGames() = getResult {
-            val query = "fields name,rating,platforms.name,cover.url,summary;where name != null; sort rating desc; limit 10;"
+            val query = "fields name,rating,platforms.name,cover.url,summary;where name != null & rating_count > 1000; sort rating desc; limit 10;"
             gameService.getTopRatedGamesService(query.toRawBody())}
 
         suspend fun getComingSoonGames() = getResult {
@@ -25,7 +25,7 @@ class GameRemoteDataSource @Inject constructor (private val gameService: IgdbSer
             gameService.getPublisherSpotlightGamesService(query.toRawBody()) }
 
         suspend fun searchGames(searchQuery: String) = getResult {
-            val query = "fields name,rating,platforms.name,cover.url,summary; where name ~ *\"$searchQuery\"*; limit 20;"
+            val query = "fields name,rating,platforms.name,cover.url,summary; where name ~ *\"$searchQuery\"* & cover.url!=null; limit 20;"
             gameService.searchGamesService(query.toRawBody()) }
     }
 

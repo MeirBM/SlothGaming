@@ -17,25 +17,7 @@ import javax.inject.Inject
 class HomeRepository @Inject constructor(
     private val remoteDataSource: GameRemoteDataSource,
     private val dao: GameDao,
-    @ApplicationContext private val context: Context
 ) {
-
-    companion object {
-        private const val PREF_NAME = "SlothPref"
-        private const val KEY_LAST_FETCH = "lastHomeFetch"
-        private const val FETCH_INTERVAL_MS = 60 * 60 * 1000L // 1 hour
-    }
-
-    private fun shouldFetchFromRemote(): Boolean {
-        val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        val lastFetch = pref.getLong(KEY_LAST_FETCH, 0)
-        return System.currentTimeMillis() - lastFetch > FETCH_INTERVAL_MS
-    }
-
-    private fun updateLastFetchTime() {
-        context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-            .edit { putLong(KEY_LAST_FETCH, System.currentTimeMillis()) }
-    }
 
     // 1. Top Rated Games
     fun getTopRatedGames() = performFetchingAndSaving(
@@ -46,9 +28,7 @@ class HomeRepository @Inject constructor(
                 it.toGameItem(section = "top_rated", platformName = it.platforms?.first()?.name?:"")
             }
             dao.updateSection("top_rated",items)
-            updateLastFetchTime()
-        },
-        shouldFetch = shouldFetchFromRemote()
+        }
     )
 
     // 2. Coming Soon (Unwrapping the Release Date)
@@ -66,7 +46,6 @@ class HomeRepository @Inject constructor(
             Log.d("items","$items")
             dao.updateSection("coming_soon", items)
         },
-        shouldFetch = shouldFetchFromRemote()
     )
 
     // 3. Publisher Spotlight (Unwrapping the Company Link)
@@ -81,8 +60,7 @@ class HomeRepository @Inject constructor(
                 )
             }
             dao.updateSection("ubisoft_spotlight",items)
-        },
-        shouldFetch = shouldFetchFromRemote()
+        }
     )
 
     // Search games — API only, no local caching
