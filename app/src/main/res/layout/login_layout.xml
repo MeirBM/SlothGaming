@@ -55,8 +55,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:hint="@string/email"
                 android:textSize="16sp"
-                app:boxBackgroundColor="@color/highRating"
-                app:boxStrokeColor="@color/customBlack"
+                app:boxBackgroundColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login_logo">
@@ -75,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:boxBackgroundColor="@color/highRating"
+                app:boxBackgroundColor="@color/black"
                 android:fontFamily="sans-serif-medium"
                 android:hint="@string/password"
                 android:textSize="16sp"
@@ -85,7 +84,6 @@
                 app:counterMaxLength="20"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:boxStrokeColor="@color/customBlack"
                 app:layout_constraintTop_toBottomOf="@+id/email_input">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -99,6 +97,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/sign_in_button"
                 android:layout_width="wrap_content"
+                android:shadowColor="@color/white"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
