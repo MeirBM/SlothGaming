@@ -63,16 +63,24 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.homePageFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
+                    binding.bottomNavigation.menu.findItem(R.id.search_games)?.isVisible = true
                     binding.bottomNavigation.menu.findItem(R.id.search_games)?.isEnabled = true
+                    if(viewModel.isUserLoggedIn())
+                        binding.bottomNavigation.menu.findItem(R.id.login_icon)?.isVisible = false
+                    else
+                        binding.bottomNavigation.menu.findItem(R.id.login_icon)?.isVisible = true
                     showTopMenu(navController)
                 }
                 R.id.myReviewsFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
+                    binding.bottomNavigation.menu.findItem(R.id.search_games)?.isVisible = true
                     binding.bottomNavigation.menu.findItem(R.id.search_games)?.isEnabled = true
                     removeTopMenu()
                 }
                 R.id.loginFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
+                    binding.bottomNavigation.menu.findItem(R.id.search_games)?.isVisible = false
+                    binding.bottomNavigation.menu.findItem(R.id.login_icon)?.isVisible = false
                     binding.bottomNavigation.menu.findItem(R.id.search_games)?.isEnabled = false
                 }
                 else -> {
@@ -89,6 +97,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.login_icon -> {
                     if (!viewModel.isUserLoggedIn()) {
                         navController.navigate(R.id.loginFragment)
+
                     } else {
                         Toast.makeText(this, getString(R.string.already_logged_in), Toast.LENGTH_SHORT).show()
                     }
