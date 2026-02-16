@@ -15,14 +15,13 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val authRepo: AuthRepository): ViewModel() {
 
+    //Reactive state holder(status:success,loading,etc) for login UI through the fragment
     private val _loginStatus = MutableStateFlow<Resource<User>?>(null)
 
+    // Letting the fragment to observe ^
     val loginStatus = _loginStatus.asStateFlow()
 
-    private val _currentUser  = MutableStateFlow<Resource<User>?>(null)
-
-    val currentUser = _currentUser.asStateFlow()
-
+    //Checking user credentials (local first through strings.xml) through firebase and handles errors
     fun signInUser(email: String, password: String, emptyFieldsError: String, wrongCredentialsError: String) {
         InputValidator.validateLogin(email, password, emptyFieldsError)?.let {
             _loginStatus.value = Resource.error(it)
@@ -32,6 +31,7 @@ class LoginViewModel @Inject constructor(private val authRepo: AuthRepository): 
             _loginStatus.value = Resource.loading()
             val loginResult = authRepo.login(email, password)
             if (loginResult.status is Error) {
+                // custom error
                 _loginStatus.value = Resource.error(wrongCredentialsError)
             } else {
                 _loginStatus.value = loginResult

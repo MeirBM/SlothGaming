@@ -1,7 +1,6 @@
 package com.example.SlothGaming.view_models
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.SlothGaming.data.models.Review
@@ -19,13 +18,16 @@ import javax.inject.Inject
 class ReviewViewModel @Inject constructor(
     private val repository : ReviewListRepository,
     ) : ViewModel(){
+        //Converting the flow to stateFlow for saving calls (share a single resource)
     val reviews : StateFlow<List<Review>> = repository.getReviews()
         .stateIn(
         viewModelScope,
+            //Keep the flow alive (5s) after UI disconnects to handle screen rotations
             SharingStarted.WhileSubscribed(5000),
             emptyList()
     )
 
+    //Reactive state holder for Review UI
     private val _chosenReview = MutableStateFlow<Review?>(null)
 
     val chosenReview = _chosenReview.asStateFlow()
@@ -37,7 +39,7 @@ class ReviewViewModel @Inject constructor(
 
         _chosenReview.value = review
     }
-
+    // Updates the review in the database asynchronously without blocking the UI
     fun updateReview(review: Review){
         viewModelScope.launch {
             repository.updateReview(review)

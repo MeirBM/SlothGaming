@@ -14,9 +14,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(private val authRepo: AuthRepository) : ViewModel() {
+   //Reactive state holder(status:success,loading,etc) for signup status
     private val _signupState = MutableStateFlow<Resource<User>?>(null)
+
     val signupState = _signupState.asStateFlow()
 
+    //Checking user credentials (local first through strings.xml) through firebase and handles errors
     fun signUpUser(
         firstName: String, lastName: String, email: String, phoneNumber: String, password: String,
         emptyFieldsError: String, emailFormatError: String, passwordShortError: String
@@ -31,6 +34,7 @@ class SignUpViewModel @Inject constructor(private val authRepo: AuthRepository) 
 
         viewModelScope.launch {
             _signupState.value = Resource.loading()
+            // Create User
             val newUser = authRepo.createUser(firstName, lastName, email, phoneNumber, password)
             _signupState.value = newUser
         }
