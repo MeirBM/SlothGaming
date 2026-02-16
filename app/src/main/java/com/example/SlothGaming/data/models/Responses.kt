@@ -2,6 +2,7 @@ package com.example.SlothGaming.data.models
 
 import com.google.gson.annotations.SerializedName
 
+// Serialize is used to make sure Response key matches the val's
 data class GameResponse(
     @SerializedName("id") val id: Long,
     @SerializedName("name") val name: String,

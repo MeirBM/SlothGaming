@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
+// ChildAdapter data class
 @Parcelize
 @Entity(tableName = "games")
 data class GameItem(

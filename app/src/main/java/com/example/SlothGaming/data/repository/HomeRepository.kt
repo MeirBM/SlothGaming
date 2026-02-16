@@ -31,7 +31,7 @@ class HomeRepository @Inject constructor(
         }
     )
 
-    // 2. Coming Soon (Unwrapping the Release Date)
+    // 2. Coming Soon
     fun getComingSoonGames() = performFetchingAndSaving(
         localDbFetch = { dao.getItemsBySection("coming_soon") },
         remoteDbFetch = { remoteDataSource.getComingSoonGames() },
@@ -48,7 +48,7 @@ class HomeRepository @Inject constructor(
         },
     )
 
-    // 3. Publisher Spotlight (Unwrapping the Company Link)
+    // 3. Publisher Spotlight
     fun getPublisherSpotlight() = performFetchingAndSaving(
         localDbFetch = { dao.getItemsBySection("ubisoft_spotlight") },
         remoteDbFetch = { remoteDataSource.getPubSpotlightGames() },
@@ -79,7 +79,7 @@ class HomeRepository @Inject constructor(
         }
     }
 
-    // Helper to map GameResponse -> GameItem Entity
+    //  GameResponse -> GameItem
     private fun GameResponse.toGameItem(section: String, platformName: String): GameItem {
 
         // Take t_thumb and convert to 720p

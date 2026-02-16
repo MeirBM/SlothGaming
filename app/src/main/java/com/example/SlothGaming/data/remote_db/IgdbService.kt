@@ -9,7 +9,8 @@ import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.Path
 
-
+/*IGDB API work mostly with POST requests https://api-docs.igdb.com/#requests
+* as well as using proxy for the following reasons: https://api-docs.igdb.com/#cors-proxy*/
 interface IgdbService {
 
     @Headers("Content-Type: text/plain")

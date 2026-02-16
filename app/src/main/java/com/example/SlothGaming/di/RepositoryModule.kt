@@ -8,7 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
+// To use hilt on our own dependency
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {

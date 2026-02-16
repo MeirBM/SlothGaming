@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface GameDao {
 
+    //show the items by sections
     @Query("SELECT * FROM games WHERE section = :sectionName")
     fun getItemsBySection(sectionName: String): Flow<List<GameItem>>
 
@@ -22,6 +23,7 @@ interface GameDao {
 
 
     @Transaction
+    //to prevent addition over the query limit
     suspend fun updateSection(sectionName: String, games: List<GameItem>) {
         clearSection(sectionName)
         insertAll(games)

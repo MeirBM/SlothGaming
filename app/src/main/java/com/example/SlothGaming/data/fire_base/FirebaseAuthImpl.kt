@@ -17,6 +17,8 @@ class FirebaseAuthImpl @Inject constructor
 
 
     private val userRef = firestore.collection("users")
+    // return user object for user data usage
+    //For future Imp currently not in use
     override suspend fun currentUser(): Resource<User> {
         return withContext(Dispatchers.IO){
             safeCall {
