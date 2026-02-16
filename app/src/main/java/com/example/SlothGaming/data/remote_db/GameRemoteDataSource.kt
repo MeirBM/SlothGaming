@@ -8,7 +8,6 @@ class GameRemoteDataSource @Inject constructor (private val gameService: IgdbSer
     : BaseDataSource(){
         //convert the query to plain text with rawBody to unsure we dont pass Json
     private fun String.toRawBody(): RequestBody {
-        // This is the "Java style" way that always works
         val mediaType = MediaType.parse("text/plain")
         return RequestBody.create(mediaType, this)
     }

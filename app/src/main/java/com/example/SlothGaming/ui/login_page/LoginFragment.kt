@@ -2,6 +2,7 @@ package com.example.SlothGaming.ui.login_page
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,10 +78,7 @@ class LoginFragment: Fragment() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 findNavController().navigate(R.id.action_loginFragment_to_homePageFragment)
-
-
                         }
-
                         is Error-> {
                             Toast.makeText(
                                 requireContext(),
@@ -97,48 +95,6 @@ class LoginFragment: Fragment() {
                 }
             }
         }
-
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.currentUser.collectLatest {
-                    when (it?.status) {
-                        is Loading -> {
-                            binding.loadingProgressLogin.apply{
-                                isVisible = true
-                                startAnimation(anim)
-                            }
-                        }
-
-                        is Success -> {
-                            binding.loadingProgressLogin.apply{
-                                clearAnimation()
-                                isVisible = false
-                            }
-                            Toast.makeText(
-                                requireContext(),
-                                getString(R.string.welcome),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-
-                        is Error -> {
-                            Toast.makeText(
-                                requireContext(),
-                                it.status.message,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            binding.loadingProgressLogin.apply{
-                                clearAnimation()
-                                isVisible = false
-                            }
-                        }else -> null
-
-                    }
-                }
-            }
-        }
-
 
     }
 

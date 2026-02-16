@@ -4,7 +4,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-
+//For review page
 @Parcelize
 @Entity(tableName = "reviews")
 data class Review(

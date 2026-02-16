@@ -18,7 +18,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-
+// All the providers for hilt to use on external dependency's
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {

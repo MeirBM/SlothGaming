@@ -62,7 +62,7 @@ class SectionDiffCallback : DiffUtil.ItemCallback<Section>() {
     }
 
     override fun areContentsTheSame(oldSection: Section, newSection: Section): Boolean {
-        // Contents are the same if the list of games matches
+        // Contents are the same if the list of games matches,ignore warning data class implement equals
         return oldSection.items == newSection.items
     }
 }
