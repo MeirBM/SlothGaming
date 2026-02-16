@@ -29,6 +29,7 @@ import androidx.navigation.navOptions
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+// The single activity that hosts all fragments and manages navigation, menus, and auth state
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     // Saving provider for manage it on other fragments
     private var topMenuProvider: MenuProvider? = null// already in activity no need for menuHost
 
+    // Entry point: shows welcome dialog, sets up nav controller, bottom bar, and destination listener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -180,6 +182,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Remove the top toolbar menu and reset the reference
     private fun removeTopMenu() {
         topMenuProvider?.let {
             removeMenuProvider(it)
@@ -187,6 +190,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Show a confirmation dialog before signing the user out
     private fun showSignOutDialog(navController: NavController) {
         AlertDialog.Builder(this).apply {
             setTitle(getString(R.string.sign_out))

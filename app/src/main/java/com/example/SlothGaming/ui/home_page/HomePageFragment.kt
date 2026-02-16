@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.getValue
 
+// The main landing screen, shows game sections like trending, top rated etc.
 @AndroidEntryPoint
 class HomePageFragment: Fragment() {
 
@@ -37,6 +38,7 @@ class HomePageFragment: Fragment() {
     private val viewModel: HomePageViewModel by viewModels()
 
 
+    // Inflate the home page layout
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +48,7 @@ class HomePageFragment: Fragment() {
         return binding.root
     }
 
+    // Set up the recycler, observe ViewModel state, and react to loading/success/error
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
@@ -94,6 +97,7 @@ class HomePageFragment: Fragment() {
         super.onDestroyView()
     }
 
+    // Create the parent adapter, clicking a game navigates to its detail page
     private fun setupAdapter() {
         // Initialize with an empty list initially
         parentAdapter = ParentAdapter{ selectedGame ->

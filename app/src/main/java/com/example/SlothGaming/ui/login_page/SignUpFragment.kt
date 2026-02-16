@@ -24,12 +24,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+// Registration screen where new users create an account
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private var binding : SignUpLayoutBinding by autoCleared()
     private val viewModel : SignUpViewModel by viewModels()
 
+    // Build the registration screen view from XML
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +41,7 @@ class SignUpFragment : Fragment() {
         return binding.root
     }
 
+    // Grab user input on register click and observe registration state from ViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val anim = AnimationUtils.loadAnimation(requireContext(),R.anim.spinning_for_sloth)

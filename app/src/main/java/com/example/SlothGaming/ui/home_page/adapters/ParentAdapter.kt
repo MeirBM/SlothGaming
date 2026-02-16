@@ -11,12 +11,14 @@ import com.example.SlothGaming.data.models.GameItem
 import com.example.SlothGaming.data.models.Section
 import com.example.SlothGaming.databinding.ItemSectionRowBinding
 
+// Main vertical list on the home page, each row is a section with a horizontal game list
 class ParentAdapter(private val gameClick: (GameItem) -> Unit) :
     ListAdapter<Section, ParentAdapter.ParentViewHolder>(SectionDiffCallback()) {
 
     // Shared ViewPool for all child RecyclerViews to improve performance
     private val viewPool = RecyclerView.RecycledViewPool().apply { setMaxRecycledViews(0, 20) }
 
+    // Each row has a section title and a horizontal child RecyclerView
     inner class ParentViewHolder(val binding: ItemSectionRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -34,6 +36,7 @@ class ParentAdapter(private val gameClick: (GameItem) -> Unit) :
             }
         }
 
+        // Set section title and update the horizontal game list
         fun bind(section: Section) {
             binding.sectionTitle.text = binding.root.context.getString(section.titleRes)
             // Use the ChildAdapter's DiffUtil update method
@@ -41,6 +44,7 @@ class ParentAdapter(private val gameClick: (GameItem) -> Unit) :
         }
     }
 
+    // Create a new section row layout
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParentViewHolder {
         val binding = ItemSectionRowBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -55,6 +59,7 @@ class ParentAdapter(private val gameClick: (GameItem) -> Unit) :
     }
 }
 
+// Compares sections by their title and game contents to know what changed
 class SectionDiffCallback : DiffUtil.ItemCallback<Section>() {
     override fun areItemsTheSame(oldItem: Section, newItem: Section): Boolean {
         // Sections are the same if they have the same title

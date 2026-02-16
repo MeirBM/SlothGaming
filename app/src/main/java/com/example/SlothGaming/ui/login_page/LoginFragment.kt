@@ -26,10 +26,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+// Login screen where users enter email and password to sign in
 @AndroidEntryPoint
 class LoginFragment: Fragment() {
     private val viewModel: LoginViewModel by viewModels()
     private var binding: LoginLayoutBinding by autoCleared()
+    // Build the login screen view from XML
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +41,7 @@ class LoginFragment: Fragment() {
         return binding.root
     }
 
+    // Set up login button, registration link, and collect login results from ViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.signupnowBtn.setOnClickListener { _ ->

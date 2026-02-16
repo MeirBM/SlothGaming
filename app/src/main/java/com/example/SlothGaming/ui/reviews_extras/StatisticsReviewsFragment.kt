@@ -17,6 +17,7 @@ import com.example.SlothGaming.databinding.StatisticsReviewsLayoutBinding
 import com.example.SlothGaming.utils.ColorProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+// Displays review stats like average rating, total count, and most reviewed console
 @AndroidEntryPoint
 class StatisticsReviewsFragment : Fragment() {
 
@@ -28,6 +29,7 @@ class StatisticsReviewsFragment : Fragment() {
     private val binding get() = _binding!!
 
 
+    // Build the statistics layout from XML
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,6 +38,8 @@ class StatisticsReviewsFragment : Fragment() {
         _binding = StatisticsReviewsLayoutBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    // Calculate average rating, total reviews, and find the most popular console
     private fun calculateStats(reviews: List<Review>) {
 
         //calculate avg for reviews // map for specify from rating
@@ -58,6 +62,7 @@ class StatisticsReviewsFragment : Fragment() {
         binding.topConsole.text = topConsole
     }
 
+    // Show zeroed out stats when there are no reviews
     private fun emptyStats() {
         star?.setTint(ContextCompat.getColor(requireContext(), R.color.lowRating))
         binding.ratingStar.setImageDrawable(star)
@@ -66,6 +71,7 @@ class StatisticsReviewsFragment : Fragment() {
         binding.topConsole.text = "-"
     }
 
+    // Observe the reviews flow and recalculate stats whenever the list changes
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // TODO: switch with lifeCycleOwner.lifeCycleScope.launch{....} to implement the flow.connect{...}

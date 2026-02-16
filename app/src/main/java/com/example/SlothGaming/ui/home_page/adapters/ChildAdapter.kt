@@ -8,14 +8,17 @@ import com.example.SlothGaming.data.models.GameItem
 import com.example.SlothGaming.data.models.Section
 import com.example.SlothGaming.databinding.ItemGameCardBinding
 
+// Shows individual game cards in the horizontal scroll inside each section
 class ChildAdapter(private var items: List<GameItem>,
                    private var gameClick:(GameItem) -> Unit) :
     RecyclerView.Adapter<ChildAdapter.ChildViewHolder>() {
 
+    // Holds a single game card view (poster image + title)
     inner class ChildViewHolder(val binding: ItemGameCardBinding) :
         RecyclerView.ViewHolder(binding.root){
         private lateinit var gameItem : GameItem
 
+        // Sets the game name and downloads its cover image into the card
         fun bind (item : GameItem){
             this.gameItem = item
             binding.itemTitle.text = item.title
@@ -25,6 +28,7 @@ class ChildAdapter(private var items: List<GameItem>,
             }
         }
 
+    // Prepare a blank game card that the recycler can reuse
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildViewHolder {
         val binding = ItemGameCardBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -34,6 +38,7 @@ class ChildAdapter(private var items: List<GameItem>,
         return ChildViewHolder(binding)
     }
 
+    // Put actual game data into the card and handle poster tap
     override fun onBindViewHolder(holder: ChildViewHolder, position: Int) {
         holder.bind(items[position])
         val item = items[position]
@@ -45,6 +50,7 @@ class ChildAdapter(private var items: List<GameItem>,
 
     override fun getItemCount() = items.size
 
+    // Replace the game list and only redraw items that actually changed
     fun updateData(newGames: List<GameItem>) {
         val diffCallBack = ChildDiffCallback(items,newGames)
         val diffResult = DiffUtil.calculateDiff(diffCallBack)
@@ -55,6 +61,7 @@ class ChildAdapter(private var items: List<GameItem>,
 }
 
 
+// Helps RecyclerView figure out which game items were added, removed, or changed
 class ChildDiffCallback(
     private val oldList: List<GameItem>,
     private val newList: List<GameItem>
