@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+// Shows full details of a single review or a game from the home page
 @AndroidEntryPoint
 class DetailReviewFragment : Fragment() {
 
@@ -35,6 +36,7 @@ class DetailReviewFragment : Fragment() {
     private val args: DetailReviewFragmentArgs by navArgs()
     private val viewModel: ReviewViewModel by activityViewModels()
 
+    // Build the detail review layout from XML
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,6 +46,7 @@ class DetailReviewFragment : Fragment() {
         return binding.root
     }
 
+    // If coming from home page, convert GameItem to Review, then observe the chosen review
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -64,7 +67,7 @@ class DetailReviewFragment : Fragment() {
 
     }
 
-    //Update UI
+    // Fill in all the detail fields: title, description, image, and colored rating star
     private fun updateUI(review: Review) {
         binding.apply {
             reviewTitle.text = review.title
@@ -84,7 +87,7 @@ class DetailReviewFragment : Fragment() {
         }
     }
 
-    //gameItem --> Review
+    // Convert a GameItem from the API into a Review object
     private fun GameItem.toReview(): Review {
         val ratingOutOfFive = (this.rating ?: 0.0) / 20.0
         return Review(

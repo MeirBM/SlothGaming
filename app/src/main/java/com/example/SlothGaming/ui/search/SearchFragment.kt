@@ -26,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+// Lets users search for games by typing, results update as they type
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
@@ -33,6 +34,7 @@ class SearchFragment : Fragment() {
     private val viewModel: SearchViewModel by viewModels()
     private lateinit var searchAdapter: SearchAdapter
 
+    // Inflate the search layout
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +44,7 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
+    // Sets up the search bar, adapter, and listens for search results from ViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.spinning_for_sloth)

@@ -12,11 +12,13 @@ import com.example.SlothGaming.data.models.Review
 import com.example.SlothGaming.databinding.ReviewLayoutBinding
 import com.example.SlothGaming.utils.ColorProvider
 
+// Adapter for displaying reviews in a list, supports click and long click actions
 class ReviewAdapter(
     val callBack: ReviewListener):
     ListAdapter<Review,ReviewAdapter.ReviewViewHolder>(ReviewDiffCallBack()) {
 
 
+    // Create a new review card layout
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ReviewViewHolder =
@@ -25,6 +27,7 @@ class ReviewAdapter(
                 .inflate(LayoutInflater.from(parent.context), parent, false)
         )
 
+    // Callback interface so the fragment knows when a review was tapped or held
     interface ReviewListener {
         fun onReviewClicked(index: Int)
         fun onReviewLongClicked(index: Int)
@@ -35,7 +38,9 @@ class ReviewAdapter(
     ) = holder.bind(getItem(position))
 
 
+    // Quick way to grab the review object at a given position
     fun reviewAt(position: Int): Review = getItem(position)
+    // ViewHolder for a review card, handles both tap (view detail) and long press (edit)
     inner class ReviewViewHolder(private val binding: ReviewLayoutBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener, View.OnLongClickListener {
 
@@ -69,6 +74,7 @@ class ReviewAdapter(
         }
 
 
+        // Fill the card with review data and color the rating star based on score
         fun bind(review: Review) {
             //get context for color changing
             val context = binding.root.context
@@ -88,6 +94,7 @@ class ReviewAdapter(
 
         }
     }
+    // DiffUtil callback to compare reviews and avoid unnecessary redraws
     class ReviewDiffCallBack: DiffUtil.ItemCallback<Review>(){
         override fun areItemsTheSame(
             oldItem: Review,

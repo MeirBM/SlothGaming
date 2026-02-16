@@ -29,6 +29,7 @@ import com.example.SlothGaming.utils.ColorProvider
 import com.example.SlothGaming.utils.InputValidator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.roundToInt
+// Handles both adding a new review and editing an existing one
 @AndroidEntryPoint
 class AddReviewFragment : Fragment() {
     companion object {
@@ -55,6 +56,7 @@ class AddReviewFragment : Fragment() {
         null
     }
 
+    // Build the add/edit review layout from XML
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,6 +68,7 @@ class AddReviewFragment : Fragment() {
         return binding.root
     }
 
+    // Set up form fields, image picker, validation, and submit logic
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -188,6 +191,7 @@ class AddReviewFragment : Fragment() {
     }
 
 
+    // Updates the star color in real time as the user slides across the rating bar
     private fun changeColorOnRatingChange(ratingBar: RatingBar) {
         ratingBar.setOnTouchListener { v, event ->
             val context = requireContext()

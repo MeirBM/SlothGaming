@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 
 
+// Adds a quick shrink and bounce effect when you tap a view, makes buttons feel responsive
 fun View.setScaleClickAnimation(
     scaleDown: Float = 0.96f,
     durationMs: Long = 80L,

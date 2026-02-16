@@ -9,13 +9,16 @@ import com.bumptech.glide.Glide
 import com.example.SlothGaming.data.models.GameItem
 import com.example.SlothGaming.databinding.ItemSearchCardBinding
 
+// Adapter for showing game search results in a grid layout
 class SearchAdapter(
     private val onGameClick: (GameItem) -> Unit
 ) : ListAdapter<GameItem, SearchAdapter.SearchViewHolder>(SearchDiffCallback()) {
 
+    // Holds a single search result card view
     inner class SearchViewHolder(val binding: ItemSearchCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        // Fills in the card with game title, poster image, and click listener
         fun bind(item: GameItem) {
             binding.itemTitle.text = item.title
             Glide.with(binding.root)
@@ -26,6 +29,7 @@ class SearchAdapter(
         }
     }
 
+    // Inflates a new search card layout
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val binding = ItemSearchCardBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
@@ -38,6 +42,7 @@ class SearchAdapter(
     }
 }
 
+// Tells the adapter how to compare game items so it knows what needs redrawing
 class SearchDiffCallback : DiffUtil.ItemCallback<GameItem>() {
     override fun areItemsTheSame(oldItem: GameItem, newItem: GameItem) = oldItem.id == newItem.id
     override fun areContentsTheSame(oldItem: GameItem, newItem: GameItem) = oldItem == newItem

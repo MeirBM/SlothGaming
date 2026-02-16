@@ -27,6 +27,7 @@ import com.example.SlothGaming.databinding.MyReviewsLayoutBinding
 import com.example.SlothGaming.extensions.setScaleClickAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+// Shows all the user's reviews in a list with swipe to delete and top menu options
 @AndroidEntryPoint
 class MyReviewsFragment : Fragment() {
     private lateinit var reviewAdapter: ReviewAdapter
@@ -37,6 +38,7 @@ class MyReviewsFragment : Fragment() {
     private val viewModel : ReviewViewModel by activityViewModels()
 
 
+    // Build the reviews list layout from XML
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +48,8 @@ class MyReviewsFragment : Fragment() {
 
         return binding.root
     }
+
+    // Set up adapter with click and long click, swipe to delete, and top menu for stats
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addReviewButton.root.setScaleClickAnimation {
