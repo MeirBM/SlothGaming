@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import com.example.SlothGaming.R
 
-
+//For the Stars changing colors.
 object ColorProvider {
     fun getColorMap(context: Context): Map<String, Int> {
         return mapOf(

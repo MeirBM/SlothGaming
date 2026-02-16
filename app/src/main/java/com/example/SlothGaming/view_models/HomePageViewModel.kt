@@ -1,6 +1,5 @@
 package com.example.SlothGaming.view_models
 
-import android.net.http.UrlRequest
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.SlothGaming.R
@@ -8,7 +7,6 @@ import com.example.SlothGaming.data.models.Section
 import com.example.SlothGaming.data.repository.AuthRepository
 import com.example.SlothGaming.data.repository.HomeRepository
 import com.example.SlothGaming.utils.Resource
-import com.example.SlothGaming.utils.Status
 import com.example.SlothGaming.utils.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,13 +22,16 @@ class HomePageViewModel @Inject constructor(
     private val authRepo: AuthRepository
 ) : ViewModel() {
 
+    //Reactive state holder for homepage UI(status:success,loading,etc)
     private val _homePageState = MutableStateFlow<Resource<List<Section>>>(Resource.loading())
+
+    // Letting the fragment to observe ^
     val homePageState = _homePageState.asStateFlow()
 
     init {
         fetchHomeContent()
     }
-
+    // Check if user is logged in from firebase localMemory(Token Timeout)
     fun isUserLoggedIn(): Boolean {
         return authRepo.isUserAuth()
     }
@@ -38,6 +39,7 @@ class HomePageViewModel @Inject constructor(
         authRepo.logOut()
     }
 
+    // For Sections rebuild
     private fun fetchHomeContent() {
         viewModelScope.launch {
             // Combine all 3 flows into one state
@@ -51,6 +53,7 @@ class HomePageViewModel @Inject constructor(
 
                 if (topRated.status is Success) {
                     topRated.status.data?.let { games ->
+                        //rebuild the sections
                         sections.add(Section(R.string.section_top_rated, games))
                     }
                 }
@@ -66,12 +69,13 @@ class HomePageViewModel @Inject constructor(
                         sections.add(Section(R.string.section_ubisoft_spotlight, games))
                     }
                 }
-
+                // Present a section even if others in the combine are not loaded yet
                 if (sections.isNotEmpty()) {
                     Resource.success(sections)
                 } else {
                     Resource.loading()
                 }
+                // CollectLatest to ensure ignore old data & prevent race condition
             }.collectLatest { resource ->
                 _homePageState.value = resource
             }
