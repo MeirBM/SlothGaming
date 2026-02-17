@@ -119,6 +119,11 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigation.menu.findItem(R.id.homePage_icon)?.isVisible = true
 
                     binding.bottomNavigation.menu.findItem(R.id.search_games)?.isVisible = false
+
+                    // Show login icon if user is not logged in
+                    binding.bottomNavigation.menu.findItem(R.id.login_icon)?.isVisible =
+                        !viewModel.isUserLoggedIn()
+
                     removeTopMenu()
                 }
                 else -> {
@@ -134,7 +139,12 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.login_icon -> {
                     if (!viewModel.isUserLoggedIn()) {
-                        navController.navigate(R.id.action_homePageFragment_to_loginFragment)
+                        when (navController.currentDestination?.id) {
+                            R.id.homePageFragment ->
+                                navController.navigate(R.id.action_homePageFragment_to_loginFragment)
+                            R.id.searchFragment ->
+                                navController.navigate(R.id.action_searchFragment_to_loginFragment)
+                        }
                     }
                     true
                 }
