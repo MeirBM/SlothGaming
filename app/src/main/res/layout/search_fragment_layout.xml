@@ -22,7 +22,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textColor="@color/pearlWhite"
-        android:textColorHint="#5C5C5C"
+        android:textColorHint="@color/darkGray"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
