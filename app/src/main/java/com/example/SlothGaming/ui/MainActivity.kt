@@ -119,6 +119,7 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigation.menu.findItem(R.id.homePage_icon)?.isVisible = true
 
                     binding.bottomNavigation.menu.findItem(R.id.search_games)?.isVisible = false
+                    removeTopMenu()
                 }
                 else -> {
                     // All other pages that doesn't require bottom bar
