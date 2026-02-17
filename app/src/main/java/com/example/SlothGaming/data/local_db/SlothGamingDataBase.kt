@@ -14,15 +14,26 @@ abstract class SlothGamingDataBase : RoomDatabase() {
     abstract fun gameDao() : GameDao
 
     companion object {
-
-        @Volatile//atomic action
+        @Volatile/* Ensures that the value of 'instance' is always up-to-date and visible to all threads immediately
+        Read&Write atomic action through
+        */
         private var instance:SlothGamingDataBase? = null
 
 
         // create Local data base "reviews_db"
-        fun getDatabase(context: Context) = instance ?: synchronized(this) {
-            Room.databaseBuilder(context.applicationContext, SlothGamingDataBase::class.java,"reviews_db")
-                .fallbackToDestructiveMigration(true).build()
+        fun getDatabase(context: Context): SlothGamingDataBase {
+            //check if not null, return and don't synchronize
+            return instance ?: synchronized(this) {
+                // Check that another thread has not created the db
+                instance?: Room.databaseBuilder(
+                    context.applicationContext,
+                    SlothGamingDataBase::class.java,
+                    "slothgaming_db"
+                )
+                    .fallbackToDestructiveMigration().build().also {
+                        instance = it //Saving the instance
+                    }
+            }
         }
     }
 }
