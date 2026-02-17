@@ -49,21 +49,22 @@ object AppModule {
         return SlothGamingDataBase.getDatabase(context)
     }
 
+    //provide for interface impl
     @Provides
     fun provideReviewDao(database: SlothGamingDataBase): ReviewListDao {
         return database.reviewDao()
     }
 
-    // Firebase
+    //provide for interface impl
     @Provides
     fun provideGameDao(database: SlothGamingDataBase) : GameDao{
         return database.gameDao()
     }
-
+    //firebase
     @Provides
     @Singleton
     fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
-
+    //firestore
     @Provides
     @Singleton
     fun provideFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()

@@ -20,7 +20,7 @@ abstract class SlothGamingDataBase : RoomDatabase() {
         private var instance:SlothGamingDataBase? = null
 
 
-        // create Local data base "reviews_db"
+        // create Local data base "slothgaming_db"
         fun getDatabase(context: Context): SlothGamingDataBase {
             //check if not null, return and don't synchronize
             return instance ?: synchronized(this) {

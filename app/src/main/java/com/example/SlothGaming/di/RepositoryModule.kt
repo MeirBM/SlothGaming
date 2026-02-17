@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-
+//binds for interface impl | for class we wrote
     @Binds
     @Singleton
     abstract fun bindAuthRepository(
